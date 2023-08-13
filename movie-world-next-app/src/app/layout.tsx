@@ -9,12 +9,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html>
-      <body>
-        <div className='bg-red-200 w-96 h-96'>
-          <div className='underline'>RootLayout 영역</div>
-          {children}
-        </div>
-      </body>
+      <body>{children}</body>
     </html>
   );
 };
