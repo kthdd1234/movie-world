@@ -26,7 +26,7 @@ const fetchBoxOfficeList = async ({
     },
   });
 
-  if (data == null) throw new Error('fetchWeeklyBoxOfficeList API null 뜸');
+  if (data == null) throw new Error(`${data}`);
   return data;
 };
 
@@ -40,7 +40,7 @@ const fetchMovieDetails = async (params: IParamsMoveDetails) => {
     },
   });
 
-  if (data == null) throw new Error(`fetchMovieDetails API null 뜸 ${data}`);
+  if (data == null) throw new Error(`${data}`);
   return data;
 };
 

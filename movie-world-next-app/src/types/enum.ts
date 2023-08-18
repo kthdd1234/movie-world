@@ -1,24 +1,60 @@
 enum EBoxOfficeType {
   /** */
-  daily = 'Daily',
+  DAILY = 'Daily',
   /** */
-  weekly = 'Weekly',
+  WEEKLY = 'Weekly',
 }
 
 enum EWeekGb {
   /** */
-  weekly = 0,
+  WEEKLY = 0,
   /** */
-  weekend = 1,
+  WEEKEND = 1,
   /** */
-  weekday = 2,
+  WEEKDAY = 2,
 }
 
 enum EMultiMovieYn {
   /** */
-  diversity = 'Y',
+  DIVERSITY = 'Y',
   /** */
-  commercial = 'N',
+  COMMERCIAL = 'N',
 }
 
-export { EWeekGb, EMultiMovieYn, EBoxOfficeType };
+enum EWebtoonServiceType {
+  /** */
+  NAVER = 'naver',
+  /** */
+  KAKAO = 'kakao',
+  /** */
+  KAKAOPAGE = 'kakaoPage',
+}
+
+enum EBookQueryType {
+  /** */
+  ITEMNEWALL = 'ItemNewAll',
+  /** */
+  ITEMNEWSPECIAL = 'ItemNewSpecial',
+  /** */
+  ITEMEDITORCHOICE = 'ItemEditorChoice',
+  /** */
+  BESTSELLER = 'Bestseller',
+  /** */
+  BLOGBEST = 'BlogBest',
+}
+
+enum EBookType {
+  /** */
+  LIST = 'ItemList',
+  /** */
+  SEARCH = 'ItemSearch',
+}
+
+export {
+  EWeekGb,
+  EMultiMovieYn,
+  EBoxOfficeType,
+  EWebtoonServiceType,
+  EBookQueryType,
+  EBookType,
+};

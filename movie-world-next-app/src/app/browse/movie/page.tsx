@@ -5,21 +5,21 @@ import {
 import { beforeDateValue } from '@/services/date';
 import { EBoxOfficeType, EMultiMovieYn, EWeekGb } from '@/types/enum';
 
-const MoviePage = async () => {
+const getMovieList = async () => {
   const { boxOfficeResult: dailyResult } = await fetchBoxOfficeList({
-    boxOfficeType: EBoxOfficeType.daily,
+    boxOfficeType: EBoxOfficeType.DAILY,
     params: {
       targetDt: beforeDateValue({ day: 1 }),
-      multiMovieYn: EMultiMovieYn.commercial,
+      multiMovieYn: EMultiMovieYn.COMMERCIAL,
     },
   });
 
   const { boxOfficeResult: weelkyResult } = await fetchBoxOfficeList({
-    boxOfficeType: EBoxOfficeType.weekly,
+    boxOfficeType: EBoxOfficeType.WEEKLY,
     params: {
       targetDt: beforeDateValue({ day: 7 }),
-      multiMovieYn: EMultiMovieYn.commercial,
-      weekGb: EWeekGb.weekly.toString(),
+      multiMovieYn: EMultiMovieYn.COMMERCIAL,
+      weekGb: EWeekGb.WEEKLY,
     },
   });
 
@@ -36,9 +36,14 @@ const MoviePage = async () => {
     data: info.Data[0].Result[0],
   }));
 
-  console.log(movieDataList);
+  console.log(dailyResult);
+  console.log(movieDataList[0].data.vods);
+};
 
-  return <>야미</>;
+const MoviePage = () => {
+  // getMovieList();
+
+  return <>영화</>;
 };
 
 export default MoviePage;

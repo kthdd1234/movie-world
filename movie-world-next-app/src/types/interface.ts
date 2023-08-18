@@ -1,13 +1,20 @@
-import { EBoxOfficeType, EMultiMovieYn, EWeekGb } from './enum';
+import {
+  EBookQueryType,
+  EBookType,
+  EBoxOfficeType,
+  EMultiMovieYn,
+  EWebtoonServiceType,
+  EWeekGb,
+} from './enum';
 
 export interface IGetFetch {
   url: string;
-  params: Record<string, string>;
+  params: Record<string, any>;
 }
 
 export interface IPostFetch {
   url: string;
-  params: Record<string, string>;
+  params: Record<string, any>;
   body: any;
 }
 
@@ -16,7 +23,7 @@ export interface IParamsBoxOfficeList {
   params: {
     targetDt: string;
     multiMovieYn: EMultiMovieYn;
-    weekGb?: string;
+    weekGb?: EWeekGb;
   };
 }
 
@@ -193,4 +200,99 @@ interface IBoxOfficeData {
   audiAcc: string;
   scrnCnt: string;
   showCnt: string;
+}
+
+export interface IParamsKoreaWebtoon {
+  isSearch: boolean;
+  params: {
+    service?: EWebtoonServiceType;
+    page?: number;
+    perPage?: number;
+    updateDay?: string;
+    keyword?: string;
+  };
+}
+
+export interface IResponceKoreaWebtoon {
+  totalWebtoonCount: number;
+  naverWebtoonCount: number;
+  kakaoWebtoonCount: number;
+  kakaoPageWebtoonCount: number;
+  lastUpdate: string;
+  updatedWebtoonCount: number;
+  createdWebtoonCount: number;
+  webtoons: IWebtoonData[];
+}
+
+interface IWebtoonData {
+  _id: string;
+  webtoonId: number;
+  title: string;
+  author: string;
+  url: string;
+  img: string;
+  service: string;
+  updateDays: string[];
+  fanCount: number;
+  additional: {
+    new: boolean;
+    rest: boolean;
+    up: boolean;
+    adult: boolean;
+    singularityList: string[];
+  };
+  searchKeyword: string;
+}
+
+export interface IParamsBookItemList {
+  bookType: EBookType;
+  params: {
+    QueryType?: EBookQueryType;
+    Query?: string;
+    Start?: number;
+    MaxResults?: number;
+    CategoryId?: number;
+  };
+}
+
+export interface IResponceBookItemList {
+  version: string;
+  logo: string;
+  title: string;
+  link: string;
+  pubDate: string;
+  totalResults: number;
+  startIndex: number;
+  itemsPerPage: number;
+  query: string;
+  searchCategoryId: number;
+  searchCategoryName: string;
+  item: IBookItem[];
+}
+
+interface IBookItem {
+  title: string;
+  link: string;
+  author: string;
+  pubDate: string;
+  description: string;
+  isbn: string;
+  isbn13: string;
+  itemId: number;
+  priceSales: number;
+  priceStandard: number;
+  mallType: string;
+  stockStatus: string;
+  mileage: number;
+  cover: string;
+  categoryId: number;
+  categoryName: string;
+  publisher: string;
+  salesPoint: number;
+  adult: boolean;
+  fixedPrice: boolean;
+  customerReviewRank: number;
+  bestDuration: string;
+  bestRank: number;
+  subInfo: {};
 }
