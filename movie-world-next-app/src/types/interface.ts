@@ -3,6 +3,7 @@ import {
   EBookType,
   EBoxOfficeType,
   EMultiMovieYn,
+  ENavItemType,
   EWebtoonServiceType,
   EWeekGb,
 } from './enum';
@@ -295,4 +296,22 @@ interface IBookItem {
   bestDuration: string;
   bestRank: number;
   subInfo: {};
+}
+
+export interface ISpace {
+  w: string;
+  h: string;
+}
+
+export interface INavItem {
+  icon: JSX.Element;
+  name: string;
+  type: ENavItemType;
+  path: string;
+}
+
+export interface INavColumnList {
+  seletedItem: ENavItemType;
+  items: INavItem[];
+  onSelectedItem: (item: INavItem) => void;
 }

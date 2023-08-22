@@ -50,6 +50,23 @@ enum EBookType {
   SEARCH = 'ItemSearch',
 }
 
+enum ENavItemType {
+  /** */
+  NONE = 'NONE',
+  /** */
+  MOVIE = 'MOVIE',
+  /** */
+  WEBTOON = 'WEBTOON',
+  /** */
+  BOOK = 'BOOK',
+  /** */
+  SEARCH = 'SEARCH',
+  /** */
+  EVALUATE = 'EVALUATE',
+  /** */
+  SAVE = 'SAVE',
+}
+
 export {
   EWeekGb,
   EMultiMovieYn,
@@ -57,4 +74,5 @@ export {
   EWebtoonServiceType,
   EBookQueryType,
   EBookType,
+  ENavItemType,
 };

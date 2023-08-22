@@ -1,4 +1,9 @@
 import type { Metadata } from 'next';
+import Header from '@/containers/Header';
+import Nav from '@/containers/Nav';
+import Main from '@/containers/Main';
+import Footer from '@/containers/Footer';
+import StyledComponentsRegistry from '@/components/Ant/AntdRegistry';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -10,15 +15,12 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <html>
       <body>
-        <header className='fixed top-0 z-30 w-screen h-16 bg-red-100'>
-          header 영역
-        </header>
-        <nav className='fixed left-0 z-20 h-screen pt-16 bg-blue-100 w-52'>
-          nav 영역
-        </nav>
-        <main className='w-screen h-screen pt-16 pl-52 bg-slate-300'>
-          main 영역{children}
-        </main>
+        <StyledComponentsRegistry>
+          <Header />
+          <Nav />
+          <Main children={children} />
+          <Footer />
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
