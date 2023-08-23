@@ -21,58 +21,36 @@ enum EMultiMovieYn {
   COMMERCIAL = 'N',
 }
 
-enum EWebtoonServiceType {
-  /** */
-  NAVER = 'naver',
-  /** */
-  KAKAO = 'kakao',
-  /** */
-  KAKAOPAGE = 'kakaoPage',
-}
-
-enum EBookQueryType {
-  /** */
-  ITEMNEWALL = 'ItemNewAll',
-  /** */
-  ITEMNEWSPECIAL = 'ItemNewSpecial',
-  /** */
-  ITEMEDITORCHOICE = 'ItemEditorChoice',
-  /** */
-  BESTSELLER = 'Bestseller',
-  /** */
-  BLOGBEST = 'BlogBest',
-}
-
-enum EBookType {
-  /** */
-  LIST = 'ItemList',
-  /** */
-  SEARCH = 'ItemSearch',
-}
-
 enum ENavItemType {
   /** */
   NONE = 'NONE',
   /** */
   MOVIE = 'MOVIE',
   /** */
-  WEBTOON = 'WEBTOON',
-  /** */
-  BOOK = 'BOOK',
+  TV = 'TV',
   /** */
   SEARCH = 'SEARCH',
   /** */
   EVALUATE = 'EVALUATE',
   /** */
-  SAVE = 'SAVE',
+  STORAGE = 'STORAGE',
+}
+
+enum EMovieListsType {
+  /** */
+  NOW_PLAYING = '/now_playing',
+  /** */
+  POPULAR = '/popular',
+  /** */
+  TOP_RATED = '/top_rated',
+  /** */
+  UPCOMING = '/upcoming',
 }
 
 export {
   EWeekGb,
   EMultiMovieYn,
   EBoxOfficeType,
-  EWebtoonServiceType,
-  EBookQueryType,
-  EBookType,
   ENavItemType,
+  EMovieListsType,
 };

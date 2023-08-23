@@ -21,6 +21,7 @@
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
     "moment": "^2.29.4",
+    "movie-art": "^3.0.0",
     "movie-trailer": "^3.0.2",
     "next": "13.4.12",
     "postcss": "8.4.27",

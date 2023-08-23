@@ -1,5 +1,5 @@
 const AppPage = () => {
-  return <div></div>;
+  return <div />;
 };
 
 export default AppPage;

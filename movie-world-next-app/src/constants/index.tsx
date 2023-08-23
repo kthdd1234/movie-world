@@ -2,37 +2,52 @@ import { ENavItemType } from '@/types/enum';
 import { INavItem } from '@/types/interface';
 import {
   VideoCameraOutlined,
-  AppstoreOutlined,
-  ReadOutlined,
+  DesktopOutlined,
   SearchOutlined,
   StarOutlined,
   InboxOutlined,
 } from '@ant-design/icons';
 
-const bgColor = '#141517';
+const { MOVIE, TV, SEARCH, EVALUATE, STORAGE } = ENavItemType;
 
-const { MOVIE, WEBTOON, BOOK, SEARCH, EVALUATE, SAVE } = ENavItemType;
+/** kobisBaseUrl */
+const kobisBaseUrl = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice`;
+
+/** kmdbBaseUrl */
+const kmdbBaseUrl = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?`;
+
+/** tmdbBaseUrl */
+const tmdbBaseUrl = 'https://api.themoviedb.org/3';
 
 const navContentsItems: INavItem[] = [
   {
     icon: <VideoCameraOutlined />,
     name: '영화',
     type: MOVIE,
-    path: '/browse/movie',
+    path: '/movie',
   },
   {
-    icon: <AppstoreOutlined />,
-    name: '웹툰',
-    type: WEBTOON,
-    path: '/browse/webtoon',
+    icon: <DesktopOutlined />,
+    name: 'TV',
+    type: TV,
+    path: '/tv',
   },
-  { icon: <ReadOutlined />, name: '책', type: BOOK, path: '/browse/book' },
 ];
 
 const navServiceItems: INavItem[] = [
   { icon: <SearchOutlined />, name: '검색', type: SEARCH, path: '/search' },
   { icon: <StarOutlined />, name: '평가', type: EVALUATE, path: '/evaluate' },
-  { icon: <InboxOutlined />, name: '보관함', type: SAVE, path: '/library' },
+  { icon: <InboxOutlined />, name: '보관함', type: STORAGE, path: '/storage' },
 ];
 
-export { bgColor, navContentsItems, navServiceItems };
+const interstellarBgUrl =
+  'http://image.tmdb.org/t/p/original/pbrkL804c8yAv3zBZR4QPEafpAR.jpg';
+
+export {
+  navContentsItems,
+  navServiceItems,
+  interstellarBgUrl,
+  kobisBaseUrl,
+  kmdbBaseUrl,
+  tmdbBaseUrl,
+};

@@ -4,10 +4,20 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/browse/movie',
+        destination: '/movie',
         permanent: true,
       },
     ];
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'image.tmdb.org',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 

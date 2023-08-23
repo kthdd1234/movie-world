@@ -1,9 +1,12 @@
 import {
-  fetchMovieDetails,
+  fetchKmdbMovieDetail,
   fetchBoxOfficeList,
-} from '../../../api/contents/movie';
+} from '../../api/contents/movie';
 import { beforeDateValue } from '@/services/date';
 import { EBoxOfficeType, EMultiMovieYn, EWeekGb } from '@/types/enum';
+import MainContentsSection from '@/components/Section/MainContentsSection';
+import StaffMadesSection from '@/components/Section/StaffMadesSection';
+import ContentsTypeSection from '@/components/Section/ContentsTypeSection';
 
 const getMovieList = async () => {
   const { boxOfficeResult: dailyResult } = await fetchBoxOfficeList({
@@ -25,7 +28,7 @@ const getMovieList = async () => {
 
   const weeklyBoxOfficeList = weelkyResult.weeklyBoxOfficeList;
   const detailMovieRequests = weeklyBoxOfficeList.map((info) => {
-    return fetchMovieDetails({
+    return fetchKmdbMovieDetail({
       query: info.movieNm,
       releaseDts: info.openDt.replace(/-/g, ''),
     });
@@ -43,7 +46,13 @@ const getMovieList = async () => {
 const MoviePage = () => {
   // getMovieList();
 
-  return <>영화</>;
+  return (
+    <div>
+      <MainContentsSection />
+      <StaffMadesSection />
+      <ContentsTypeSection />
+    </div>
+  );
 };
 
 export default MoviePage;

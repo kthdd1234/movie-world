@@ -1,18 +1,22 @@
 import {
   IParamsBoxOfficeList,
-  IParamsMoveDetails,
-  IResposeMovieDetails,
+  IParamsKmdbMoveDetail,
+  IResposeKmdbMovieDetail,
   IResposeBoxOfficeList,
+  IParamsTmdbMovieLists,
 } from '@/types/interface';
 import { getFetch } from '..';
+import { kmdbBaseUrl, kobisBaseUrl, tmdbBaseUrl } from '@/constants';
 
-/** kobisBaseUrl */
-const kobisBaseUrl = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice`;
+/** tmdbMovieUrl */
+const tmdbMovieUrl = `${tmdbBaseUrl}/movie`;
 
-/** kmdbBaseUrl */
-const kmdbBaseUrl = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?`;
-
-const { NEXT_PUBLIC_KOBIS_API_KEY_1, NEXT_PUBLIC_KMDB_API_KEY } = process.env;
+/** API KEYS */
+const {
+  NEXT_PUBLIC_KOBIS_API_KEY_1,
+  NEXT_PUBLIC_KMDB_API_KEY,
+  NEXT_PUBLIC_TMDB_API_KEY,
+} = process.env;
 
 const fetchBoxOfficeList = async ({
   boxOfficeType,
@@ -30,12 +34,12 @@ const fetchBoxOfficeList = async ({
   return data;
 };
 
-const fetchMovieDetails = async (params: IParamsMoveDetails) => {
-  const data: IResposeMovieDetails | null = await getFetch({
+const fetchKmdbMovieDetail = async (params: IParamsKmdbMoveDetail) => {
+  const data: IResposeKmdbMovieDetail | null = await getFetch({
     url: kmdbBaseUrl,
     params: {
       collection: 'kmdb_new2',
-      ServiceKey: NEXT_PUBLIC_KMDB_API_KEY ?? '',
+      ServiceKey: NEXT_PUBLIC_KMDB_API_KEY,
       ...params,
     },
   });
@@ -44,4 +48,15 @@ const fetchMovieDetails = async (params: IParamsMoveDetails) => {
   return data;
 };
 
-export { fetchBoxOfficeList, fetchMovieDetails };
+const fetchTmdbMovieLists = async ({ path, params }: IParamsTmdbMovieLists) => {
+  const data = await getFetch({
+    url: tmdbMovieUrl + path,
+    token: NEXT_PUBLIC_TMDB_API_KEY,
+    params: params,
+  });
+
+  if (data == null) throw new Error(`${data}`);
+  return data;
+};
+
+export { fetchBoxOfficeList, fetchKmdbMovieDetail, fetchTmdbMovieLists };

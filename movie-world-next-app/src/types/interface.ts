@@ -1,16 +1,15 @@
 import {
-  EBookQueryType,
-  EBookType,
   EBoxOfficeType,
+  EMovieListsType,
   EMultiMovieYn,
   ENavItemType,
-  EWebtoonServiceType,
   EWeekGb,
 } from './enum';
 
 export interface IGetFetch {
   url: string;
   params: Record<string, any>;
+  token?: string;
 }
 
 export interface IPostFetch {
@@ -38,19 +37,19 @@ export interface IResposeBoxOfficeList {
   };
 }
 
-export interface IParamsMoveDetails {
+export interface IParamsKmdbMoveDetail {
   query: string;
   releaseDts: string;
 }
 
-export interface IResposeMovieDetails {
+export interface IResposeKmdbMovieDetail {
   Query: string;
   KMAQuery: string;
   TotalCount: number;
-  Data: IMovieDetailData[];
+  Data: IKmdbMovieData[];
 }
 
-interface IMovieDetailData {
+interface IKmdbMovieData {
   CollName: string;
   TotalCount: number;
   Count: number;
@@ -203,106 +202,6 @@ interface IBoxOfficeData {
   showCnt: string;
 }
 
-export interface IParamsKoreaWebtoon {
-  isSearch: boolean;
-  params: {
-    service?: EWebtoonServiceType;
-    page?: number;
-    perPage?: number;
-    updateDay?: string;
-    keyword?: string;
-  };
-}
-
-export interface IResponceKoreaWebtoon {
-  totalWebtoonCount: number;
-  naverWebtoonCount: number;
-  kakaoWebtoonCount: number;
-  kakaoPageWebtoonCount: number;
-  lastUpdate: string;
-  updatedWebtoonCount: number;
-  createdWebtoonCount: number;
-  webtoons: IWebtoonData[];
-}
-
-interface IWebtoonData {
-  _id: string;
-  webtoonId: number;
-  title: string;
-  author: string;
-  url: string;
-  img: string;
-  service: string;
-  updateDays: string[];
-  fanCount: number;
-  additional: {
-    new: boolean;
-    rest: boolean;
-    up: boolean;
-    adult: boolean;
-    singularityList: string[];
-  };
-  searchKeyword: string;
-}
-
-export interface IParamsBookItemList {
-  bookType: EBookType;
-  params: {
-    QueryType?: EBookQueryType;
-    Query?: string;
-    Start?: number;
-    MaxResults?: number;
-    CategoryId?: number;
-  };
-}
-
-export interface IResponceBookItemList {
-  version: string;
-  logo: string;
-  title: string;
-  link: string;
-  pubDate: string;
-  totalResults: number;
-  startIndex: number;
-  itemsPerPage: number;
-  query: string;
-  searchCategoryId: number;
-  searchCategoryName: string;
-  item: IBookItem[];
-}
-
-interface IBookItem {
-  title: string;
-  link: string;
-  author: string;
-  pubDate: string;
-  description: string;
-  isbn: string;
-  isbn13: string;
-  itemId: number;
-  priceSales: number;
-  priceStandard: number;
-  mallType: string;
-  stockStatus: string;
-  mileage: number;
-  cover: string;
-  categoryId: number;
-  categoryName: string;
-  publisher: string;
-  salesPoint: number;
-  adult: boolean;
-  fixedPrice: boolean;
-  customerReviewRank: number;
-  bestDuration: string;
-  bestRank: number;
-  subInfo: {};
-}
-
-export interface ISpace {
-  w: string;
-  h: string;
-}
-
 export interface INavItem {
   icon: JSX.Element;
   name: string;
@@ -314,4 +213,13 @@ export interface INavColumnList {
   seletedItem: ENavItemType;
   items: INavItem[];
   onSelectedItem: (item: INavItem) => void;
+}
+
+export interface IParamsTmdbMovieLists {
+  path: EMovieListsType;
+  params: {
+    language: string;
+    page: number;
+    region: string;
+  };
 }

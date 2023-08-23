@@ -1,11 +1,12 @@
 import { IGetFetch, IPostFetch } from '@/types/interface';
 
-const getFetch = async ({ url, params }: IGetFetch) => {
+const getFetch = async ({ url, params, token }: IGetFetch) => {
   const resp = await fetch(url + new URLSearchParams(params), {
     method: 'GET',
     cache: 'force-cache',
     headers: {
       'Content-type': 'application/json',
+      Authorization: token ?? `Bearer ${token}`,
     },
   });
 
