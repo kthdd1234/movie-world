@@ -4,6 +4,9 @@ import {
   IResposeKmdbMovieDetail,
   IResposeBoxOfficeList,
   IParamsTmdbMovieLists,
+  IResponseTmdbMovieLists,
+  IParamsTmdbMovieImages,
+  IResponseTmdbMovieImages,
 } from '@/types/interface';
 import { getFetch } from '..';
 import { kmdbBaseUrl, kobisBaseUrl, tmdbBaseUrl } from '@/constants';
@@ -15,14 +18,14 @@ const tmdbMovieUrl = `${tmdbBaseUrl}/movie`;
 const {
   NEXT_PUBLIC_KOBIS_API_KEY_1,
   NEXT_PUBLIC_KMDB_API_KEY,
-  NEXT_PUBLIC_TMDB_API_KEY,
+  NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
 } = process.env;
 
 const fetchBoxOfficeList = async ({
   boxOfficeType,
   params,
 }: IParamsBoxOfficeList) => {
-  const data: IResposeBoxOfficeList | null = await getFetch({
+  const data: IResposeBoxOfficeList = await getFetch({
     url: `${kobisBaseUrl}/search${boxOfficeType}BoxOfficeList.json?`,
     params: {
       key: NEXT_PUBLIC_KOBIS_API_KEY_1 ?? '',
@@ -30,12 +33,11 @@ const fetchBoxOfficeList = async ({
     },
   });
 
-  if (data == null) throw new Error(`${data}`);
   return data;
 };
 
 const fetchKmdbMovieDetail = async (params: IParamsKmdbMoveDetail) => {
-  const data: IResposeKmdbMovieDetail | null = await getFetch({
+  const data: IResposeKmdbMovieDetail = await getFetch({
     url: kmdbBaseUrl,
     params: {
       collection: 'kmdb_new2',
@@ -44,19 +46,38 @@ const fetchKmdbMovieDetail = async (params: IParamsKmdbMoveDetail) => {
     },
   });
 
-  if (data == null) throw new Error(`${data}`);
   return data;
 };
 
-const fetchTmdbMovieLists = async ({ path, params }: IParamsTmdbMovieLists) => {
-  const data = await getFetch({
-    url: tmdbMovieUrl + path,
-    token: NEXT_PUBLIC_TMDB_API_KEY,
-    params: params,
+const fetchTmdbMovieLists = async ({
+  list_type,
+  query,
+}: IParamsTmdbMovieLists) => {
+  const data: IResponseTmdbMovieLists = await getFetch({
+    url: `${tmdbMovieUrl}/${list_type}?`,
+    token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
+    params: query,
   });
 
-  if (data == null) throw new Error(`${data}`);
   return data;
 };
 
-export { fetchBoxOfficeList, fetchKmdbMovieDetail, fetchTmdbMovieLists };
+const fetchTmdbMovieImages = async ({
+  movie_id,
+  query,
+}: IParamsTmdbMovieImages) => {
+  const data: IResponseTmdbMovieImages = await getFetch({
+    url: `${tmdbMovieUrl}/${movie_id}/images?`,
+    token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
+    params: query,
+  });
+
+  return data;
+};
+
+export {
+  fetchBoxOfficeList,
+  fetchKmdbMovieDetail,
+  fetchTmdbMovieLists,
+  fetchTmdbMovieImages,
+};

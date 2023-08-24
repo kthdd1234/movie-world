@@ -11,6 +11,8 @@ import IconBox from './box_FILL0_wght400_GRAD0_opsz48.svg';
 import IconPlayOutline from './play_arrow_white_24dp.svg';
 import IconPlayFill from './play_arrow_black_24dp.svg';
 import IconAddWhite from './add_white_24dp.svg';
+import IconArrowLeft from './arrow_left.svg';
+import IconArrowRight from './arrow_right.svg';
 
 export {
   IconNotification,
@@ -26,4 +28,6 @@ export {
   IconPlayOutline,
   IconPlayFill,
   IconAddWhite,
+  IconArrowLeft,
+  IconArrowRight,
 };

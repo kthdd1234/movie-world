@@ -19,6 +19,9 @@ const kmdbBaseUrl = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api
 /** tmdbBaseUrl */
 const tmdbBaseUrl = 'https://api.themoviedb.org/3';
 
+/** tmdbImgUrl */
+const tmdbImgUrl = 'http://image.tmdb.org/t/p/original';
+
 const navContentsItems: INavItem[] = [
   {
     icon: <VideoCameraOutlined />,
@@ -40,14 +43,26 @@ const navServiceItems: INavItem[] = [
   { icon: <InboxOutlined />, name: '보관함', type: STORAGE, path: '/storage' },
 ];
 
-const interstellarBgUrl =
-  'http://image.tmdb.org/t/p/original/pbrkL804c8yAv3zBZR4QPEafpAR.jpg';
+const mainSetionMovieList = [
+  {
+    movieId: 157336,
+    back_drop: '/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg',
+    logo_path: '/bxp4NhUZ1GxjdrGF8szOlsL4g0d.pn',
+    desc: '우린 답을 찾을 것이다. 늘 그랬듯이! \n 크리스토퍼 놀란 감독의 놀라운 우주 세계관',
+  },
+  {
+    movieId: 0,
+    back_drop: '',
+    logo_path: '',
+    desc: '',
+  },
+];
 
 export {
   navContentsItems,
   navServiceItems,
-  interstellarBgUrl,
   kobisBaseUrl,
   kmdbBaseUrl,
   tmdbBaseUrl,
+  tmdbImgUrl,
 };

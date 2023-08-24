@@ -1,5 +1,7 @@
+import { LegacyRef } from 'react';
 import {
   EBoxOfficeType,
+  EDirectionType,
   EMovieListsType,
   EMultiMovieYn,
   ENavItemType,
@@ -216,10 +218,67 @@ export interface INavColumnList {
 }
 
 export interface IParamsTmdbMovieLists {
-  path: EMovieListsType;
-  params: {
+  list_type: EMovieListsType;
+  query: {
     language: string;
     page: number;
     region: string;
   };
+}
+
+export interface IResponseTmdbMovieLists {
+  dates: {
+    maximum: string;
+    minumum: string;
+  };
+  page: number;
+  results: {
+    adult: boolean;
+    backdrop_path: string;
+    genre_ids: number[];
+    id: number;
+    original_language: string;
+    original_title: string;
+    overview: string;
+    popularity: number;
+    poster_path: string;
+    release_date: string;
+    title: string;
+    video: boolean;
+    vote_average: number;
+    vote_count: number;
+  }[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface IArrowButton {
+  arrowRef: LegacyRef<HTMLDivElement>;
+  direction: EDirectionType;
+  onClick: (direction: EDirectionType) => void;
+}
+
+export interface IParamsTmdbMovieImages {
+  movie_id: number;
+  query: {
+    include_image_language: string | null;
+    language: string;
+  };
+}
+
+export interface IResponseTmdbMovieImages {
+  backdrops: ITmdbMovieImage[];
+  id: number;
+  logos: ITmdbMovieImage[];
+  posters: ITmdbMovieImage[];
+}
+
+export interface ITmdbMovieImage {
+  aspect_ratio: number;
+  height: number;
+  iso_639_1: string;
+  file_path: string;
+  vote_average: number;
+  vote_count: number;
+  width: number;
 }

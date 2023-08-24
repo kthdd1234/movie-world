@@ -38,13 +38,20 @@ enum ENavItemType {
 
 enum EMovieListsType {
   /** */
-  NOW_PLAYING = '/now_playing',
+  NOW_PLAYING = 'now_playing',
   /** */
-  POPULAR = '/popular',
+  POPULAR = 'popular',
   /** */
-  TOP_RATED = '/top_rated',
+  TOP_RATED = 'top_rated',
   /** */
-  UPCOMING = '/upcoming',
+  UPCOMING = 'upcoming',
+}
+
+enum EDirectionType {
+  /** */
+  LEFT = 'left',
+  /** */
+  RIGHT = 'right',
 }
 
 export {
@@ -53,4 +60,5 @@ export {
   EBoxOfficeType,
   ENavItemType,
   EMovieListsType,
+  EDirectionType,
 };

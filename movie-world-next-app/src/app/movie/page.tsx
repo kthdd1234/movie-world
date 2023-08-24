@@ -1,12 +1,21 @@
 import {
   fetchKmdbMovieDetail,
   fetchBoxOfficeList,
+  fetchTmdbMovieLists,
+  fetchTmdbMovieImages,
 } from '../../api/contents/movie';
 import { beforeDateValue } from '@/services/date';
-import { EBoxOfficeType, EMultiMovieYn, EWeekGb } from '@/types/enum';
+import {
+  EBoxOfficeType,
+  EMovieListsType,
+  EMultiMovieYn,
+  EWeekGb,
+} from '@/types/enum';
 import MainContentsSection from '@/components/Section/MainContentsSection';
 import StaffMadesSection from '@/components/Section/StaffMadesSection';
 import ContentsTypeSection from '@/components/Section/ContentsTypeSection';
+import Image from 'next/image';
+import { tmdbImgUrl } from '@/constants';
 
 const getMovieList = async () => {
   const { boxOfficeResult: dailyResult } = await fetchBoxOfficeList({
@@ -43,7 +52,27 @@ const getMovieList = async () => {
   console.log(movieDataList[0].data.vods);
 };
 
-const MoviePage = () => {
+const MoviePage = async () => {
+  const { results } = await fetchTmdbMovieLists({
+    list_type: EMovieListsType.NOW_PLAYING,
+    query: {
+      language: 'ko-KR',
+      page: 1,
+      region: 'KR',
+    },
+  });
+
+  const { backdrops, logos, posters } = await fetchTmdbMovieImages({
+    movie_id: 157336,
+    query: {
+      include_image_language: 'en',
+      language: 'ko',
+    },
+  });
+
+  console.log(backdrops);
+
+  // console.log('results:', results);
   // getMovieList();
 
   return (
@@ -51,6 +80,17 @@ const MoviePage = () => {
       <MainContentsSection />
       <StaffMadesSection />
       <ContentsTypeSection />
+      {/* {logos.map((info) => (
+        <>
+          <Image
+            src={tmdbImgUrl + info.file_path}
+            alt=''
+            width={1920}
+            height={1080}
+          />
+          <span>{info.file_path}</span>
+        </>
+      ))} */}
     </div>
   );
 };

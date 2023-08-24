@@ -6,7 +6,7 @@ const getFetch = async ({ url, params, token }: IGetFetch) => {
     cache: 'force-cache',
     headers: {
       'Content-type': 'application/json',
-      Authorization: token ?? `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 

@@ -25,3 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }  */
+
+.black-gradient {
+  background: linear-gradient(270deg, rgb(0, 0, 0) 70%, rgba(0, 0, 0, 0) 100%);
+}
