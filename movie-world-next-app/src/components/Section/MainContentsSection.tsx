@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import {} from '@/constants';
+import { mainMovieList, tmdbImgUrl } from '@/constants';
 import Slider from 'react-slick';
 import ArrowButton from '../Button/ArrowButton';
 import { EDirectionType } from '@/types/enum';
@@ -37,6 +37,10 @@ const MainContentsSection = () => {
     setSliderRef(sliderRef);
   };
 
+  const onClickContents = (movieId: number) => {
+    //
+  };
+
   return (
     <div
       className='relative'
@@ -59,27 +63,34 @@ const MainContentsSection = () => {
         arrows={false}
         infinite={true}
       >
-        {/* <Image
-          className='rounded-md cursor-pointer'
-          src={interstellarBgUrl}
-          alt=''
-          width={1920}
-          height={0}
-        />
-        <Image
-          className='rounded-md'
-          src={interstellarBgUrl}
-          alt=''
-          width={1920}
-          height={0}
-        />
-        <Image
-          className='rounded-md'
-          src={interstellarBgUrl}
-          alt=''
-          width={1920}
-          height={0}
-        /> */}
+        {mainMovieList.map((info) => (
+          <div
+            key={info.movieId}
+            className='relative pr-5'
+            onClick={() => onClickContents(info.movieId)}
+          >
+            <div className='absolute bottom-0 z-40 w-full h-20 bg-linear' />
+            <div className='absolute bottom-0 p-9 z-60'>
+              <Image
+                src={tmdbImgUrl + info.logo_path}
+                alt=''
+                width={370}
+                height={0}
+              />
+              <div className='h-6' />
+              <div className='text-xl font-medium leading-7 text-white whitespace-pre-line'>
+                {info.desc}
+              </div>
+            </div>
+            <Image
+              className='z-30 rounded-md cursor-pointer '
+              src={tmdbImgUrl + info.back_drop}
+              alt={`${info.movieId}`}
+              width={1920}
+              height={0}
+            />
+          </div>
+        ))}
       </Slider>
       <ArrowButton
         arrowRef={rightRef}
@@ -89,5 +100,15 @@ const MainContentsSection = () => {
     </div>
   );
 };
+
+// .custom-4c4u5d::before {
+//   content: "";
+//   display: block;
+//   position: absolute;
+//   inset: 0px;
+//   z-index: -1;
+//   background: linear-gradient(179.46deg, rgba(0, 0, 0, 0) 0.46%, rgba(0, 0, 0, 0.6) 95.22%);
+//   width: 100%;
+// }
 
 export default MainContentsSection;
