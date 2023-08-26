@@ -1,5 +1,5 @@
 const StaffMadesSection = () => {
-  return <div></div>;
+  return <div className='relative'></div>;
 };
 
 export default StaffMadesSection;

@@ -54,6 +54,15 @@ enum EDirectionType {
   RIGHT = 'right',
 }
 
+enum ESectionType {
+  /** */
+  MAIN_CONTENTS,
+  /** */
+  STAFF_MADES,
+  /** */
+  CONTENTS_TYPE,
+}
+
 export {
   EWeekGb,
   EMultiMovieYn,
@@ -61,4 +70,5 @@ export {
   ENavItemType,
   EMovieListsType,
   EDirectionType,
+  ESectionType,
 };

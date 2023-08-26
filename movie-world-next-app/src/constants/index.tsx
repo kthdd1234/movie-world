@@ -7,6 +7,13 @@ import {
   StarOutlined,
   InboxOutlined,
 } from '@ant-design/icons';
+import {
+  NowPlayingImage,
+  PopularImage,
+  TopRatedImage,
+  UpcomingImage,
+} from '../../public/images';
+
 /** ENavItemType */
 const { MOVIE, TV, SEARCH, EVALUATE, STORAGE } = ENavItemType;
 
@@ -90,25 +97,25 @@ const staffMadesMovieList = [
     id: NOW_PLAYING,
     title: '상영 중인 영화 리스트',
     desc: '현재 극장에서 상영 중인 다양한 영화들을 만나보세요.',
-    back_drop: '',
+    image: NowPlayingImage,
   },
   {
     id: POPULAR,
     title: '인기있는 영화 리스트',
     desc: '가장 인기있는 영화들을 한번에 확인 해보세요.',
-    back_drop: '',
+    image: PopularImage,
   },
   {
     id: TOP_RATED,
     title: '평점이 높은 영화 리스트',
     desc: '인터스텔라에서 어벤져스까지 평점이 높은 영화들을 만나보세요.',
-    back_drop: '',
+    image: TopRatedImage,
   },
   {
     id: UPCOMING,
     title: '개봉 예정 영화 리스트',
     desc: '곧 개봉할 영화들의 예고편을 확인해보세요.',
-    back_drop: '',
+    image: UpcomingImage,
   },
 ];
 
@@ -120,4 +127,5 @@ export {
   tmdbBaseUrl,
   tmdbImgUrl,
   mainMovieList,
+  staffMadesMovieList,
 };

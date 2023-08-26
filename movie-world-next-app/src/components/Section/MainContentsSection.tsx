@@ -3,59 +3,27 @@
 import Image from 'next/image';
 import { mainMovieList, tmdbImgUrl } from '@/constants';
 import Slider from 'react-slick';
-import ArrowButton from '../Button/ArrowButton';
-import { EDirectionType } from '@/types/enum';
-import { useRef, useState } from 'react';
+import { ESectionType } from '@/types/enum';
 
-const MainContentsSection = () => {
-  /** useState */
-  const [sliderRef, setSliderRef] = useState<Slider | null>(null);
-
-  /** useRef */
-  const leftRef = useRef<HTMLDivElement | null>(null);
-  const rightRef = useRef<HTMLDivElement | null>(null);
-
-  const onClicArrow = (direction: EDirectionType) => {
-    if (sliderRef) {
-      direction == EDirectionType.LEFT
-        ? sliderRef.slickPrev()
-        : sliderRef.slickNext();
-    }
+const MainContentsSection = ({
+  onSlider,
+}: {
+  onSlider: (args: { sectionType: ESectionType; slider: Slider }) => void;
+}) => {
+  const onRef = (slider: Slider) => {
+    onSlider({ sectionType: ESectionType.MAIN_CONTENTS, slider: slider });
   };
 
-  const onMouseEnter = () => {
-    leftRef.current!.style.display = 'flex';
-    rightRef.current!.style.display = 'flex';
-  };
-
-  const onMouseLeave = () => {
-    leftRef.current!.style.display = 'none';
-    rightRef.current!.style.display = 'none';
-  };
-
-  const onSliderRef = (sliderRef: Slider) => {
-    setSliderRef(sliderRef);
-  };
-
-  const onClickContents = (movieId: number) => {
+  const onClick = (movieId: number) => {
     //
   };
 
   return (
-    <div
-      className='relative'
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <ArrowButton
-        arrowRef={leftRef}
-        direction={EDirectionType.LEFT}
-        onClick={onClicArrow}
-      />
+    <>
       <div className='text-3xl font-bold text-white'>홈</div>
       <div className='h-8' />
       <Slider
-        ref={onSliderRef}
+        ref={onRef}
         className='w-[150rem]'
         speed={800}
         slidesToShow={2}
@@ -67,7 +35,7 @@ const MainContentsSection = () => {
           <div
             key={info.movieId}
             className='relative pr-5'
-            onClick={() => onClickContents(info.movieId)}
+            onClick={() => onClick(info.movieId)}
           >
             <div className='absolute bottom-0 z-40 w-full h-20 bg-linear' />
             <div className='absolute bottom-0 p-9 z-60'>
@@ -92,23 +60,8 @@ const MainContentsSection = () => {
           </div>
         ))}
       </Slider>
-      <ArrowButton
-        arrowRef={rightRef}
-        direction={EDirectionType.RIGHT}
-        onClick={onClicArrow}
-      />
-    </div>
+    </>
   );
 };
-
-// .custom-4c4u5d::before {
-//   content: "";
-//   display: block;
-//   position: absolute;
-//   inset: 0px;
-//   z-index: -1;
-//   background: linear-gradient(179.46deg, rgba(0, 0, 0, 0) 0.46%, rgba(0, 0, 0, 0.6) 95.22%);
-//   width: 100%;
-// }
 
 export default MainContentsSection;
