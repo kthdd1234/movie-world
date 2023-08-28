@@ -10,8 +10,8 @@ const NavColumnList = ({
       {items.map((item) => (
         <li
           key={item.type}
-          className={`flex gap-3 px-4 py-2 text-[#d4d7db] hover:text-white cursor-pointer rounded-md ${
-            seletedItem === item.type ? 'bg-slate-700' : ''
+          className={`flex gap-3 px-4 py-2 text-base text-[#d4d7db] hover:text-white cursor-pointer rounded-md ${
+            seletedItem === item.type ? 'bg-[#303133]' : ''
           }`}
           onClick={() => onSelectedItem(item)}
         >

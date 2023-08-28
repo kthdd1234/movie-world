@@ -36,7 +36,7 @@ enum ENavItemType {
   STORAGE = 'STORAGE',
 }
 
-enum EMovieListsType {
+enum EListsType {
   /** */
   NOW_PLAYING = 'now_playing',
   /** */
@@ -45,6 +45,8 @@ enum EMovieListsType {
   TOP_RATED = 'top_rated',
   /** */
   UPCOMING = 'upcoming',
+  /** */
+  NOLAN_MOVIES = 'nolan_movies',
 }
 
 enum EDirectionType {
@@ -61,6 +63,26 @@ enum ESectionType {
   STAFF_MADES,
   /** */
   CONTENTS_TYPE,
+  /** */
+  TRENDING,
+}
+
+enum ETrendingType {
+  /** */
+  ALL = 'all',
+  /** */
+  MOVIE = 'movie',
+  /** */
+  PERSON = 'person',
+  /** */
+  TV = 'tv',
+}
+
+enum ETrendingDateType {
+  /** */
+  DAY = 'day',
+  /** */
+  WEEK = 'week',
 }
 
 export {
@@ -68,7 +90,9 @@ export {
   EMultiMovieYn,
   EBoxOfficeType,
   ENavItemType,
-  EMovieListsType,
+  EListsType,
   EDirectionType,
   ESectionType,
+  ETrendingType,
+  ETrendingDateType,
 };

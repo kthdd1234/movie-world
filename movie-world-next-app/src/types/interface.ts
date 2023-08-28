@@ -1,28 +1,33 @@
-import { LegacyRef } from 'react';
+import { LegacyRef, ReactNode } from 'react';
 import {
   EBoxOfficeType,
+  ETrendingType,
   EDirectionType,
-  EMovieListsType,
   EMultiMovieYn,
   ENavItemType,
+  ESectionType,
   EWeekGb,
+  ETrendingDateType,
+  EListsType,
 } from './enum';
+import Slider from 'react-slick';
+import { StaticImageData } from 'next/image';
 
 export interface IGetFetch {
   url: string;
-  params: Record<string, any>;
+  query: Record<string, any>;
   token?: string;
 }
 
 export interface IPostFetch {
   url: string;
-  params: Record<string, any>;
+  query: Record<string, any>;
   body: any;
 }
 
 export interface IParamsBoxOfficeList {
   boxOfficeType: EBoxOfficeType;
-  params: {
+  query: {
     targetDt: string;
     multiMovieYn: EMultiMovieYn;
     weekGb?: EWeekGb;
@@ -218,7 +223,7 @@ export interface INavColumnList {
 }
 
 export interface IParamsTmdbMovieLists {
-  list_type: EMovieListsType;
+  lists_type: EListsType;
   query: {
     language: string;
     page: number;
@@ -281,4 +286,73 @@ export interface ITmdbMovieImage {
   vote_average: number;
   vote_count: number;
   width: number;
+}
+
+export interface IOnSlider {
+  sectionType: ESectionType;
+  slider: Slider;
+}
+
+export interface IPropsSection {
+  children: ReactNode;
+  slider: Slider | null;
+}
+
+export interface IPropsMainContentsSection extends IPropsOnSlider {
+  list: { id: number; back_drop: string; logo_path: string; desc: string }[];
+}
+
+export interface IPropsStaffMadesSection extends IPropsOnSlider {
+  list: {
+    id: EListsType;
+    title: string;
+    sub_title: string;
+    movie_titles: string;
+    image: StaticImageData;
+  }[];
+}
+
+export interface IPropsTrendingSection extends IPropsOnSlider {
+  list: ITrendingData[];
+}
+
+interface IPropsOnSlider {
+  onSlider: (args: IOnSlider) => void;
+}
+
+export interface IParamsTmdbTrending {
+  trending_type: ETrendingType;
+  time_window: ETrendingDateType;
+  query: {
+    language: string;
+  };
+}
+
+export interface IResponceTmdbTrending {
+  page: number;
+  results: ITrendingData[];
+  total_pages: number;
+  total_results: number;
+}
+
+interface ITrendingData {
+  adult: boolean;
+  media_type: string;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+export interface IMovieContent {
+  trendingList: ITrendingData[];
 }

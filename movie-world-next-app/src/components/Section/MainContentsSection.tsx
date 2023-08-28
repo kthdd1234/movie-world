@@ -1,20 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import { mainMovieList, tmdbImgUrl } from '@/constants';
+import { tmdbImgUrl } from '@/constants';
 import Slider from 'react-slick';
 import { ESectionType } from '@/types/enum';
+import { IPropsMainContentsSection } from '@/types/interface';
 
-const MainContentsSection = ({
-  onSlider,
-}: {
-  onSlider: (args: { sectionType: ESectionType; slider: Slider }) => void;
-}) => {
+const MainContentsSection = ({ list, onSlider }: IPropsMainContentsSection) => {
   const onRef = (slider: Slider) => {
     onSlider({ sectionType: ESectionType.MAIN_CONTENTS, slider: slider });
   };
 
-  const onClick = (movieId: number) => {
+  const onClick = (id: number) => {
     //
   };
 
@@ -31,11 +28,11 @@ const MainContentsSection = ({
         arrows={false}
         infinite={true}
       >
-        {mainMovieList.map((info) => (
+        {list.map((info) => (
           <div
-            key={info.movieId}
+            key={info.id}
             className='relative pr-5'
-            onClick={() => onClick(info.movieId)}
+            onClick={() => onClick(info.id)}
           >
             <div className='absolute bottom-0 z-40 w-full h-20 bg-linear' />
             <div className='absolute bottom-0 p-9 z-60'>
@@ -53,7 +50,7 @@ const MainContentsSection = ({
             <Image
               className='z-30 rounded-md cursor-pointer '
               src={tmdbImgUrl + info.back_drop}
-              alt={`${info.movieId}`}
+              alt={`${info.id}`}
               width={1920}
               height={0}
             />

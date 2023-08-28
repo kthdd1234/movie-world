@@ -1,18 +1,13 @@
 import { EDirectionType } from '@/types/enum';
-import { useRef, ReactNode } from 'react';
-import Slider from 'react-slick';
+import { useRef } from 'react';
+import { IPropsSection } from '@/types/interface';
+import { TDivElement } from '@/types/type';
 import ArrowButton from '../Button/ArrowButton';
 
-const Section = ({
-  children,
-  slider,
-}: {
-  children: ReactNode;
-  slider: Slider | null;
-}) => {
+const Section = ({ children, slider }: IPropsSection) => {
   /** useRef */
-  const leftRef = useRef<HTMLDivElement | null>(null);
-  const rightRef = useRef<HTMLDivElement | null>(null);
+  const leftRef = useRef<TDivElement>(null);
+  const rightRef = useRef<TDivElement>(null);
 
   const onMouseEnter = () => {
     leftRef.current!.style.display = 'flex';
@@ -34,7 +29,7 @@ const Section = ({
 
   return (
     <div
-      className='relative'
+      className='relative mb-24'
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
