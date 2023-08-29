@@ -58,8 +58,14 @@ const MoviePage = async () => {
     );
   };
 
-  const { results } = await fetchTmdbTrending({
+  const { results: trendingMovies } = await fetchTmdbTrending({
     trending_type: ETrendingType.MOVIE,
+    time_window: ETrendingDateType.WEEK,
+    query: { language: 'ko' },
+  });
+
+  const { results: trendingPersons } = await fetchTmdbTrending({
+    trending_type: ETrendingType.PERSON,
     time_window: ETrendingDateType.WEEK,
     query: { language: 'ko' },
   });
@@ -68,7 +74,12 @@ const MoviePage = async () => {
   // getTmdbMovieLists();
   // getTmdbMovieImages();
 
-  return <MovieContent trendingList={results} />;
+  return (
+    <MovieContent
+      trendingMovies={trendingMovies}
+      trendingPersons={trendingPersons}
+    />
+  );
 };
 
 export default MoviePage;

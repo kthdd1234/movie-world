@@ -237,24 +237,26 @@ export interface IResponseTmdbMovieLists {
     minumum: string;
   };
   page: number;
-  results: {
-    adult: boolean;
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-  }[];
+  results: ITmdbMovieData[];
   total_pages: number;
   total_results: number;
+}
+
+export interface ITmdbMovieData {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
 }
 
 export interface IArrowButton {
@@ -351,8 +353,15 @@ interface ITrendingData {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  original_name: string;
+  name: string;
+  gender: number;
+  known_for_department: string;
+  profile_path: string;
+  known_for: ITmdbMovieData[];
 }
 
 export interface IMovieContent {
-  trendingList: ITrendingData[];
+  trendingMovies: ITrendingData[];
+  trendingPersons: ITrendingData[];
 }

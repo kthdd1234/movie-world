@@ -65,6 +65,8 @@ enum ESectionType {
   CONTENTS_TYPE,
   /** */
   TRENDING,
+  /** */
+  PERSON,
 }
 
 enum ETrendingType {

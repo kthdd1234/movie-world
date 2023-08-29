@@ -10,8 +10,11 @@ import StaffMadesSection from '../Section/StaffMadesSection';
 import TrendingSection from '../Section/TrendingSection';
 import ContentsTypeSection from '../Section/ContentsTypeSection';
 import { mainMovieList, staffMadesMovieList } from '@/constants';
+import PersonSection from '../Section/PersonSection';
 
-const MovieContent = ({ trendingList }: IMovieContent) => {
+const { MAIN_CONTENTS, STAFF_MADES, TRENDING, PERSON } = ESectionType;
+
+const MovieContent = ({ trendingMovies, trendingPersons }: IMovieContent) => {
   /** mainContentsSlider */
   const [mainContentsSlider, setMainContentsSlider] = useState<TSlider>(null);
 
@@ -21,18 +24,25 @@ const MovieContent = ({ trendingList }: IMovieContent) => {
   /** trendingSlider */
   const [trendingSlider, setTrendingSlider] = useState<TSlider>(null);
 
+  /** personSlider */
+  const [personSlider, setPersonSlider] = useState<TSlider>(null);
+
   const onSlider = ({ sectionType, slider }: IOnSlider) => {
     switch (sectionType) {
-      case ESectionType.MAIN_CONTENTS:
+      case MAIN_CONTENTS:
         setMainContentsSlider(slider);
         break;
 
-      case ESectionType.STAFF_MADES:
+      case STAFF_MADES:
         setStaffMadesSlider(slider);
         break;
 
-      case ESectionType.TRENDING:
+      case TRENDING:
         setTrendingSlider(slider);
+        break;
+
+      case PERSON:
+        setPersonSlider(slider);
         break;
 
       default:
@@ -56,7 +66,11 @@ const MovieContent = ({ trendingList }: IMovieContent) => {
       />
       <Section
         slider={trendingSlider}
-        children={<TrendingSection list={trendingList} onSlider={onSlider} />}
+        children={<TrendingSection list={trendingMovies} onSlider={onSlider} />}
+      />
+      <Section
+        slider={personSlider}
+        children={<PersonSection list={trendingPersons} onSlider={onSlider} />}
       />
       {/* <ContentsTypeSection /> */}
     </div>
