@@ -26,7 +26,7 @@ const fetchBoxOfficeList = async ({
   query,
 }: IParamsBoxOfficeList) => {
   const data: IResposeBoxOfficeList = await getFetch({
-    url: `${kobisBaseUrl}/search${boxOfficeType}BoxOfficeList.json?`,
+    url: `${kobisBaseUrl}/search${boxOfficeType}BoxOfficeList.json`,
     query: {
       key: NEXT_PUBLIC_KOBIS_API_KEY_1 ?? '',
       ...query,
@@ -54,7 +54,7 @@ const fetchTmdbMovieLists = async ({
   query,
 }: IParamsTmdbMovieLists) => {
   const data: IResponseTmdbMovieLists = await getFetch({
-    url: `${tmdbMovieUrl}/${lists_type}?`,
+    url: `${tmdbMovieUrl}/${lists_type}`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
@@ -67,7 +67,7 @@ const fetchTmdbMovieImages = async ({
   query,
 }: IParamsTmdbMovieImages) => {
   const data: IResponseTmdbMovieImages = await getFetch({
-    url: `${tmdbMovieUrl}/${movie_id}/images?`,
+    url: `${tmdbMovieUrl}/${movie_id}/images`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });

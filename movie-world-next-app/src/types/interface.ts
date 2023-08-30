@@ -9,6 +9,8 @@ import {
   EWeekGb,
   ETrendingDateType,
   EListsType,
+  EGenresType,
+  EDiscoverType,
 } from './enum';
 import Slider from 'react-slick';
 import { StaticImageData } from 'next/image';
@@ -231,18 +233,21 @@ export interface IParamsTmdbMovieLists {
   };
 }
 
-export interface IResponseTmdbMovieLists {
+export interface IResponseTmdbMovieLists extends ITmdbContentsList {
   dates: {
     maximum: string;
     minumum: string;
   };
+}
+
+export interface ITmdbContentsList {
   page: number;
-  results: ITmdbMovieData[];
+  results: ITmdbContentsData[];
   total_pages: number;
   total_results: number;
 }
 
-export interface ITmdbMovieData {
+export interface ITmdbContentsData {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -318,6 +323,10 @@ export interface IPropsTrendingSection extends IPropsOnSlider {
   list: ITrendingData[];
 }
 
+export interface IPropsGenreSection extends IPropsOnSlider {
+  list: ITmdbContentsData[];
+}
+
 interface IPropsOnSlider {
   onSlider: (args: IOnSlider) => void;
 }
@@ -358,10 +367,32 @@ interface ITrendingData {
   gender: number;
   known_for_department: string;
   profile_path: string;
-  known_for: ITmdbMovieData[];
+  known_for: ITmdbContentsData[];
 }
 
 export interface IMovieContent {
   trendingMovies: ITrendingData[];
   trendingPersons: ITrendingData[];
+  genreMovies: ITmdbContentsData[];
+}
+
+export interface IParamsTmdbDiscover {
+  discover_type: EDiscoverType;
+  query: {
+    include_adult: boolean;
+    language: string;
+    page: number;
+    with_genres: number;
+  };
+}
+
+export interface IParamsTmdbGenres {
+  genres_type: EGenresType;
+  query: {
+    language: string;
+  };
+}
+
+export interface IResponceTmdbGenres {
+  genres: { id: string; name: string }[];
 }

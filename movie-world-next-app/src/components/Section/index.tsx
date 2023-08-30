@@ -29,7 +29,7 @@ const Section = ({ children, slider }: IPropsSection) => {
 
   return (
     <div
-      className='relative mb-24'
+      className='relative mb-10'
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

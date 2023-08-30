@@ -19,7 +19,6 @@ const PersonSection = ({ list, onSlider }: IPropsTrendingSection) => {
       <SectionTitle text='아티스트' />
       <Slider
         ref={onRef}
-        className=''
         speed={800}
         slidesToShow={8}
         slidesToScroll={8}

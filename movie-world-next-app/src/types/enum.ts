@@ -67,6 +67,8 @@ enum ESectionType {
   TRENDING,
   /** */
   PERSON,
+  /** */
+  GENRE,
 }
 
 enum ETrendingType {
@@ -87,6 +89,20 @@ enum ETrendingDateType {
   WEEK = 'week',
 }
 
+enum EDiscoverType {
+  /** */
+  MOVIE = 'movie',
+  /** */
+  TV = 'tv',
+}
+
+enum EGenresType {
+  /** */
+  MOVIE = 'movie',
+  /** */
+  TV = 'tv',
+}
+
 export {
   EWeekGb,
   EMultiMovieYn,
@@ -97,4 +113,6 @@ export {
   ESectionType,
   ETrendingType,
   ETrendingDateType,
+  EDiscoverType,
+  EGenresType,
 };

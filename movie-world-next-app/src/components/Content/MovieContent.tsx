@@ -8,13 +8,18 @@ import Section from '../Section';
 import MainContentsSection from '../Section/MainContentsSection';
 import StaffMadesSection from '../Section/StaffMadesSection';
 import TrendingSection from '../Section/TrendingSection';
-import ContentsTypeSection from '../Section/ContentsTypeSection';
+import ContentsTypeSection from '../Section/GenreSection';
 import { mainMovieList, staffMadesMovieList } from '@/constants';
 import PersonSection from '../Section/PersonSection';
+import GenreSection from '../Section/GenreSection';
 
-const { MAIN_CONTENTS, STAFF_MADES, TRENDING, PERSON } = ESectionType;
+const { MAIN_CONTENTS, STAFF_MADES, TRENDING, PERSON, GENRE } = ESectionType;
 
-const MovieContent = ({ trendingMovies, trendingPersons }: IMovieContent) => {
+const MovieContent = ({
+  trendingMovies,
+  trendingPersons,
+  genreMovies,
+}: IMovieContent) => {
   /** mainContentsSlider */
   const [mainContentsSlider, setMainContentsSlider] = useState<TSlider>(null);
 
@@ -26,6 +31,9 @@ const MovieContent = ({ trendingMovies, trendingPersons }: IMovieContent) => {
 
   /** personSlider */
   const [personSlider, setPersonSlider] = useState<TSlider>(null);
+
+  /** genreSlider */
+  const [genreSlider, setGenreSlider] = useState<TSlider>(null);
 
   const onSlider = ({ sectionType, slider }: IOnSlider) => {
     switch (sectionType) {
@@ -43,6 +51,10 @@ const MovieContent = ({ trendingMovies, trendingPersons }: IMovieContent) => {
 
       case PERSON:
         setPersonSlider(slider);
+        break;
+
+      case GENRE:
+        setGenreSlider(slider);
         break;
 
       default:
@@ -72,7 +84,10 @@ const MovieContent = ({ trendingMovies, trendingPersons }: IMovieContent) => {
         slider={personSlider}
         children={<PersonSection list={trendingPersons} onSlider={onSlider} />}
       />
-      {/* <ContentsTypeSection /> */}
+      <Section
+        slider={genreSlider}
+        children={<GenreSection list={genreMovies} onSlider={onSlider} />}
+      />
     </div>
   );
 };

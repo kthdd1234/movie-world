@@ -12,11 +12,17 @@ import {
   ETrendingType,
   ETrendingDateType,
   EWeekGb,
+  EGenresType,
+  EDiscoverType,
 } from '@/types/enum';
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
 import MovieContent from '@/components/Content/MovieContent';
-import { fetchTmdbTrending } from '@/api/contents/trending';
+import {
+  fetchTmdbDiscover,
+  fetchTmdbGenres,
+  fetchTmdbTrending,
+} from '@/api/contents';
 
 const MoviePage = async () => {
   const getTmdbMovieLists = async (lists_type: EListsType) => {
@@ -70,6 +76,23 @@ const MoviePage = async () => {
     query: { language: 'ko' },
   });
 
+  const { genres } = await fetchTmdbGenres({
+    genres_type: EGenresType.MOVIE,
+    query: { language: 'ko' },
+  });
+
+  const { results } = await fetchTmdbDiscover({
+    discover_type: EDiscoverType.MOVIE,
+    query: {
+      include_adult: true,
+      language: 'ko',
+      page: 1,
+      with_genres: 878,
+    },
+  });
+
+  // console.log(results);
+
   // getKmdbMovieList();
   // getTmdbMovieLists();
   // getTmdbMovieImages();
@@ -78,6 +101,7 @@ const MoviePage = async () => {
     <MovieContent
       trendingMovies={trendingMovies}
       trendingPersons={trendingPersons}
+      genreMovies={results}
     />
   );
 };

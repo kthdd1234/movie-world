@@ -43,7 +43,7 @@ const TrendingSection = ({ list, onSlider }: IPropsTrendingSection) => {
       <SectionTitle text='주간 TOP 10' />
       <Slider
         ref={onRef}
-        className='w-[115rem]'
+        className='w-[112rem]'
         speed={800}
         slidesToShow={7}
         slidesToScroll={7}
