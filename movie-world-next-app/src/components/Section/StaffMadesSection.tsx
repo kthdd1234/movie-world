@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 
 const StaffMadesSection = ({ list, onSlider }: IPropsStaffMadesSection) => {
   const onRef = (slider: Slider) => {
-    onSlider({ sectionType: ESectionType.STAFF_MADES, slider: slider });
+    onSlider({ sliderId: ESectionType.STAFF_MADES, slider: slider });
   };
 
   const onClick = (id: EListsType) => {

@@ -1,13 +1,13 @@
 import { IPropsTrendingSection } from '@/types/interface';
 import SectionTitle from '../Text/SectionTitle';
 import Slider from 'react-slick';
-import { ESectionType } from '@/types/enum';
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
+import { ESectionType } from '@/types/enum';
 
 const PersonSection = ({ list, onSlider }: IPropsTrendingSection) => {
   const onRef = (slider: Slider) => {
-    onSlider({ sectionType: ESectionType.PERSON, slider: slider });
+    onSlider({ sliderId: ESectionType.PERSON, slider: slider });
   };
 
   const onClick = (id: number) => {

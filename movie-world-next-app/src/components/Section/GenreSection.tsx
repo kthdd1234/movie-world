@@ -7,7 +7,7 @@ import { ESectionType } from '@/types/enum';
 
 const GenreSection = ({ list, onSlider }: IPropsGenreSection) => {
   const onRef = (slider: Slider) => {
-    onSlider({ sectionType: ESectionType.GENRE, slider: slider });
+    onSlider({ sliderId: ESectionType.SF, slider: slider });
   };
 
   const onClick = (id: number) => {
@@ -27,10 +27,13 @@ const GenreSection = ({ list, onSlider }: IPropsGenreSection) => {
         infinite={true}
       >
         {list.map((info) => (
-          <div className='mr-2 cursor-pointer' onClick={() => onClick(info.id)}>
+          <div
+            key={info.id}
+            className='mr-2 cursor-pointer'
+            onClick={() => onClick(info.id)}
+          >
             <Image
               className='rounded'
-              key={info.id}
               src={tmdbImgUrl + info.poster_path}
               alt=''
               width={173.5}

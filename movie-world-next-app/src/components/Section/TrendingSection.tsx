@@ -1,4 +1,3 @@
-import { ESectionType } from '@/types/enum';
 import { IPropsTrendingSection } from '@/types/interface';
 import Slider from 'react-slick';
 import Image from 'next/image';
@@ -16,9 +15,10 @@ import {
   IconRank10,
 } from '../../../public/svgs';
 import SectionTitle from '../Text/SectionTitle';
+import { ESectionType } from '@/types/enum';
 
 const TrendingSection = ({ list, onSlider }: IPropsTrendingSection) => {
-  const rank_10_list = list.slice(0, 11);
+  const rank_10_list = list.slice(0, 10);
   const rank_svg_list = [
     IconRank1,
     IconRank2,
@@ -33,7 +33,7 @@ const TrendingSection = ({ list, onSlider }: IPropsTrendingSection) => {
   ];
 
   const onRef = (slider: Slider) => {
-    onSlider({ sectionType: ESectionType.TRENDING, slider: slider });
+    onSlider({ sliderId: ESectionType.TRENDING, slider: slider });
   };
 
   const onClick = (id: number) => {};

@@ -296,7 +296,7 @@ export interface ITmdbMovieImage {
 }
 
 export interface IOnSlider {
-  sectionType: ESectionType;
+  sliderId: number;
   slider: Slider;
 }
 

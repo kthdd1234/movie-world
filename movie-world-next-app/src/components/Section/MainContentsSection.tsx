@@ -3,12 +3,14 @@
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
 import Slider from 'react-slick';
-import { ESectionType } from '@/types/enum';
 import { IPropsMainContentsSection } from '@/types/interface';
+import { ESectionType } from '@/types/enum';
 
 const MainContentsSection = ({ list, onSlider }: IPropsMainContentsSection) => {
+  /** useRecoilState */
+
   const onRef = (slider: Slider) => {
-    onSlider({ sectionType: ESectionType.MAIN_CONTENTS, slider: slider });
+    onSlider({ sliderId: ESectionType.MAIN_CONTENTS, slider: slider });
   };
 
   const onClick = (id: number) => {
