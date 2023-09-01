@@ -14,6 +14,7 @@ import {
 } from './enum';
 import Slider from 'react-slick';
 import { StaticImageData } from 'next/image';
+import { TLanguage, TSlider } from './type';
 
 export interface IGetFetch {
   url: string;
@@ -227,7 +228,7 @@ export interface INavColumnList {
 export interface IParamsTmdbMovieLists {
   lists_type: EListsType;
   query: {
-    language: string;
+    language: TLanguage;
     page: number;
     region: string;
   };
@@ -274,7 +275,7 @@ export interface IParamsTmdbMovieImages {
   movie_id: number;
   query: {
     include_image_language: string | null;
-    language: string;
+    language: TLanguage;
   };
 }
 
@@ -335,7 +336,7 @@ export interface IParamsTmdbTrending {
   trending_type: ETrendingType;
   time_window: ETrendingDateType;
   query: {
-    language: string;
+    language: TLanguage;
   };
 }
 
@@ -370,7 +371,7 @@ interface ITrendingData {
   known_for: ITmdbContentsData[];
 }
 
-export interface IMovieContent {
+export interface IMovieContent extends IResponceTmdbGenres {
   trendingMovies: ITrendingData[];
   trendingPersons: ITrendingData[];
   genreMovies: ITmdbContentsData[];
@@ -380,7 +381,7 @@ export interface IParamsTmdbDiscover {
   discover_type: EDiscoverType;
   query: {
     include_adult: boolean;
-    language: string;
+    language: TLanguage;
     page: number;
     with_genres: number;
   };
@@ -389,10 +390,110 @@ export interface IParamsTmdbDiscover {
 export interface IParamsTmdbGenres {
   genres_type: EGenresType;
   query: {
-    language: string;
+    language: TLanguage;
   };
 }
 
 export interface IResponceTmdbGenres {
-  genres: { id: string; name: string }[];
+  genres: IGenreData[];
+}
+
+interface IGenreData {
+  id: string;
+  name: string;
+}
+
+export interface ISliderState {
+  [key: string]: TSlider;
+}
+
+export interface IParamsTmdbMovieDeatail {
+  movie_id: number;
+  query: {
+    append_to_response: string;
+    language: TLanguage;
+  };
+}
+
+export interface IResponceTmdbMovieDetail {
+  adult: boolean;
+  backdrop_path: string;
+  belongs_to_collection: any;
+  budget: number;
+  genres: IGenreData[];
+  homepage: string;
+  id: number;
+  imdb_id: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: {
+    id: number;
+    logo_path: string;
+    name: string;
+    origin_country: string;
+  }[];
+  production_countries: {
+    iso_3166_1: string;
+    name: string;
+  }[];
+  release_date: string;
+  revenue: number;
+  runtime: number;
+  spoken_languages: {
+    english_name: string;
+    iso_639_1: string;
+    name: string;
+  }[];
+  status: string;
+  tagline: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+  videos: {
+    results: {
+      iso_639_1: string;
+      iso_3166_1: string;
+      name: string;
+      key: string;
+      site: string;
+      size: number;
+      type: string;
+      official: boolean;
+      published_at: string;
+      id: string;
+    }[];
+  };
+  credits: {
+    cast: {
+      adult: boolean;
+      gender: number;
+      id: number;
+      known_for_department: string;
+      name: string;
+      original_name: string;
+      popularity: number;
+      profile_path: string;
+      cast_id: number;
+      character: string;
+      credit_id: string;
+      order: null;
+    }[];
+    crew: {
+      adult: boolean;
+      gender: number;
+      id: number;
+      known_for_department: string;
+      name: string;
+      original_name: string;
+      popularity: number;
+      profile_path: string;
+      credit_id: string;
+      department: string;
+      job: string;
+    }[];
+  };
 }

@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TSlider } from '@/types/type';
-import { IMovieContent, IOnSlider } from '@/types/interface';
+import { IMovieContent, IOnSlider, ISliderState } from '@/types/interface';
 import Section from '../Section';
 import MainContentsSection from '../Section/MainContentsSection';
 import StaffMadesSection from '../Section/StaffMadesSection';
@@ -11,18 +11,27 @@ import { mainMovieList, staffMadesMovieList } from '@/constants';
 import PersonSection from '../Section/PersonSection';
 import GenreSection from '../Section/GenreSection';
 import { ESectionType } from '@/types/enum';
+import { useSetRecoilState } from 'recoil';
+import { movieGenresState } from '@/states/movie';
 
 const { MAIN_CONTENTS, STAFF_MADES, TRENDING, PERSON, SF } = ESectionType;
 
 const MovieContent = ({
+  genres,
   trendingMovies,
   trendingPersons,
   genreMovies,
 }: IMovieContent) => {
-  /** sliderState */
-  const [sliderState, setSliderState] = useState<{ [key: string]: TSlider }>(
-    {}
-  );
+  /** useSetRecoilState */
+  const setMovieGenresState = useSetRecoilState(movieGenresState);
+
+  /** useState */
+  const [sliderState, setSliderState] = useState<ISliderState>({});
+
+  /** useEffect */
+  useEffect(() => {
+    setMovieGenresState(genres);
+  }, []);
 
   const onSlider = ({ sliderId, slider }: IOnSlider) => {
     if (sliderState[sliderId] === undefined) {

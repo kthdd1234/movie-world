@@ -7,6 +7,8 @@ import {
   IResponseTmdbMovieLists,
   IParamsTmdbMovieImages,
   IResponseTmdbMovieImages,
+  IResponceTmdbMovieDetail,
+  IParamsTmdbMovieDeatail,
 } from '@/types/interface';
 import { getFetch } from '..';
 import { kmdbBaseUrl, kobisBaseUrl, tmdbBaseUrl } from '@/constants';
@@ -75,9 +77,23 @@ const fetchTmdbMovieImages = async ({
   return data;
 };
 
+const fetchTmdbMovieDetail = async ({
+  movie_id,
+  query,
+}: IParamsTmdbMovieDeatail) => {
+  const data: IResponceTmdbMovieDetail = await getFetch({
+    url: `${tmdbMovieUrl}/${movie_id}`,
+    token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
+    query: query,
+  });
+
+  return data;
+};
+
 export {
   fetchBoxOfficeList,
   fetchKmdbMovieDetail,
   fetchTmdbMovieLists,
   fetchTmdbMovieImages,
+  fetchTmdbMovieDetail,
 };

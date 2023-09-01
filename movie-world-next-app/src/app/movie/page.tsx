@@ -1,17 +1,17 @@
 import {
   fetchKmdbMovieDetail,
   fetchBoxOfficeList,
-  fetchTmdbMovieLists,
   fetchTmdbMovieImages,
+  fetchTmdbMovieLists,
 } from '../../api/contents/movie';
 import { beforeDateValue } from '@/services/date';
 import {
   EBoxOfficeType,
-  EListsType,
+  EWeekGb,
   EMultiMovieYn,
+  EListsType,
   ETrendingType,
   ETrendingDateType,
-  EWeekGb,
   EGenresType,
   EDiscoverType,
 } from '@/types/enum';
@@ -36,32 +36,6 @@ const MoviePage = async () => {
     });
 
     console.log(results);
-  };
-
-  const getTmdbMovieImages = async () => {
-    const { backdrops, logos, posters } = await fetchTmdbMovieImages({
-      movie_id: 278,
-      query: {
-        include_image_language: null,
-        language: 'ko',
-      },
-    });
-
-    return (
-      <div>
-        {backdrops.map((info) => (
-          <>
-            <Image
-              src={tmdbImgUrl + info.file_path}
-              alt=''
-              width={1920}
-              height={1080}
-            />
-            <span>{info.file_path}</span>
-          </>
-        ))}
-      </div>
-    );
   };
 
   const { results: trendingMovies } = await fetchTmdbTrending({
@@ -99,6 +73,7 @@ const MoviePage = async () => {
 
   return (
     <MovieContent
+      genres={genres}
       trendingMovies={trendingMovies}
       trendingPersons={trendingPersons}
       genreMovies={results}
@@ -140,4 +115,29 @@ export default MoviePage;
 //   }));
 
 //   console.log(movieDataList[0].data.vods);
+// };
+// const getTmdbMovieImages = async () => {
+//   const { backdrops, logos, posters } = await fetchTmdbMovieImages({
+//     movie_id: 278,
+//     query: {
+//       include_image_language: null,
+//       language: 'ko',
+//     },
+//   });
+
+//   return (
+//     <div>
+//       {backdrops.map((info) => (
+//         <>
+//           <Image
+//             src={tmdbImgUrl + info.file_path}
+//             alt=''
+//             width={1920}
+//             height={1080}
+//           />
+//           <span>{info.file_path}</span>
+//         </>
+//       ))}
+//     </div>
+//   );
 // };

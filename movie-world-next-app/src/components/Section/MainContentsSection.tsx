@@ -5,16 +5,18 @@ import { tmdbImgUrl } from '@/constants';
 import Slider from 'react-slick';
 import { IPropsMainContentsSection } from '@/types/interface';
 import { ESectionType } from '@/types/enum';
+import { useRouter } from 'next/navigation';
 
 const MainContentsSection = ({ list, onSlider }: IPropsMainContentsSection) => {
-  /** useRecoilState */
+  /** useRouter */
+  const router = useRouter();
 
   const onRef = (slider: Slider) => {
     onSlider({ sliderId: ESectionType.MAIN_CONTENTS, slider: slider });
   };
 
   const onClick = (id: number) => {
-    //
+    router.push(`/contents/${id}`);
   };
 
   return (
