@@ -31,7 +31,7 @@ const StaffMadesSection = ({ list, onSlider }: IPropsStaffMadesSection) => {
           >
             <div className='text-xs font-normal'>{info.title}</div>
             <div className='text-xl font-bold'>{info.sub_title}</div>
-            <div className='text-lg font-normal text-[#babac1]'>
+            <div className='text-lg font-normal text-mist'>
               {info.movie_titles}
             </div>
             <Image

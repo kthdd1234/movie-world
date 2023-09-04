@@ -4,7 +4,7 @@ import {
   fetchTmdbMovieImages,
   fetchTmdbMovieLists,
 } from '../../api/contents/movie';
-import { beforeDateValue } from '@/services/date';
+import { beforeDateValue } from '@/services/date_and_time';
 import {
   EBoxOfficeType,
   EWeekGb,
