@@ -13,6 +13,9 @@ module.exports = {
       mist: '#babac1',
       divider: '#1b1c1d',
       tomato: '#f82f62',
+      disabled: '#4f5152',
+      deepGray: '#84868d',
+      yellow500: '#eab308',
     },
     extend: {
       backgroundImage: {

@@ -23,6 +23,7 @@ import IconRank7 from './rank_7.svg';
 import IconRank8 from './rank_8.svg';
 import IconRank9 from './rank_9.svg';
 import IconRank10 from './rank_10.svg';
+import IconStarYellow from './star_yellow.svg';
 
 export {
   IconNotification,
@@ -50,4 +51,5 @@ export {
   IconRank8,
   IconRank9,
   IconRank10,
+  IconStarYellow,
 };
