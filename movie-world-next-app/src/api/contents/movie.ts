@@ -9,6 +9,8 @@ import {
   IResponseTmdbMovieImages,
   IResponceTmdbMovieDetail,
   IParamsTmdbMovieDeatail,
+  IParamsTmdbMovieReviews,
+  IResponceTmdbMovieReviews,
 } from '@/types/interface';
 import { getFetch } from '..';
 import { kmdbBaseUrl, kobisBaseUrl, tmdbBaseUrl } from '@/constants';
@@ -90,10 +92,24 @@ const fetchTmdbMovieDetail = async ({
   return data;
 };
 
+const fetchTmdbMovieReviews = async ({
+  movie_id,
+  query,
+}: IParamsTmdbMovieReviews) => {
+  const data: IResponceTmdbMovieReviews = await getFetch({
+    url: `${tmdbMovieUrl}/${movie_id}/reviews`,
+    token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
+    query: query,
+  });
+
+  return data;
+};
+
 export {
   fetchBoxOfficeList,
   fetchKmdbMovieDetail,
   fetchTmdbMovieLists,
   fetchTmdbMovieImages,
   fetchTmdbMovieDetail,
+  fetchTmdbMovieReviews,
 };

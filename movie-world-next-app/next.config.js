@@ -17,6 +17,12 @@ const nextConfig = {
         port: '',
         pathname: '/t/p/original/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+        port: '',
+        pathname: '/vi/**/mqdefault.jpg',
+      },
     ],
   },
 };

@@ -497,3 +497,32 @@ export interface IResponceTmdbMovieDetail {
     }[];
   };
 }
+
+export interface IParamsTmdbMovieReviews {
+  movie_id: number;
+  query: {
+    language: TLanguage;
+    page: number;
+  };
+}
+
+export interface IResponceTmdbMovieReviews {
+  id: number;
+  page: number;
+  results: {
+    author: string;
+    author_details: {
+      name: string;
+      username: string;
+      avatar_path: string | null;
+      rating: number;
+    };
+    content: string;
+    created_at: string;
+    id: string;
+    updated_at: string;
+    url: string;
+  }[];
+  total_pages: number;
+  total_results: number;
+}

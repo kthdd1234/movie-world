@@ -16,6 +16,8 @@ module.exports = {
       disabled: '#4f5152',
       deepGray: '#84868d',
       yellow500: '#eab308',
+      deepGray2: 'rgb(132, 134, 141)',
+      deepGray3: 'rgb(186, 186, 193)',
     },
     extend: {
       backgroundImage: {
