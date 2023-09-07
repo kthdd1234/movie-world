@@ -1,11 +1,11 @@
-import { EListsType, ESectionType } from '@/types/enum';
-import { IPropsStaffMadesSection } from '@/types/interface';
+import { EListsType, ESliderType } from '@/types/enum';
+import { IPropsStaffMadesSlider } from '@/types/interface';
 import Image from 'next/image';
 import Slider from 'react-slick';
 
-const StaffMadesSection = ({ list, onSlider }: IPropsStaffMadesSection) => {
+const StaffMadesSlider = ({ list, onSlider }: IPropsStaffMadesSlider) => {
   const onRef = (slider: Slider) => {
-    onSlider({ sliderId: ESectionType.STAFF_MADES, slider: slider });
+    onSlider({ sliderId: ESliderType.STAFF_MADES, slider: slider });
   };
 
   const onClick = (id: EListsType) => {
@@ -47,4 +47,4 @@ const StaffMadesSection = ({ list, onSlider }: IPropsStaffMadesSection) => {
   );
 };
 
-export default StaffMadesSection;
+export default StaffMadesSlider;

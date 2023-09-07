@@ -1,19 +1,19 @@
 'use client';
 
-import { IPropsGenreSection } from '@/types/interface';
+import { IPropsGenreSlider } from '@/types/interface';
 import SectionTitle from '../Text/SectionTitle';
 import Image from 'next/image';
 import Slider from 'react-slick';
 import { tmdbImgUrl } from '@/constants';
-import { ESectionType } from '@/types/enum';
+import { ESliderType } from '@/types/enum';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { movieGenresState } from '@/states/movie';
 
-const GenreSection = ({ list, onSlider }: IPropsGenreSection) => {
+const GenreSlide = ({ list, onSlider }: IPropsGenreSlider) => {
   // const movieGenres = useRecoilValue(movieGenresState);
 
   const onRef = (slider: Slider) => {
-    onSlider({ sliderId: ESectionType.SF, slider: slider });
+    onSlider({ sliderId: ESliderType.SF, slider: slider });
   };
 
   const onClick = (id: number) => {
@@ -52,4 +52,4 @@ const GenreSection = ({ list, onSlider }: IPropsGenreSection) => {
   );
 };
 
-export default GenreSection;
+export default GenreSlide;

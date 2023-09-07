@@ -1,10 +1,10 @@
 import { EDirectionType } from '@/types/enum';
 import { useRef } from 'react';
-import { IPropsSection } from '@/types/interface';
+import { IPropsRootSlider } from '@/types/interface';
 import { TDivElement } from '@/types/type';
 import ArrowButton from '../Button/ArrowButton';
 
-const Section = ({ children, slider }: IPropsSection) => {
+const RootSlider = ({ children, slider }: IPropsRootSlider) => {
   /** useRef */
   const leftRef = useRef<TDivElement>(null);
   const rightRef = useRef<TDivElement>(null);
@@ -48,4 +48,4 @@ const Section = ({ children, slider }: IPropsSection) => {
   );
 };
 
-export default Section;
+export default RootSlider;

@@ -5,7 +5,7 @@ import {
   EDirectionType,
   EMultiMovieYn,
   ENavItemType,
-  ESectionType,
+  ESliderType,
   EWeekGb,
   ETrendingDateType,
   EListsType,
@@ -301,16 +301,16 @@ export interface IOnSlider {
   slider: Slider;
 }
 
-export interface IPropsSection {
+export interface IPropsRootSlider {
   children: ReactNode;
   slider: Slider | null;
 }
 
-export interface IPropsMainContentsSection extends IPropsOnSlider {
+export interface IPropsMainContentsSlider extends IPropsOnSlider {
   list: { id: number; back_drop: string; logo_path: string; desc: string }[];
 }
 
-export interface IPropsStaffMadesSection extends IPropsOnSlider {
+export interface IPropsStaffMadesSlider extends IPropsOnSlider {
   list: {
     id: EListsType;
     title: string;
@@ -320,11 +320,11 @@ export interface IPropsStaffMadesSection extends IPropsOnSlider {
   }[];
 }
 
-export interface IPropsTrendingSection extends IPropsOnSlider {
+export interface IPropsTrendingSlider extends IPropsOnSlider {
   list: ITrendingData[];
 }
 
-export interface IPropsGenreSection extends IPropsOnSlider {
+export interface IPropsGenreSlider extends IPropsOnSlider {
   list: ITmdbContentsData[];
 }
 
@@ -371,7 +371,7 @@ interface ITrendingData {
   known_for: ITmdbContentsData[];
 }
 
-export interface IMovieContent extends IResponceTmdbGenres {
+export interface IMovieHomeBody extends IResponceTmdbGenres {
   trendingMovies: ITrendingData[];
   trendingPersons: ITrendingData[];
   genreMovies: ITmdbContentsData[];
@@ -454,34 +454,10 @@ export interface IResponceTmdbMovieDetail {
   vote_average: number;
   vote_count: number;
   videos: {
-    results: {
-      iso_639_1: string;
-      iso_3166_1: string;
-      name: string;
-      key: string;
-      site: string;
-      size: number;
-      type: string;
-      official: boolean;
-      published_at: string;
-      id: string;
-    }[];
+    results: IVideosResult[];
   };
   credits: {
-    cast: {
-      adult: boolean;
-      gender: number;
-      id: number;
-      known_for_department: string;
-      name: string;
-      original_name: string;
-      popularity: number;
-      profile_path: string;
-      cast_id: number;
-      character: string;
-      credit_id: string;
-      order: null;
-    }[];
+    cast: ICreditsCast[];
     crew: {
       adult: boolean;
       gender: number;
@@ -496,6 +472,49 @@ export interface IResponceTmdbMovieDetail {
       job: string;
     }[];
   };
+}
+
+interface IVideosResult {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
+
+interface ICreditsCast {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: null;
+}
+
+interface IReviewsResult {
+  author: string;
+  author_details: {
+    name: string;
+    username: string;
+    avatar_path: string | null;
+    rating: number;
+  };
+  content: string;
+  created_at: string;
+  id: string;
+  updated_at: string;
+  url: string;
 }
 
 export interface IParamsTmdbMovieReviews {
@@ -525,4 +544,48 @@ export interface IResponceTmdbMovieReviews {
   }[];
   total_pages: number;
   total_results: number;
+}
+
+export interface IPropsContentsIntro {
+  poster_path: string;
+  title: string;
+  runtime: number;
+  genres: IGenreData[];
+  overview: string;
+  vote_average: number;
+}
+
+export interface IPropsContentsDetail {
+  vote_count: number;
+  vote_average: number;
+  popularity: number;
+  videos_results: IVideosResult[];
+  cast: ICreditsCast[];
+  reviews_total: number;
+  reviews_result: IReviewsResult[];
+}
+
+export interface IParamsTmdbMovieSimilar {
+  movie_id: number;
+  query: {
+    language: TLanguage;
+    page: number;
+  };
+}
+
+export interface IResponceTmdbMovieSimilar {
+  page: number;
+  results: ITmdbContentsData[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface IPropsContentsRelated {
+  similarResult: ITmdbContentsData[];
+}
+
+export interface IMovieContentsBody {
+  detail: IResponceTmdbMovieDetail;
+  reviews: IResponceTmdbMovieReviews;
+  similar: IResponceTmdbMovieSimilar;
 }

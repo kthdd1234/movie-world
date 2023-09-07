@@ -17,7 +17,7 @@ import {
 } from '@/types/enum';
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
-import MovieContent from '@/components/Content/MovieContent';
+import MovieHomeBody from '@/components/Body/MovieHomeBody';
 import {
   fetchTmdbDiscover,
   fetchTmdbGenres,
@@ -72,7 +72,7 @@ const MoviePage = async () => {
   // getTmdbMovieImages();
 
   return (
-    <MovieContent
+    <MovieHomeBody
       genres={genres}
       trendingMovies={trendingMovies}
       trendingPersons={trendingPersons}

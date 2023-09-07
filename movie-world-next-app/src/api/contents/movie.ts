@@ -11,6 +11,8 @@ import {
   IParamsTmdbMovieDeatail,
   IParamsTmdbMovieReviews,
   IResponceTmdbMovieReviews,
+  IParamsTmdbMovieSimilar,
+  IResponceTmdbMovieSimilar,
 } from '@/types/interface';
 import { getFetch } from '..';
 import { kmdbBaseUrl, kobisBaseUrl, tmdbBaseUrl } from '@/constants';
@@ -105,6 +107,19 @@ const fetchTmdbMovieReviews = async ({
   return data;
 };
 
+const fetchTmdbMovieSimilar = async ({
+  movie_id,
+  query,
+}: IParamsTmdbMovieSimilar) => {
+  const data: IResponceTmdbMovieSimilar = await getFetch({
+    url: `${tmdbMovieUrl}/${movie_id}/similar`,
+    token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
+    query: query,
+  });
+
+  return data;
+};
+
 export {
   fetchBoxOfficeList,
   fetchKmdbMovieDetail,
@@ -112,4 +127,5 @@ export {
   fetchTmdbMovieImages,
   fetchTmdbMovieDetail,
   fetchTmdbMovieReviews,
+  fetchTmdbMovieSimilar,
 };

@@ -1,4 +1,4 @@
-import { IPropsTrendingSection } from '@/types/interface';
+import { IPropsTrendingSlider } from '@/types/interface';
 import Slider from 'react-slick';
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
@@ -15,9 +15,9 @@ import {
   IconRank10,
 } from '../../../public/svgs';
 import SectionTitle from '../Text/SectionTitle';
-import { ESectionType } from '@/types/enum';
+import { ESliderType } from '@/types/enum';
 
-const TrendingSection = ({ list, onSlider }: IPropsTrendingSection) => {
+const TrendingSlider = ({ list, onSlider }: IPropsTrendingSlider) => {
   const rank_10_list = list.slice(0, 10);
   const rank_svg_list = [
     IconRank1,
@@ -33,7 +33,7 @@ const TrendingSection = ({ list, onSlider }: IPropsTrendingSection) => {
   ];
 
   const onRef = (slider: Slider) => {
-    onSlider({ sliderId: ESectionType.TRENDING, slider: slider });
+    onSlider({ sliderId: ESliderType.TRENDING, slider: slider });
   };
 
   const onClick = (id: number) => {};
@@ -78,4 +78,4 @@ const TrendingSection = ({ list, onSlider }: IPropsTrendingSection) => {
   );
 };
 
-export default TrendingSection;
+export default TrendingSlider;

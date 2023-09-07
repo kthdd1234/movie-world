@@ -3,16 +3,16 @@
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
 import Slider from 'react-slick';
-import { IPropsMainContentsSection } from '@/types/interface';
-import { ESectionType } from '@/types/enum';
+import { IPropsMainContentsSlider } from '@/types/interface';
+import { ESliderType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
 
-const MainContentsSection = ({ list, onSlider }: IPropsMainContentsSection) => {
+const MainContentsSlider = ({ list, onSlider }: IPropsMainContentsSlider) => {
   /** useRouter */
   const router = useRouter();
 
   const onRef = (slider: Slider) => {
-    onSlider({ sliderId: ESectionType.MAIN_CONTENTS, slider: slider });
+    onSlider({ sliderId: ESliderType.MAIN_CONTENTS, slider: slider });
   };
 
   const onClick = (id: number) => {
@@ -65,4 +65,4 @@ const MainContentsSection = ({ list, onSlider }: IPropsMainContentsSection) => {
   );
 };
 
-export default MainContentsSection;
+export default MainContentsSlider;

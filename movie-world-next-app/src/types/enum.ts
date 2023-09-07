@@ -56,7 +56,7 @@ enum EDirectionType {
   RIGHT = 'right',
 }
 
-enum ESectionType {
+enum ESliderType {
   /** */
   MAIN_CONTENTS = 0,
   /** */
@@ -137,6 +137,13 @@ enum EGenresType {
   TV = 'tv',
 }
 
+enum EContentsSplitType {
+  /** */
+  CONTENTS_INFO,
+  /** */
+  RELATED_CONTENTS,
+}
+
 export {
   EWeekGb,
   EMultiMovieYn,
@@ -144,9 +151,10 @@ export {
   ENavItemType,
   EListsType,
   EDirectionType,
-  ESectionType,
+  ESliderType,
   ETrendingType,
   ETrendingDateType,
   EDiscoverType,
   EGenresType,
+  EContentsSplitType,
 };

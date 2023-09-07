@@ -1,27 +1,26 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { TSlider } from '@/types/type';
-import { IMovieContent, IOnSlider, ISliderState } from '@/types/interface';
-import Section from '../Section';
-import MainContentsSection from '../Section/MainContentsSection';
-import StaffMadesSection from '../Section/StaffMadesSection';
-import TrendingSection from '../Section/TrendingSection';
+import { IMovieHomeBody, IOnSlider, ISliderState } from '@/types/interface';
+import Section from '../Slider';
+import MainContentsSlider from '../Slider/MainContentsSlider';
+import StaffMadesSlider from '../Slider/StaffMadesSlider';
+import TrendingSlider from '../Slider/TrendingSlider';
 import { mainMovieList, staffMadesMovieList } from '@/constants';
-import PersonSection from '../Section/PersonSection';
-import GenreSection from '../Section/GenreSection';
-import { ESectionType } from '@/types/enum';
+import PersonSection from '../Slider/PersonSlider';
+import GenreSlide from '../Slider/GenreSlider';
+import { ESliderType } from '@/types/enum';
 import { useSetRecoilState } from 'recoil';
 import { movieGenresState } from '@/states/movie';
 
-const { MAIN_CONTENTS, STAFF_MADES, TRENDING, PERSON, SF } = ESectionType;
+const { MAIN_CONTENTS, STAFF_MADES, TRENDING, PERSON, SF } = ESliderType;
 
-const MovieContent = ({
+const MovieHomeBody = ({
   genres,
   trendingMovies,
   trendingPersons,
   genreMovies,
-}: IMovieContent) => {
+}: IMovieHomeBody) => {
   /** useSetRecoilState */
   const setMovieGenresState = useSetRecoilState(movieGenresState);
 
@@ -43,19 +42,17 @@ const MovieContent = ({
   const sectionList = [
     {
       id: MAIN_CONTENTS,
-      children: (
-        <MainContentsSection list={mainMovieList} onSlider={onSlider} />
-      ),
+      children: <MainContentsSlider list={mainMovieList} onSlider={onSlider} />,
     },
     {
       id: STAFF_MADES,
       children: (
-        <StaffMadesSection list={staffMadesMovieList} onSlider={onSlider} />
+        <StaffMadesSlider list={staffMadesMovieList} onSlider={onSlider} />
       ),
     },
     {
       id: TRENDING,
-      children: <TrendingSection list={trendingMovies} onSlider={onSlider} />,
+      children: <TrendingSlider list={trendingMovies} onSlider={onSlider} />,
     },
     {
       id: PERSON,
@@ -63,7 +60,7 @@ const MovieContent = ({
     },
     {
       id: SF,
-      children: <GenreSection list={genreMovies} onSlider={onSlider} />,
+      children: <GenreSlide list={genreMovies} onSlider={onSlider} />,
     },
   ];
 
@@ -80,4 +77,4 @@ const MovieContent = ({
   );
 };
 
-export default MovieContent;
+export default MovieHomeBody;
