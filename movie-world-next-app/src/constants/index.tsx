@@ -33,6 +33,9 @@ const tmdbBaseUrl = 'https://api.themoviedb.org/3';
 /** tmdbImgUrl */
 const tmdbImgUrl = 'http://image.tmdb.org/t/p/original';
 
+/** youtubeWatchUrl */
+const youtubeWatchUrl = 'https://www.youtube.com/watch?v=';
+
 const navContentsItems: INavItem[] = [
   {
     icon: <VideoCameraOutlined />,
@@ -140,4 +143,5 @@ export {
   tmdbImgUrl,
   mainMovieList,
   staffMadesMovieList,
+  youtubeWatchUrl,
 };

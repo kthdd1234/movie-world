@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const Header = () => {
   return (
-    <header className={`fixed top-0 z-30 w-screen p-3 bg-[#141517]`}>
+    <header className={`fixed top-0 z-30 w-screen p-3 bg-black2`}>
       <div className='flex items-center justify-between'>
         <Image className='w-20' src={WatchaLogo} alt='watchaLogo' />
         <div className='flex gap-5 pr-5'>

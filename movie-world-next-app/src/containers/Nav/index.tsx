@@ -25,7 +25,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className={`fixed left-0 z-20 h-screen pt-16 w-52  bg-[#141517]`}>
+    <nav className={`fixed left-0 z-20 h-screen pt-16 w-52 bg-black2`}>
       <NavColumnList
         seletedItem={navItem}
         items={navContentsItems}

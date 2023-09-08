@@ -7,6 +7,9 @@ import ContentsSetting from '../Contents/ContentsSetting';
 import { IMovieContentsBody } from '@/types/interface';
 import { EContentsSplitType } from '@/types/enum';
 import { useState } from 'react';
+import ContentsDetail from '../Contents/ContentsDetail';
+
+const { CONTENTS_INFO } = EContentsSplitType;
 
 const MovieContentsBody = ({
   detail,
@@ -14,9 +17,7 @@ const MovieContentsBody = ({
   similar,
 }: IMovieContentsBody) => {
   /** */
-  const [contentsSplitType, setContentsSplitType] = useState(
-    EContentsSplitType.RELATED_CONTENTS
-  );
+  const [contentsSplitType, setContentsSplitType] = useState(CONTENTS_INFO);
 
   /** */
   const {
@@ -49,21 +50,26 @@ const MovieContentsBody = ({
         vote_average={vote_average}
         overview={overview}
       />
-      <ContentsSetting />
+      <ContentsSetting
+        watchKey={videos.results.length > 0 ? videos.results[0].key : ''}
+      />
       <ContentsSplit
         type={contentsSplitType}
         onClick={onClickContentsSplitType}
       />
-      {/* <ContentsDetail
-        vote_count={vote_count}
-        vote_average={vote_average}
-        popularity={popularity}
-        videos_results={videos.results}
-        cast={credits.cast}
-        reviews_total={reviewsTotal}
-        reviews_result={reviewsResult}
-      /> */}
-      <ContentsRelated similarResult={similarResult} />
+      {contentsSplitType === CONTENTS_INFO ? (
+        <ContentsDetail
+          vote_count={vote_count}
+          vote_average={vote_average}
+          popularity={popularity}
+          videos_results={videos.results}
+          cast={credits.cast}
+          reviews_total={reviewsTotal}
+          reviews_result={reviewsResult}
+        />
+      ) : (
+        <ContentsRelated similarResult={similarResult} />
+      )}
     </div>
   );
 };
