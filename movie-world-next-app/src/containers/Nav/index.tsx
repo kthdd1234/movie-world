@@ -20,7 +20,7 @@ const Nav = () => {
   }, []);
 
   const onSelectedItem = (item: INavItem) => {
-    router.push(item.path);
+    router.push(`/browse/${item.path}`);
     setNavItem(item.type);
   };
 

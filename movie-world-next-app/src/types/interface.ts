@@ -11,6 +11,7 @@ import {
   EListsType,
   EGenresType,
   EDiscoverType,
+  EContentsType,
 } from './enum';
 import Slider from 'react-slick';
 import { StaticImageData } from 'next/image';
@@ -329,6 +330,7 @@ export interface IPropsGenreSlider extends IPropsOnSlider {
 }
 
 interface IPropsOnSlider {
+  type: EContentsType;
   onSlider: (args: IOnSlider) => void;
 }
 
@@ -581,6 +583,7 @@ export interface IResponceTmdbMovieSimilar {
 }
 
 export interface IPropsContentsRelated {
+  type: EContentsType;
   similarResult: ITmdbContentsData[];
 }
 
@@ -588,4 +591,12 @@ export interface IMovieContentsBody {
   detail: IResponceTmdbMovieDetail;
   reviews: IResponceTmdbMovieReviews;
   similar: IResponceTmdbMovieSimilar;
+}
+
+export interface IPropsParamsId {
+  params: { id: string };
+}
+
+export interface IPropsParamsList {
+  params: { list: string[] };
 }

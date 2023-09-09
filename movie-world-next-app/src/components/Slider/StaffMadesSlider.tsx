@@ -1,15 +1,21 @@
+'use client';
+
 import { EListsType, ESliderType } from '@/types/enum';
 import { IPropsStaffMadesSlider } from '@/types/interface';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Slider from 'react-slick';
 
-const StaffMadesSlider = ({ list, onSlider }: IPropsStaffMadesSlider) => {
+const StaffMadesSlider = ({ type, list, onSlider }: IPropsStaffMadesSlider) => {
+  /** */
+  const router = useRouter();
+
   const onRef = (slider: Slider) => {
     onSlider({ sliderId: ESliderType.STAFF_MADES, slider: slider });
   };
 
   const onClick = (id: EListsType) => {
-    //
+    router.push(`/staffmades/${type}/${id}`);
   };
 
   return (

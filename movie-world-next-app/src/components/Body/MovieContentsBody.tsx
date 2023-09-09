@@ -5,10 +5,11 @@ import ContentsRelated from '../Contents/ContentsRelated';
 import ContentsSplit from '../Contents/ContentsSplit';
 import ContentsSetting from '../Contents/ContentsSetting';
 import { IMovieContentsBody } from '@/types/interface';
-import { EContentsSplitType } from '@/types/enum';
+import { EContentsSplitType, EContentsType } from '@/types/enum';
 import { useState } from 'react';
 import ContentsDetail from '../Contents/ContentsDetail';
 
+const { MOVIE, TV } = EContentsType;
 const { CONTENTS_INFO } = EContentsSplitType;
 
 const MovieContentsBody = ({
@@ -68,7 +69,7 @@ const MovieContentsBody = ({
           reviews_result={reviewsResult}
         />
       ) : (
-        <ContentsRelated similarResult={similarResult} />
+        <ContentsRelated type={MOVIE} similarResult={similarResult} />
       )}
     </div>
   );

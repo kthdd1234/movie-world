@@ -21,6 +21,13 @@ enum EMultiMovieYn {
   COMMERCIAL = 'N',
 }
 
+enum EContentsType {
+  /** */
+  MOVIE = 'movie',
+  /** */
+  TV = 'tv',
+}
+
 enum ENavItemType {
   /** */
   NONE = 'NONE',
@@ -157,4 +164,5 @@ export {
   EDiscoverType,
   EGenresType,
   EContentsSplitType,
+  EContentsType,
 };

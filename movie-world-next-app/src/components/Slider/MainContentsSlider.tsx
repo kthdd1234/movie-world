@@ -7,7 +7,11 @@ import { IPropsMainContentsSlider } from '@/types/interface';
 import { ESliderType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
 
-const MainContentsSlider = ({ list, onSlider }: IPropsMainContentsSlider) => {
+const MainContentsSlider = ({
+  type,
+  list,
+  onSlider,
+}: IPropsMainContentsSlider) => {
   /** useRouter */
   const router = useRouter();
 
@@ -16,7 +20,7 @@ const MainContentsSlider = ({ list, onSlider }: IPropsMainContentsSlider) => {
   };
 
   const onClick = (id: number) => {
-    router.push(`/contents/${id}`);
+    router.push(`/contents/${type}/${id}`);
   };
 
   return (

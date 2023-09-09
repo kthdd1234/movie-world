@@ -6,12 +6,12 @@ import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
 import { useRouter } from 'next/navigation';
 
-const ContentsRelated = ({ similarResult }: IPropsContentsRelated) => {
+const ContentsRelated = ({ type, similarResult }: IPropsContentsRelated) => {
   /** */
   const router = useRouter();
 
   const onClick = (id: number) => {
-    router.push(`/contents/${id}`);
+    router.push(`/contents/${type}/${id}`);
   };
 
   return (

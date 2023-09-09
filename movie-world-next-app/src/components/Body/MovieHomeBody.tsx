@@ -9,10 +9,11 @@ import TrendingSlider from '../Slider/TrendingSlider';
 import { mainMovieList, staffMadesMovieList } from '@/constants';
 import PersonSection from '../Slider/PersonSlider';
 import GenreSlide from '../Slider/GenreSlider';
-import { ESliderType } from '@/types/enum';
+import { EContentsType, ESliderType } from '@/types/enum';
 import { useSetRecoilState } from 'recoil';
 import { movieGenresState } from '@/states/movie';
 
+const { MOVIE } = EContentsType;
 const { MAIN_CONTENTS, STAFF_MADES, TRENDING, PERSON, SF } = ESliderType;
 
 const MovieHomeBody = ({
@@ -42,25 +43,49 @@ const MovieHomeBody = ({
   const sectionList = [
     {
       id: MAIN_CONTENTS,
-      children: <MainContentsSlider list={mainMovieList} onSlider={onSlider} />,
+      children: (
+        <MainContentsSlider
+          type={MOVIE}
+          list={mainMovieList}
+          onSlider={onSlider}
+        />
+      ),
     },
     {
       id: STAFF_MADES,
       children: (
-        <StaffMadesSlider list={staffMadesMovieList} onSlider={onSlider} />
+        <StaffMadesSlider
+          type={MOVIE}
+          list={staffMadesMovieList}
+          onSlider={onSlider}
+        />
       ),
     },
     {
       id: TRENDING,
-      children: <TrendingSlider list={trendingMovies} onSlider={onSlider} />,
+      children: (
+        <TrendingSlider
+          type={MOVIE}
+          list={trendingMovies}
+          onSlider={onSlider}
+        />
+      ),
     },
     {
       id: PERSON,
-      children: <PersonSection list={trendingPersons} onSlider={onSlider} />,
+      children: (
+        <PersonSection
+          type={MOVIE}
+          list={trendingPersons}
+          onSlider={onSlider}
+        />
+      ),
     },
     {
       id: SF,
-      children: <GenreSlide list={genreMovies} onSlider={onSlider} />,
+      children: (
+        <GenreSlide type={MOVIE} list={genreMovies} onSlider={onSlider} />
+      ),
     },
   ];
 

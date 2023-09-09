@@ -7,6 +7,16 @@ import { EmptyProfileImage } from '../../../public/images';
 import SectionTitle from '../Text/SectionTitle';
 import Image from 'next/image';
 import { IPropsContentsDetail } from '@/types/interface';
+import { useRouter } from 'next/navigation';
+
+const EvaluatedLine = ({ icon, text }: { icon: JSX.Element; text: string }) => {
+  return (
+    <li className='flex items-center py-2'>
+      <div className='flex items-center mr-4 text-xl text-tomato'>{icon}</div>
+      <div className='text-[15px]'>{text}</div>
+    </li>
+  );
+};
 
 const ContentsDetail = ({
   vote_count,
@@ -17,38 +27,31 @@ const ContentsDetail = ({
   reviews_total,
   reviews_result,
 }: IPropsContentsDetail) => {
+  /** */
+  const router = useRouter();
+
+  /** */
   const evalueatedInfo = [
     {
       icon: <EditOutlined />,
-      text: `투표 인원수는 ${vote_count}명 이에요.`,
+      text: `투표 인원수는 ${vote_count}명이에요`,
     },
     {
       icon: <StarFilled />,
-      text: `평균 평점은 ${vote_average}점 이에요`,
+      text: `평균 평점은 ${vote_average}점이에요`,
     },
     {
       icon: <BarChartOutlined />,
-      text: `인지도 점수는 ${popularity}점 이에요.`,
+      text: `인지도 점수는 ${popularity}점이에요.`,
     },
   ];
 
-  const EvaluatedLine = ({
-    icon,
-    text,
-  }: {
-    icon: JSX.Element;
-    text: string;
-  }) => {
-    return (
-      <li className='flex items-center py-2'>
-        <div className='flex items-center mr-4 text-xl text-tomato'>{icon}</div>
-        <div className='text-[15px]'>{text}</div>
-      </li>
-    );
-  };
-
   const onClickVideoThumbnail = (watchKey: string) => {
     window.open(youtubeWatchUrl + watchKey);
+  };
+
+  const onClickProfile = (id: number) => {
+    router.push(`/people/${id}`);
   };
 
   const bestReviewrInfo = reviews_result[0].author_details;
@@ -84,7 +87,11 @@ const ContentsDetail = ({
           <SectionTitle text='감독/출연' />
           <ul className='grid grid-cols-2 gap-4'>
             {cast.slice(0, 10).map((info, key) => (
-              <li className='flex items-center' key={key}>
+              <li
+                key={key}
+                className='flex items-center cursor-pointer'
+                onClick={() => onClickProfile(info.id)}
+              >
                 <div className='w-[62px] h-[62px] rounded-full overflow-hidden mr-4'>
                   <Image
                     src={tmdbImgUrl + info.profile_path}
