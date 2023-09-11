@@ -6,6 +6,10 @@ import {
   ITmdbContentsList,
   IParamsTmdbGenres,
   IResponceTmdbGenres,
+  IParamsTmdbSearch,
+  IResponceTmdbSearch,
+  IParamsTmdbPerson,
+  IResponceTmdbPerson,
 } from '@/types/interface';
 import { getFetch } from '..';
 
@@ -17,6 +21,12 @@ const tmdbDiscoverUrl = `${tmdbBaseUrl}/discover`;
 
 /** tmdbGenreUrl */
 const tmdbGenreUrl = `${tmdbBaseUrl}/genre`;
+
+/** tmdbSearchUrl */
+const tmdbSearchUrl = `${tmdbBaseUrl}/search`;
+
+/** tmdbPersonUrl */
+const tmdbPersonUrl = `${tmdbBaseUrl}/person`;
 
 /** API KEYS */
 const { NEXT_PUBLIC_TMDB_ACCESS_TOKEN } = process.env;
@@ -50,7 +60,7 @@ const fetchTmdbDiscover = async ({
   query,
 }: IParamsTmdbDiscover) => {
   const data: ITmdbContentsList = await getFetch({
-    url: `${tmdbDiscoverUrl}/${discover_type}?`,
+    url: `${tmdbDiscoverUrl}/${discover_type}`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
@@ -58,4 +68,30 @@ const fetchTmdbDiscover = async ({
   return data;
 };
 
-export { fetchTmdbTrending, fetchTmdbDiscover, fetchTmdbGenres };
+const fetchTmdbPerson = async ({ person_id, query }: IParamsTmdbPerson) => {
+  const data: IResponceTmdbPerson = await getFetch({
+    url: `${tmdbPersonUrl}/${person_id}`,
+    token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
+    query: query,
+  });
+
+  return data;
+};
+
+const fetchTmdbSearch = async ({ search_type, query }: IParamsTmdbSearch) => {
+  const data: IResponceTmdbSearch = await getFetch({
+    url: `${tmdbSearchUrl}/${search_type}`,
+    token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
+    query: query,
+  });
+
+  return data;
+};
+
+export {
+  fetchTmdbTrending,
+  fetchTmdbDiscover,
+  fetchTmdbGenres,
+  fetchTmdbSearch,
+  fetchTmdbPerson,
+};

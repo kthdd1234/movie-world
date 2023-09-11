@@ -227,7 +227,7 @@ export interface INavColumnList {
 }
 
 export interface IParamsTmdbMovieLists {
-  lists_type: EListsType;
+  lists_type: string;
   query: {
     language: TLanguage;
     page: number;
@@ -385,7 +385,8 @@ export interface IParamsTmdbDiscover {
     include_adult: boolean;
     language: TLanguage;
     page: number;
-    with_genres: number;
+    with_genres?: number;
+    with_people?: string;
   };
 }
 
@@ -504,7 +505,7 @@ interface ICreditsCast {
   order: null;
 }
 
-interface IReviewsResult {
+export interface IReviewsResult {
   author: string;
   author_details: {
     name: string;
@@ -549,12 +550,11 @@ export interface IResponceTmdbMovieReviews {
 }
 
 export interface IPropsContentsIntro {
-  poster_path: string;
+  image: string | StaticImageData;
+  image_size: { w: number; h: number };
   title: string;
-  runtime: number;
-  genres: IGenreData[];
+  subTitle: string;
   overview: string;
-  vote_average: number;
 }
 
 export interface IPropsContentsDetail {
@@ -584,7 +584,8 @@ export interface IResponceTmdbMovieSimilar {
 
 export interface IPropsContentsRelated {
   type: EContentsType;
-  similarResult: ITmdbContentsData[];
+  isTitle: boolean;
+  results: ITmdbContentsData[];
 }
 
 export interface IMovieContentsBody {
@@ -599,4 +600,66 @@ export interface IPropsParamsId {
 
 export interface IPropsParamsList {
   params: { list: string[] };
+}
+
+export interface IParamsTmdbSearch {
+  search_type: string;
+  query: {
+    query: string;
+    include_adult: boolean;
+    language: TLanguage;
+    page: number;
+    region: string;
+  };
+}
+
+export interface IResponceTmdbSearch {
+  page: number;
+  results: ISearchData[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface ISearchData {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  known_for: ITmdbContentsData[];
+}
+
+export interface IParamsTmdbPerson {
+  person_id: number;
+  query: {
+    append_to_response: string;
+    language: TLanguage;
+  };
+}
+
+export interface IResponceTmdbPerson {
+  adult: boolean;
+  also_known_as: [];
+  biography: string;
+  birthday: string | null;
+  deathday: string | null;
+  gender: number;
+  homepage: string | null;
+  id: number;
+  imdb_id: string;
+  known_for_department: string;
+  name: string;
+  place_of_birth: string | null;
+  popularity: number;
+  profile_path: string | null;
+}
+
+export interface IPropsPerson {
+  searchResult: ISearchData[];
+  name: string;
+  biography: string;
+  data: { movie: ITmdbContentsData[]; tv: ITmdbContentsData[] };
 }

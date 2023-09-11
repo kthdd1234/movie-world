@@ -149,6 +149,27 @@ enum EContentsSplitType {
   CONTENTS_INFO,
   /** */
   RELATED_CONTENTS,
+  /** */
+  MOVIE,
+  /** */
+  TV,
+}
+
+enum ESearchType {
+  /** */
+  COLLECTION = 'collection',
+  /** */
+  COMPANY = 'company',
+  /** */
+  KEYWORD = 'keyword',
+  /** */
+  MOVIE = 'movie',
+  /** */
+  MULTI = 'multi',
+  /** */
+  PERSON = 'person',
+  /** */
+  TV = 'tv',
 }
 
 export {
@@ -165,4 +186,5 @@ export {
   EGenresType,
   EContentsSplitType,
   EContentsType,
+  ESearchType,
 };

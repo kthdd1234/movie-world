@@ -1,3 +1,5 @@
+'use client';
+
 import { CaretRightFilled, PlusOutlined } from '@ant-design/icons';
 import { Divider, Dropdown, MenuProps, message } from 'antd';
 import IconButton from '../Button/IconButton';
@@ -62,12 +64,16 @@ const ContentsSetting = ({ watchKey }: { watchKey: string }) => {
       {contextHolder}
       <Divider className='bg-divider' />
       <section className='flex justify-between'>
-        <IconButton
-          text='감상하기'
-          icon={<CaretRightFilled />}
-          type='danger'
-          onClick={onClickWatch}
-        />
+        {watchKey ? (
+          <IconButton
+            text='감상하기'
+            icon={<CaretRightFilled />}
+            type='danger'
+            onClick={onClickWatch}
+          />
+        ) : (
+          <div />
+        )}
         <div className='flex'>
           <IconButton
             text='보고 싶어요'

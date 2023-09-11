@@ -1,38 +1,27 @@
 'use client';
 
-import { tmdbImgUrl } from '@/constants';
-import { secondsFormatter } from '@/services/date_and_time';
 import { IPropsContentsIntro } from '@/types/interface';
 import Image from 'next/image';
 
 const ContentsIntro = ({
-  poster_path,
+  image,
   title,
-  genres,
-  runtime,
-  vote_average,
+  subTitle,
   overview,
+  image_size,
 }: IPropsContentsIntro) => {
-  const genreNames = genres.map((info) => info.name).join(' · ');
-  const formatRuntime = secondsFormatter({
-    seconds: runtime,
-    formatStr: 'm시간 s분',
-  });
-  const avgRated = `예상 ${vote_average}`;
-  const joinInfo = [genreNames, formatRuntime, avgRated].join(' · ');
-
   return (
     <section className='flex'>
       <Image
         className='rounded'
-        src={tmdbImgUrl + poster_path}
+        src={image}
         alt=''
-        width={169}
-        height={247}
+        width={image_size.w}
+        height={image_size.h}
       />
       <div className='mt-4 ml-10'>
         <div className='text-6xl font-bold'>{title}</div>
-        <div className='mt-2 text-base text-mist'>{joinInfo}</div>
+        <div className='mt-2 text-base text-mist'>{subTitle}</div>
         <div className='mt-2 text-base text-mist'>{overview}</div>
       </div>
     </section>

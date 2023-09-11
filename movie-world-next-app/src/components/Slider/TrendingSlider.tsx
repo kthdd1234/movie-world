@@ -1,3 +1,5 @@
+'use client';
+
 import { IPropsTrendingSlider } from '@/types/interface';
 import Slider from 'react-slick';
 import Image from 'next/image';
@@ -16,8 +18,13 @@ import {
 } from '../../../public/svgs';
 import SectionTitle from '../Text/SectionTitle';
 import { ESliderType } from '@/types/enum';
+import { useRouter } from 'next/navigation';
 
-const TrendingSlider = ({ list, onSlider }: IPropsTrendingSlider) => {
+const TrendingSlider = ({ type, list, onSlider }: IPropsTrendingSlider) => {
+  /** */
+  const router = useRouter();
+
+  /** */
   const rank_10_list = list.slice(0, 10);
   const rank_svg_list = [
     IconRank1,
@@ -36,7 +43,9 @@ const TrendingSlider = ({ list, onSlider }: IPropsTrendingSlider) => {
     onSlider({ sliderId: ESliderType.TRENDING, slider: slider });
   };
 
-  const onClick = (id: number) => {};
+  const onClick = (id: number) => {
+    router.push(`/contents/${type}/${id}`);
+  };
 
   return (
     <div className='relative'>

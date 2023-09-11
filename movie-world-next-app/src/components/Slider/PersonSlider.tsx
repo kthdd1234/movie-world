@@ -4,14 +4,18 @@ import Slider from 'react-slick';
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
 import { ESliderType } from '@/types/enum';
+import { useRouter } from 'next/navigation';
 
 const PersonSection = ({ list, onSlider }: IPropsTrendingSlider) => {
+  /** */
+  const router = useRouter();
+
   const onRef = (slider: Slider) => {
     onSlider({ sliderId: ESliderType.PERSON, slider: slider });
   };
 
   const onClick = (id: number) => {
-    //
+    router.push(`/people/${id}`);
   };
 
   return (

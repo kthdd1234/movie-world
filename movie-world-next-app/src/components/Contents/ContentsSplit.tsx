@@ -3,35 +3,25 @@
 import { EContentsSplitType } from '@/types/enum';
 import DefaultButton from '../Button/DefaultButton';
 
-const { CONTENTS_INFO, RELATED_CONTENTS } = EContentsSplitType;
-
 const ContentsSplit = ({
-  type,
+  list,
+  curType,
   onClick,
 }: {
-  type: EContentsSplitType;
+  list: { id: EContentsSplitType; name: string }[];
+  curType: EContentsSplitType;
   onClick: (type: EContentsSplitType) => void;
 }) => {
-  const onClickLeft = () => {
-    onClick(CONTENTS_INFO);
-  };
-
-  const onClickRight = () => {
-    onClick(RELATED_CONTENTS);
-  };
-
   return (
     <section className='flex justify-center mb-4'>
-      <DefaultButton
-        text='콘텐츠 정보'
-        type={type === CONTENTS_INFO ? 'border' : 'disabled'}
-        onClick={onClickLeft}
-      />
-      <DefaultButton
-        text='관련 콘텐츠'
-        type={type === RELATED_CONTENTS ? 'border' : 'disabled'}
-        onClick={onClickRight}
-      />
+      {list.map((item) => (
+        <DefaultButton
+          key={item.id}
+          text={item.name}
+          onClick={() => onClick(item.id)}
+          type={curType === item.id ? 'border' : 'disabled'}
+        />
+      ))}
     </section>
   );
 };

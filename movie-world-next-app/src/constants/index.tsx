@@ -96,6 +96,14 @@ const mainMovieList = [
   },
 ];
 
+const initStaffMadesInfo = {
+  id: '',
+  title: '',
+  sub_title: '',
+  movie_titles: '',
+  image: null,
+};
+
 const staffMadesMovieList = [
   {
     id: NOW_PLAYING,
@@ -126,12 +134,40 @@ const staffMadesMovieList = [
     image: UpcomingImage,
   },
   {
-    id: NOLAN_MOVIES,
-    title: '감독 작품 리스트',
-    sub_title: '크리스토퍼 놀란 감독의 놀라운 작품 세계관',
-    movie_titles: '인셉션, 다크 나이트, 인터스텔라 등',
-    image: NolanMoviesImage,
+    id: NOW_PLAYING,
+    title: '상영 중인 영화 리스트',
+    sub_title: '현재 극장에서 상영 중인 다양한 영화',
+    movie_titles: '오펜하이머, 바비, 엘리멘탈 등',
+    image: NowPlayingImage,
   },
+  {
+    id: POPULAR,
+    title: '인기있는 영화 리스트',
+    sub_title: '많은 사람들이 좋아하는 영화',
+    movie_titles: '하스 오브 스톤, 메가로톤 2, 스파이맨 등',
+    image: PopularImage,
+  },
+  {
+    id: TOP_RATED,
+    title: '평점이 높은 영화 리스트',
+    sub_title: 'TMDB 기준으로 평점이 높은 영화',
+    movie_titles: '쇼생크 탈출, 쉰들러 리스트, 센과 치히로의 행방불명 등',
+    image: TopRatedImage,
+  },
+  {
+    id: UPCOMING,
+    title: '개봉 예정 영화 리스트',
+    sub_title: '다음 달 개봉 예정 영화',
+    movie_titles: '닌자터틀: 뮤턴트 대소동, 거미집, 조이 라이드 등',
+    image: UpcomingImage,
+  },
+  // {
+  //   id: NOLAN_MOVIES,
+  //   title: '감독 작품 리스트',
+  //   sub_title: '크리스토퍼 놀란 감독의 놀라운 작품 세계관',
+  //   movie_titles: '인셉션, 다크 나이트, 인터스텔라 등',
+  //   image: NolanMoviesImage,
+  // },
 ];
 
 export {
@@ -144,4 +180,5 @@ export {
   mainMovieList,
   staffMadesMovieList,
   youtubeWatchUrl,
+  initStaffMadesInfo,
 };

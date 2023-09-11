@@ -8,9 +8,11 @@ import { IMovieContentsBody } from '@/types/interface';
 import { EContentsSplitType, EContentsType } from '@/types/enum';
 import { useState } from 'react';
 import ContentsDetail from '../Contents/ContentsDetail';
+import { secondsFormatter } from '@/services/date_and_time';
+import { tmdbImgUrl } from '@/constants';
 
 const { MOVIE, TV } = EContentsType;
-const { CONTENTS_INFO } = EContentsSplitType;
+const { CONTENTS_INFO, RELATED_CONTENTS } = EContentsSplitType;
 
 const MovieContentsBody = ({
   detail,
@@ -34,28 +36,46 @@ const MovieContentsBody = ({
     poster_path,
   } = detail;
   const { results: reviewsResult, total_results: reviewsTotal } = reviews;
-  const { results: similarResult } = similar;
+  const { results: results } = similar;
 
   /** */
   const onClickContentsSplitType = (type: EContentsSplitType) => {
     setContentsSplitType(type);
   };
 
+  /** */
+  const setSubTitle = () => {
+    const genreNames = genres.map((info) => info.name).join(' · ');
+    const formatRuntime = secondsFormatter({
+      seconds: runtime,
+      formatStr: 'm시간 s분',
+    });
+    const avgRated = `예상 ${vote_average}`;
+    const str = [genreNames, formatRuntime, avgRated].join(' · ');
+
+    return str;
+  };
+
+  const splitTypeList = [
+    { id: CONTENTS_INFO, name: '콘텐츠 정보' },
+    { id: RELATED_CONTENTS, name: '관련 콘텐츠' },
+  ];
+
   return (
     <div className='text-white'>
       <ContentsIntro
-        poster_path={poster_path}
+        image_size={{ w: 169, h: 247 }}
+        image={`${tmdbImgUrl}${poster_path}`}
         title={title}
-        genres={genres}
-        runtime={runtime}
-        vote_average={vote_average}
+        subTitle={setSubTitle()}
         overview={overview}
       />
       <ContentsSetting
         watchKey={videos.results.length > 0 ? videos.results[0].key : ''}
       />
       <ContentsSplit
-        type={contentsSplitType}
+        list={splitTypeList}
+        curType={contentsSplitType}
         onClick={onClickContentsSplitType}
       />
       {contentsSplitType === CONTENTS_INFO ? (
@@ -69,7 +89,7 @@ const MovieContentsBody = ({
           reviews_result={reviewsResult}
         />
       ) : (
-        <ContentsRelated type={MOVIE} similarResult={similarResult} />
+        <ContentsRelated isTitle={true} type={MOVIE} results={results} />
       )}
     </div>
   );

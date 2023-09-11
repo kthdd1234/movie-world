@@ -8,16 +8,18 @@ import { tmdbImgUrl } from '@/constants';
 import { ESliderType } from '@/types/enum';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { movieGenresState } from '@/states/movie';
+import { useRouter } from 'next/navigation';
 
-const GenreSlide = ({ list, onSlider }: IPropsGenreSlider) => {
+const GenreSlide = ({ type, list, onSlider }: IPropsGenreSlider) => {
   // const movieGenres = useRecoilValue(movieGenresState);
+  const router = useRouter();
 
   const onRef = (slider: Slider) => {
     onSlider({ sliderId: ESliderType.SF, slider: slider });
   };
 
   const onClick = (id: number) => {
-    //
+    router.push(`/contents/${type}/${id}`);
   };
 
   return (

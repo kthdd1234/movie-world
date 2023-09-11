@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
 import { useRouter } from 'next/navigation';
 
-const ContentsRelated = ({ type, similarResult }: IPropsContentsRelated) => {
+const ContentsRelated = ({ isTitle, type, results }: IPropsContentsRelated) => {
   /** */
   const router = useRouter();
 
@@ -16,9 +16,9 @@ const ContentsRelated = ({ type, similarResult }: IPropsContentsRelated) => {
 
   return (
     <section>
-      <SectionTitle text='관련 콘텐츠' />
+      {isTitle ? <SectionTitle text='관련 콘텐츠' /> : <div className='mt-5' />}
       <ul className='grid grid-cols-8 gap-4'>
-        {similarResult.map((info) => (
+        {results.map((info) => (
           <Image
             className='rounded cursor-pointer'
             key={info.id}
