@@ -26,7 +26,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
         />
       </head>
-      <body className='overflow-x-hidden'>
+      <body className='overflow-x-hidden bg-black'>
         <StyledComponentsRegistry>
           <Header />
           <Nav />

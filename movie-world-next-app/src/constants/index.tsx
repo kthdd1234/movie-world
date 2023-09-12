@@ -6,6 +6,11 @@ import {
   SearchOutlined,
   StarOutlined,
   InboxOutlined,
+  MailOutlined,
+  GithubOutlined,
+  BoldOutlined,
+  InstagramFilled,
+  InstagramOutlined,
 } from '@ant-design/icons';
 import {
   NowPlayingImage,
@@ -170,6 +175,75 @@ const staffMadesMovieList = [
   // },
 ];
 
+/** */
+const profileInfo = [
+  {
+    name: '프론트엔드 개발자 김동현',
+    link: 'https://kimdonghyun.me/',
+    isPoint: false,
+    isUnderline: false,
+  },
+  {
+    name: '서울 마포구 염리동 10-143',
+    link: 'https://kimdonghyun.me/',
+    isPoint: false,
+    isUnderline: false,
+  },
+  {
+    name: '010-2455-3704',
+    link: 'https://kimdonghyun.me/',
+    isPoint: true,
+    isUnderline: false,
+  },
+  {
+    name: 'kthdd1234@gmail.com',
+    link: 'mailto:kthdd1234@gmail.com',
+    isPoint: true,
+    isUnderline: true,
+  },
+];
+
+const webSiteInfo = [
+  {
+    name: 'github 주소',
+    link: 'https://github.com/kthdd1234',
+    isPoint: false,
+    isUnderline: false,
+  },
+  {
+    name: '개발자 웹사이트',
+    link: 'https://kimdonghyun.me/',
+    isPoint: false,
+    isUnderline: false,
+  },
+  {
+    name: '개발자 블로그',
+    link: 'https://velog.io/@halley_123',
+    isPoint: false,
+    isUnderline: false,
+  },
+];
+
+const footerIcons = [
+  {
+    icon: <MailOutlined />,
+    link: 'mailto:kthdd1234@gmail.com',
+  },
+  {
+    icon: <GithubOutlined />,
+    link: 'https://github.com/kthdd1234',
+  },
+
+  {
+    icon: <BoldOutlined />,
+    link: 'https://velog.io/@halley_123',
+  },
+  {
+    icon: <InstagramOutlined />,
+    link: 'https://www.instagram.com/gimdonghyeon4937',
+  },
+];
+
 export {
   navContentsItems,
   navServiceItems,
@@ -181,4 +255,7 @@ export {
   staffMadesMovieList,
   youtubeWatchUrl,
   initStaffMadesInfo,
+  profileInfo,
+  webSiteInfo,
+  footerIcons,
 };

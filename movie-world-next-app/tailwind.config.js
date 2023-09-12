@@ -9,6 +9,8 @@ module.exports = {
   theme: {
     colors: {
       white: '#ffffff',
+      whitePoint: 'rgba(255, 255, 255, 0.7)',
+      whitePoint2: 'rgba(255, 255, 255, 0.2)',
       black: '#000',
       black2: '#141517',
       mist: '#babac1',

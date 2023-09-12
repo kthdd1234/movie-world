@@ -663,3 +663,11 @@ export interface IPropsPerson {
   biography: string;
   data: { movie: ITmdbContentsData[]; tv: ITmdbContentsData[] };
 }
+
+export interface IPropsSmallText {
+  name: string;
+  isPoint: boolean;
+  isUnderline: boolean;
+  link: string;
+  onClick: (link: string) => void;
+}

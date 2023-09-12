@@ -1,5 +1,15 @@
+import Profile from './Profile';
+import WebSite from './WebSite';
+
 const Footer = () => {
-  return <footer className='bg-green-200  pl-52'>footer 영역</footer>;
+  return (
+    <footer className='text-white pl-52'>
+      <div className='px-10 pb-12'>
+        <Profile />
+        <WebSite />
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
