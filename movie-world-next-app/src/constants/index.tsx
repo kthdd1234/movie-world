@@ -166,13 +166,6 @@ const staffMadesMovieList = [
     movie_titles: '닌자터틀: 뮤턴트 대소동, 거미집, 조이 라이드 등',
     image: UpcomingImage,
   },
-  // {
-  //   id: NOLAN_MOVIES,
-  //   title: '감독 작품 리스트',
-  //   sub_title: '크리스토퍼 놀란 감독의 놀라운 작품 세계관',
-  //   movie_titles: '인셉션, 다크 나이트, 인터스텔라 등',
-  //   image: NolanMoviesImage,
-  // },
 ];
 
 /** */

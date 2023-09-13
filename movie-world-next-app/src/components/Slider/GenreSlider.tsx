@@ -1,25 +1,37 @@
 'use client';
 
-import { IPropsGenreSlider } from '@/types/interface';
+import { IPropsOnSlider } from '@/types/interface';
 import SectionTitle from '../Text/SectionTitle';
 import Image from 'next/image';
 import Slider from 'react-slick';
 import { tmdbImgUrl } from '@/constants';
-import { ESliderType } from '@/types/enum';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { movieGenresState } from '@/states/movie';
+import { useRecoilValue } from 'recoil';
+import { genresAtom, sectionSliderAtom } from '@/states';
 import { useRouter } from 'next/navigation';
+import { ESliderType } from '@/types/enum';
 
-const GenreSlide = ({ type, list, onSlider }: IPropsGenreSlider) => {
-  // const movieGenres = useRecoilValue(movieGenresState);
+const GenreSlider = ({
+  genre = ESliderType.NONE,
+  onSlider,
+}: IPropsOnSlider) => {
+  /** useRouter */
   const router = useRouter();
 
+  /** useRecoil */
+  const genresState = useRecoilValue(genresAtom);
+  const sectionSliderState = useRecoilValue(sectionSliderAtom);
+
+  const findGenre = genresState.find((info) => info.id === genre);
+  const data = findGenre
+    ? sectionSliderState[findGenre.name]
+    : { type: ESliderType.NONE, list: [] };
+
   const onRef = (slider: Slider) => {
-    onSlider({ sliderId: ESliderType.SF, slider: slider });
+    onSlider({ sliderId: genre!, slider: slider });
   };
 
   const onClick = (id: number) => {
-    router.push(`/contents/${type}/${id}`);
+    router.push(`/contents/${data.type}/${id}`);
   };
 
   return (
@@ -34,7 +46,7 @@ const GenreSlide = ({ type, list, onSlider }: IPropsGenreSlider) => {
         arrows={false}
         infinite={true}
       >
-        {list.map((info) => (
+        {data.list.map((info: any) => (
           <div
             key={info.id}
             className='mr-2 cursor-pointer'
@@ -54,4 +66,4 @@ const GenreSlide = ({ type, list, onSlider }: IPropsGenreSlider) => {
   );
 };
 
-export default GenreSlide;
+export default GenreSlider;

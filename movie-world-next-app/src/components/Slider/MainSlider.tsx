@@ -3,17 +3,19 @@
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
 import Slider from 'react-slick';
-import { IPropsMainContentsSlider } from '@/types/interface';
+import { IPropsOnSlider } from '@/types/interface';
 import { ESliderType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
+import { sectionSliderAtom } from '@/states';
 
-const MainContentsSlider = ({
-  type,
-  list,
-  onSlider,
-}: IPropsMainContentsSlider) => {
+const MainSlider = ({ onSlider }: IPropsOnSlider) => {
   /** useRouter */
   const router = useRouter();
+
+  /** useRecoilValue */
+  const { main } = useRecoilValue(sectionSliderAtom);
+  const { type, list } = main;
 
   const onRef = (slider: Slider) => {
     onSlider({ sliderId: ESliderType.MAIN_CONTENTS, slider: slider });
@@ -69,4 +71,4 @@ const MainContentsSlider = ({
   );
 };
 
-export default MainContentsSlider;
+export default MainSlider;

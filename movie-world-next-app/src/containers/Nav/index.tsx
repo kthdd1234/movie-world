@@ -6,9 +6,15 @@ import { ENavItemType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
 import NavColumnList from './NavColumnList';
 import { INavItem } from '@/types/interface';
+import { message } from 'antd';
+
+const { SEARCH, EVALUATE, STORAGE } = ENavItemType;
 
 const Nav = () => {
-  /** router */
+  /** useMessage */
+  const [messageApi, contextHolder] = message.useMessage();
+
+  /** useRouter */
   const router = useRouter();
 
   /** useSatte */
@@ -20,12 +26,22 @@ const Nav = () => {
   }, []);
 
   const onSelectedItem = (item: INavItem) => {
-    router.push(`/browse/${item.path}`);
-    setNavItem(item.type);
+    const notDevelopPage = [SEARCH, EVALUATE, STORAGE];
+
+    if (notDevelopPage.includes(item.type)) {
+      messageApi.open({
+        type: 'warning',
+        content: '개발 준비 중입니다.',
+      });
+    } else {
+      router.push(`/browse/${item.path}`);
+      setNavItem(item.type);
+    }
   };
 
   return (
     <nav className={`fixed left-0 z-20 h-screen pt-16 w-52 bg-black2`}>
+      {contextHolder}
       <NavColumnList
         seletedItem={navItem}
         items={navContentsItems}

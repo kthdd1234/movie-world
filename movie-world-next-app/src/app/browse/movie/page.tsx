@@ -12,13 +12,13 @@ import {
 } from '@/api/contents';
 
 const BrowseMovie = async () => {
-  const { results: trendingMovies } = await fetchTmdbTrending({
+  const { results: rankMovies } = await fetchTmdbTrending({
     trending_type: ETrendingType.MOVIE,
     time_window: ETrendingDateType.WEEK,
     query: { language: 'ko' },
   });
 
-  const { results: trendingPersons } = await fetchTmdbTrending({
+  const { results: persons } = await fetchTmdbTrending({
     trending_type: ETrendingType.PERSON,
     time_window: ETrendingDateType.WEEK,
     query: { language: 'ko' },
@@ -48,8 +48,8 @@ const BrowseMovie = async () => {
   return (
     <MovieHomeBody
       genres={genres}
-      trendingMovies={trendingMovies}
-      trendingPersons={trendingPersons}
+      rankMovies={rankMovies}
+      persons={persons}
       genreMovies={results}
     />
   );

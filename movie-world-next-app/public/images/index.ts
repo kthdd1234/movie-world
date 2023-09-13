@@ -6,6 +6,7 @@ import UpcomingImage from './coming-soon-movie.jpeg';
 import TrendingImage from './the-flash.jpeg';
 import NolanMoviesImage from './nolan-movies.webp';
 import EmptyProfileImage from './empty-profile-img.jpeg';
+import WLogo from './w-logo.png';
 
 export {
   WatchaLogo,
@@ -16,4 +17,5 @@ export {
   TrendingImage,
   NolanMoviesImage,
   EmptyProfileImage,
+  WLogo,
 };

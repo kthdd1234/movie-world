@@ -1,6 +1,6 @@
 'use client';
 
-import { IPropsTrendingSlider } from '@/types/interface';
+import { IPropsOnSlider } from '@/types/interface';
 import Slider from 'react-slick';
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
@@ -19,10 +19,16 @@ import {
 import SectionTitle from '../Text/SectionTitle';
 import { ESliderType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
+import { sectionSliderAtom } from '@/states';
 
-const TrendingSlider = ({ type, list, onSlider }: IPropsTrendingSlider) => {
-  /** */
+const RankSlider = ({ onSlider }: IPropsOnSlider) => {
+  /** useRouter */
   const router = useRouter();
+
+  /** useRecoilValue */
+  const { rank } = useRecoilValue(sectionSliderAtom);
+  const { type, list } = rank;
 
   /** */
   const rank_10_list = list.slice(0, 10);
@@ -40,7 +46,7 @@ const TrendingSlider = ({ type, list, onSlider }: IPropsTrendingSlider) => {
   ];
 
   const onRef = (slider: Slider) => {
-    onSlider({ sliderId: ESliderType.TRENDING, slider: slider });
+    onSlider({ sliderId: ESliderType.RANK, slider: slider });
   };
 
   const onClick = (id: number) => {
@@ -87,4 +93,4 @@ const TrendingSlider = ({ type, list, onSlider }: IPropsTrendingSlider) => {
   );
 };
 
-export default TrendingSlider;
+export default RankSlider;

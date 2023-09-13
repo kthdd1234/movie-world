@@ -1,14 +1,20 @@
-import { IPropsTrendingSlider } from '@/types/interface';
+import { IPropsOnSlider } from '@/types/interface';
 import SectionTitle from '../Text/SectionTitle';
 import Slider from 'react-slick';
 import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
 import { ESliderType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
+import { sectionSliderAtom } from '@/states';
 
-const PersonSection = ({ list, onSlider }: IPropsTrendingSlider) => {
-  /** */
+const PersonSlider = ({ onSlider }: IPropsOnSlider) => {
+  /** useRouter */
   const router = useRouter();
+
+  /** useRecoilValue */
+  const { person } = useRecoilValue(sectionSliderAtom);
+  const { list } = person;
 
   const onRef = (slider: Slider) => {
     onSlider({ sliderId: ESliderType.PERSON, slider: slider });
@@ -55,4 +61,4 @@ const PersonSection = ({ list, onSlider }: IPropsTrendingSlider) => {
   );
 };
 
-export default PersonSection;
+export default PersonSlider;

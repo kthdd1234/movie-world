@@ -60,6 +60,21 @@ export interface IResposeKmdbMovieDetail {
   Data: IKmdbMovieData[];
 }
 
+export interface IMainSlider {
+  id: number;
+  back_drop: string;
+  logo_path: string;
+  desc: string;
+}
+
+export interface IStaffmadeSlider {
+  id: EListsType;
+  title: string;
+  sub_title: string;
+  movie_titles: string;
+  image: StaticImageData;
+}
+
 interface IKmdbMovieData {
   CollName: string;
   TotalCount: number;
@@ -307,30 +322,30 @@ export interface IPropsRootSlider {
   slider: Slider | null;
 }
 
-export interface IPropsMainContentsSlider extends IPropsOnSlider {
-  list: { id: number; back_drop: string; logo_path: string; desc: string }[];
-}
+// export interface IPropsMainSlider extends IPropsOnSlider {
+//   list: { id: number; back_drop: string; logo_path: string; desc: string }[];
+// }
 
-export interface IPropsStaffMadesSlider extends IPropsOnSlider {
-  list: {
-    id: EListsType;
-    title: string;
-    sub_title: string;
-    movie_titles: string;
-    image: StaticImageData;
-  }[];
-}
+// export interface IPropsStaffMadesSlider extends IPropsOnSlider {
+//   list: {
+//     id: EListsType;
+//     title: string;
+//     sub_title: string;
+//     movie_titles: string;
+//     image: StaticImageData;
+//   }[];
+// }
 
-export interface IPropsTrendingSlider extends IPropsOnSlider {
-  list: ITrendingData[];
-}
+// export interface IPropsRankSlider extends IPropsOnSlider {
+//   list: ITrendingData[];
+// }
 
-export interface IPropsGenreSlider extends IPropsOnSlider {
-  list: ITmdbContentsData[];
-}
+// export interface IPropsGenreSlider extends IPropsOnSlider {
+//   list: ITmdbContentsData[];
+// }
 
-interface IPropsOnSlider {
-  type: EContentsType;
+export interface IPropsOnSlider {
+  genre?: ESliderType;
   onSlider: (args: IOnSlider) => void;
 }
 
@@ -374,8 +389,8 @@ interface ITrendingData {
 }
 
 export interface IMovieHomeBody extends IResponceTmdbGenres {
-  trendingMovies: ITrendingData[];
-  trendingPersons: ITrendingData[];
+  rankMovies: ITrendingData[];
+  persons: ITrendingData[];
   genreMovies: ITmdbContentsData[];
 }
 
@@ -401,8 +416,8 @@ export interface IResponceTmdbGenres {
   genres: IGenreData[];
 }
 
-interface IGenreData {
-  id: string;
+export interface IGenreData {
+  id: number;
   name: string;
 }
 
@@ -670,4 +685,37 @@ export interface IPropsSmallText {
   isUnderline: boolean;
   link: string;
   onClick: (link: string) => void;
+}
+
+export interface ISectionSliderState {
+  NONE: { type: EContentsType; list: {}[] };
+  main: { type: EContentsType; list: IMainSlider[] };
+  staffmades: { type: EContentsType; list: IStaffmadeSlider[] };
+  person: { type: EContentsType; list: ITrendingData[] };
+  rank: { type: EContentsType; list: ITrendingData[] };
+  ACTION: { type: EContentsType; list: ITmdbContentsData[] };
+  ADVENTURE: { type: EContentsType; list: ITmdbContentsData[] };
+  ANIMATION: { type: EContentsType; list: ITmdbContentsData[] };
+  COMEDY: { type: EContentsType; list: ITmdbContentsData[] };
+  CRIME: { type: EContentsType; list: ITmdbContentsData[] };
+  DOCUMENTARY: { type: EContentsType; list: ITmdbContentsData[] };
+  DRAMA: { type: EContentsType; list: ITmdbContentsData[] };
+  FAMILY: { type: EContentsType; list: ITmdbContentsData[] };
+  FANTASY: { type: EContentsType; list: ITmdbContentsData[] };
+  HISTORY: { type: EContentsType; list: ITmdbContentsData[] };
+  HORROR: { type: EContentsType; list: ITmdbContentsData[] };
+  MUSIC: { type: EContentsType; list: ITmdbContentsData[] };
+  MYSTERY: { type: EContentsType; list: ITmdbContentsData[] };
+  ROMANCE: { type: EContentsType; list: ITmdbContentsData[] };
+  SF: { type: EContentsType; list: ITmdbContentsData[] };
+  THRILLER: { type: EContentsType; list: ITmdbContentsData[] };
+  WAR: { type: EContentsType; list: ITmdbContentsData[] };
+  KIDS: { type: EContentsType; list: ITmdbContentsData[] };
+  NEWS: { type: EContentsType; list: ITmdbContentsData[] };
+  REALITY: { type: EContentsType; list: ITmdbContentsData[] };
+  SOAP: { type: EContentsType; list: ITmdbContentsData[] };
+  TALK: { type: EContentsType; list: ITmdbContentsData[] };
+  WAR_POLITICS: { type: EContentsType; list: ITmdbContentsData[] };
+  WESTERN: { type: EContentsType; list: ITmdbContentsData[] };
+  [propsName: string]: any;
 }

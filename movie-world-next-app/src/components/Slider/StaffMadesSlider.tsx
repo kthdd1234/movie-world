@@ -1,14 +1,20 @@
 'use client';
 
+import { sectionSliderAtom } from '@/states';
 import { EListsType, ESliderType } from '@/types/enum';
-import { IPropsStaffMadesSlider } from '@/types/interface';
+import { IPropsOnSlider } from '@/types/interface';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Slider from 'react-slick';
+import { useRecoilValue } from 'recoil';
 
-const StaffMadesSlider = ({ type, list, onSlider }: IPropsStaffMadesSlider) => {
-  /** */
+const StaffMadesSlider = ({ onSlider }: IPropsOnSlider) => {
+  /** useRouter */
   const router = useRouter();
+
+  /** useRecoilValue */
+  const { staffmades } = useRecoilValue(sectionSliderAtom);
+  const { type, list } = staffmades;
 
   const onRef = (slider: Slider) => {
     onSlider({ sliderId: ESliderType.STAFF_MADES, slider: slider });

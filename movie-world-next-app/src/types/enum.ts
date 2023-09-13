@@ -23,6 +23,8 @@ enum EMultiMovieYn {
 
 enum EContentsType {
   /** */
+  NONE = 'None',
+  /** */
   MOVIE = 'movie',
   /** */
   TV = 'tv',
@@ -65,11 +67,13 @@ enum EDirectionType {
 
 enum ESliderType {
   /** */
+  NONE = 9999,
+  /** */
   MAIN_CONTENTS = 0,
   /** */
   STAFF_MADES = 1,
   /** */
-  TRENDING = 2,
+  RANK = 2,
   /** */
   PERSON = 3,
   /** */
@@ -110,6 +114,22 @@ enum ESliderType {
   WAR = 10752,
   /** */
   WESTERN = 37,
+  /** */
+  ACTION_ADVENTURE = 10759,
+  /** */
+  KIDS = 10762,
+  /** */
+  NEWS = 10763,
+  /** */
+  REALITY = 10764,
+  /** */
+  SCI_FI_FANTASY = 10765,
+  /** */
+  SOAP = 10766,
+  /** */
+  TALK = 10767,
+  /** */
+  WAR_POLITICS = 10768,
 }
 
 enum ETrendingType {
