@@ -8,10 +8,12 @@ import {
   ESliderType,
   EWeekGb,
   ETrendingDateType,
-  EListsType,
+  EMovieListsType,
   EGenresType,
   EDiscoverType,
   EContentsType,
+  ETVListsType,
+  ETmdbPathType,
 } from './enum';
 import Slider from 'react-slick';
 import { StaticImageData } from 'next/image';
@@ -29,7 +31,7 @@ export interface IPostFetch {
   body: any;
 }
 
-export interface IParamsBoxOfficeList {
+export interface IParamsKobisBoxOffice {
   boxOfficeType: EBoxOfficeType;
   query: {
     targetDt: string;
@@ -38,17 +40,17 @@ export interface IParamsBoxOfficeList {
   };
 }
 
-export interface IResposeBoxOfficeList {
+export interface IResposeKobisBoxOffice {
   boxOfficeResult: {
     boxofficeType: string;
     showRange: string;
     yearWeekTime: string;
-    weeklyBoxOfficeList: IBoxOfficeData[];
-    dailyBoxOfficeList: IBoxOfficeData[];
+    weeklyKobisBoxOffice: IBoxOfficeData[];
+    dailyKobisBoxOffice: IBoxOfficeData[];
   };
 }
 
-export interface IParamsKmdbMoveDetail {
+export interface IParamsKmdbDetail {
   query: string;
   releaseDts: string;
 }
@@ -68,7 +70,7 @@ export interface IMainSlider {
 }
 
 export interface IStaffmadeSlider {
-  id: EListsType;
+  id: EMovieListsType | ETVListsType;
   title: string;
   sub_title: string;
   movie_titles: string;
@@ -241,7 +243,8 @@ export interface INavColumnList {
   onSelectedItem: (item: INavItem) => void;
 }
 
-export interface IParamsTmdbMovieLists {
+export interface IParamsTmdbLists {
+  contents_type: string;
   lists_type: string;
   query: {
     language: TLanguage;
@@ -250,7 +253,7 @@ export interface IParamsTmdbMovieLists {
   };
 }
 
-export interface IResponseTmdbMovieLists extends ITmdbContentsList {
+export interface IResponseTmdbLists extends ITmdbContentsList {
   dates: {
     maximum: string;
     minumum: string;
@@ -287,7 +290,8 @@ export interface IArrowButton {
   onClick: (direction: EDirectionType) => void;
 }
 
-export interface IParamsTmdbMovieImages {
+export interface IParamsTmdbImages {
+  contents_type: string;
   movie_id: number;
   query: {
     include_image_language: string | null;
@@ -295,7 +299,7 @@ export interface IParamsTmdbMovieImages {
   };
 }
 
-export interface IResponseTmdbMovieImages {
+export interface IResponseTmdbImages {
   backdrops: ITmdbMovieImage[];
   id: number;
   logos: ITmdbMovieImage[];
@@ -328,7 +332,7 @@ export interface IPropsRootSlider {
 
 // export interface IPropsStaffMadesSlider extends IPropsOnSlider {
 //   list: {
-//     id: EListsType;
+//     id: EMovieListsType;
 //     title: string;
 //     sub_title: string;
 //     movie_titles: string;
@@ -388,10 +392,13 @@ interface ITrendingData {
   known_for: ITmdbContentsData[];
 }
 
-export interface IMovieHomeBody extends IResponceTmdbGenres {
-  rankMovies: ITrendingData[];
-  persons: ITrendingData[];
-  genreMovies: ITmdbContentsData[];
+export interface IHomeBody extends IResponceTmdbGenres {
+  main: IMainSlider[];
+  staffmades: IStaffmadeSlider[];
+  type: EContentsType;
+  rank: ITrendingData[];
+  person: ITrendingData[];
+  discover: ITmdbContentsData[];
 }
 
 export interface IParamsTmdbDiscover {
@@ -425,15 +432,17 @@ export interface ISliderState {
   [key: string]: TSlider;
 }
 
-export interface IParamsTmdbMovieDeatail {
-  movie_id: number;
+export interface IParamsTmdbDetail {
+  contents_type: string;
+  id: number;
   query: {
     append_to_response: string;
     language: TLanguage;
   };
 }
 
-export interface IResponceTmdbMovieDetail {
+export interface IResponceTmdbDetail {
+  name: string;
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: any;
@@ -490,6 +499,16 @@ export interface IResponceTmdbMovieDetail {
       job: string;
     }[];
   };
+  seasons: {
+    air_date: string;
+    episode_count: number;
+    id: number;
+    name: string;
+    overview: string;
+    poster_path: string;
+    season_number: number;
+    vote_average: number;
+  }[];
 }
 
 interface IVideosResult {
@@ -535,7 +554,8 @@ export interface IReviewsResult {
   url: string;
 }
 
-export interface IParamsTmdbMovieReviews {
+export interface IParamsTmdbReviews {
+  contents_type: string;
   movie_id: number;
   query: {
     language: TLanguage;
@@ -543,7 +563,7 @@ export interface IParamsTmdbMovieReviews {
   };
 }
 
-export interface IResponceTmdbMovieReviews {
+export interface IResponceTmdbReviews {
   id: number;
   page: number;
   results: {
@@ -582,7 +602,8 @@ export interface IPropsContentsDetail {
   reviews_result: IReviewsResult[];
 }
 
-export interface IParamsTmdbMovieSimilar {
+export interface IParamsTmdbSimilar {
+  contents_type: string;
   movie_id: number;
   query: {
     language: TLanguage;
@@ -590,7 +611,7 @@ export interface IParamsTmdbMovieSimilar {
   };
 }
 
-export interface IResponceTmdbMovieSimilar {
+export interface IResponceTmdbSimilar {
   page: number;
   results: ITmdbContentsData[];
   total_pages: number;
@@ -603,10 +624,11 @@ export interface IPropsContentsRelated {
   results: ITmdbContentsData[];
 }
 
-export interface IMovieContentsBody {
-  detail: IResponceTmdbMovieDetail;
-  reviews: IResponceTmdbMovieReviews;
-  similar: IResponceTmdbMovieSimilar;
+export interface IContentsBody {
+  type: string;
+  detail: IResponceTmdbDetail;
+  reviews?: IResponceTmdbReviews;
+  similar?: IResponceTmdbSimilar;
 }
 
 export interface IPropsParamsId {

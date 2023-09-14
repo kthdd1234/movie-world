@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { tmdbImgUrl } from '@/constants';
 import Slider from 'react-slick';
 import { IPropsOnSlider } from '@/types/interface';
-import { ESliderType } from '@/types/enum';
+import { EContentsType, ESliderType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { sectionSliderAtom } from '@/states';
@@ -27,7 +27,9 @@ const MainSlider = ({ onSlider }: IPropsOnSlider) => {
 
   return (
     <>
-      <div className='text-3xl font-bold text-white'>홈</div>
+      <div className='text-3xl font-bold text-white'>
+        {type === EContentsType.MOVIE ? '영화' : 'TV 프로그램'}
+      </div>
       <div className='h-8' />
       <Slider
         ref={onRef}

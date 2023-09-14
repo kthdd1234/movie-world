@@ -28,17 +28,6 @@ const ContentsDetail = ({
   reviews_total,
   reviews_result,
 }: IPropsContentsDetail) => {
-  console.log(
-    '=>>>>>:',
-    vote_count,
-    vote_average,
-    popularity,
-    videos_results,
-    cast,
-    reviews_total,
-    reviews_result
-  );
-
   /** */
   const router = useRouter();
 

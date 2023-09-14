@@ -21,10 +21,10 @@ const GenreSlider = ({
   const genresState = useRecoilValue(genresAtom);
   const sectionSliderState = useRecoilValue(sectionSliderAtom);
 
-  const findGenre = genresState.find((info) => info.id === genre);
-  const data = findGenre
-    ? sectionSliderState[findGenre.name]
-    : { type: ESliderType.NONE, list: [] };
+  const genreKey = ESliderType[genre];
+  const data = sectionSliderState[genreKey];
+
+  const genreInfo = genresState.find((info) => info.id === genre);
 
   const onRef = (slider: Slider) => {
     onSlider({ sliderId: genre!, slider: slider });
@@ -36,7 +36,7 @@ const GenreSlider = ({
 
   return (
     <div className='relative'>
-      <SectionTitle text='SF 영화' />
+      <SectionTitle text={genreInfo?.name ?? ''} />
       <Slider
         ref={onRef}
         speed={800}
@@ -46,7 +46,7 @@ const GenreSlider = ({
         arrows={false}
         infinite={true}
       >
-        {data.list.map((info: any) => (
+        {data?.list.map((info: any) => (
           <div
             key={info.id}
             className='mr-2 cursor-pointer'

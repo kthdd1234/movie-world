@@ -1,10 +1,9 @@
-import { fetchTmdbSearch } from '@/api/contents';
-import { fetchTmdbMovieLists } from '@/api/contents/movie';
+import { fetchTmdbLists } from '@/api/tmdb';
 import ContentsIntro from '@/components/Contents/ContentsIntro';
 import ContentsRelated from '@/components/Contents/ContentsRelated';
 import ContentsSetting from '@/components/Contents/ContentsSetting';
-import { staffMadesMovieList } from '@/constants';
-import { EContentsType, ESearchType } from '@/types/enum';
+import { staffMadesMovieList, staffMadesTVList } from '@/constants';
+import { EContentsType } from '@/types/enum';
 import { IPropsParamsList } from '@/types/interface';
 
 const StaffmadesPage = async ({ params }: IPropsParamsList) => {
@@ -12,9 +11,13 @@ const StaffmadesPage = async ({ params }: IPropsParamsList) => {
   const [type, id] = params.list;
 
   /** */
-  const staffmadesInfo = staffMadesMovieList.find((info) => info.id === id)!;
-  const { title, sub_title, image, movie_titles } = staffmadesInfo;
-  const { results: contentsList, total_results } = await fetchTmdbMovieLists({
+  const staffmadesInfo = { movie: staffMadesMovieList, tv: staffMadesTVList }[
+    type
+  ]!;
+  const infoList = staffmadesInfo.find((info) => info.id === id)!;
+  const { title, sub_title, image, movie_titles } = infoList;
+  const { results: contentsList, total_results } = await fetchTmdbLists({
+    contents_type: type,
     lists_type: id,
     query: {
       language: 'ko',

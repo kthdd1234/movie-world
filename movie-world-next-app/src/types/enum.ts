@@ -45,19 +45,6 @@ enum ENavItemType {
   STORAGE = 'STORAGE',
 }
 
-enum EListsType {
-  /** */
-  NOW_PLAYING = 'now_playing',
-  /** */
-  POPULAR = 'popular',
-  /** */
-  TOP_RATED = 'top_rated',
-  /** */
-  UPCOMING = 'upcoming',
-  /** */
-  NOLAN_MOVIES = 'nolan_movies',
-}
-
 enum EDirectionType {
   /** */
   LEFT = 'left',
@@ -170,6 +157,8 @@ enum EContentsSplitType {
   /** */
   RELATED_CONTENTS,
   /** */
+  SEASON_INFO,
+  /** */
   MOVIE,
   /** */
   TV,
@@ -192,12 +181,43 @@ enum ESearchType {
   TV = 'tv',
 }
 
+enum EListsType {
+  /** */
+  NOW_PLAYING = 'now_playing',
+  /** */
+  UPCOMING = 'upcoming',
+  /** */
+  AIRING_TODAY = 'airing_today',
+  /** */
+  ON_THE_AIR = 'on_the_air',
+  /** */
+  POPULAR = 'popular',
+  /** */
+  TOP_RATED = 'top_rated',
+}
+
+enum ETmdbPathType {
+  /** */
+  MOVIE = 'movie',
+  /** */
+  TV = 'tv',
+  /** */
+  TRENDING = 'trending',
+  /** */
+  DISCOVER = 'discover',
+  /** */
+  GENRE = 'genre',
+  /** */
+  SEARCH = 'search',
+  /** */
+  PERSON = 'person',
+}
+
 export {
   EWeekGb,
   EMultiMovieYn,
   EBoxOfficeType,
   ENavItemType,
-  EListsType,
   EDirectionType,
   ESliderType,
   ETrendingType,
@@ -207,4 +227,6 @@ export {
   EContentsSplitType,
   EContentsType,
   ESearchType,
+  EListsType,
+  ETmdbPathType,
 };

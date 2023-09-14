@@ -10,7 +10,6 @@ import Image from 'next/image';
 
 const BestReviewer = ({ results }: { results: IReviewsResult[] }) => {
   const { avatar_path, username, rating } = results[0].author_details;
-  console.log(results);
 
   return (
     <div className='w-[33%]'>

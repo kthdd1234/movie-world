@@ -3,24 +3,30 @@ import {
   ETrendingDateType,
   EGenresType,
   EDiscoverType,
+  ESliderType,
+  EContentsType,
 } from '@/types/enum';
-import MovieHomeBody from '@/components/Body/MovieHomeBody';
+import HomeBody from '@/components/Body/HomeBody';
 import {
   fetchTmdbDiscover,
   fetchTmdbGenres,
   fetchTmdbTrending,
-} from '@/api/contents';
+} from '@/api/tmdb';
+import { mainMovieList, staffMadesMovieList } from '@/constants';
+
+const { MOVIE, PERSON } = ETrendingType;
+const { WEEK } = ETrendingDateType;
 
 const BrowseMovie = async () => {
-  const { results: rankMovies } = await fetchTmdbTrending({
-    trending_type: ETrendingType.MOVIE,
-    time_window: ETrendingDateType.WEEK,
+  const { results: rank } = await fetchTmdbTrending({
+    trending_type: MOVIE,
+    time_window: WEEK,
     query: { language: 'ko' },
   });
 
   const { results: persons } = await fetchTmdbTrending({
-    trending_type: ETrendingType.PERSON,
-    time_window: ETrendingDateType.WEEK,
+    trending_type: PERSON,
+    time_window: WEEK,
     query: { language: 'ko' },
   });
 
@@ -29,28 +35,27 @@ const BrowseMovie = async () => {
     query: { language: 'ko' },
   });
 
-  const { results } = await fetchTmdbDiscover({
+  const { results: discover } = await fetchTmdbDiscover({
     discover_type: EDiscoverType.MOVIE,
     query: {
-      include_adult: true,
+      include_adult: false,
       language: 'ko',
       page: 1,
-      with_genres: 878,
+      with_genres: ESliderType.DRAMA,
     },
   });
 
-  // console.log(results);
-
-  // getKmdbMovieList();
-  // getTmdbMovieLists();
-  // getTmdbMovieImages();
+  //
 
   return (
-    <MovieHomeBody
+    <HomeBody
+      type={EContentsType.MOVIE}
+      main={mainMovieList}
+      staffmades={staffMadesMovieList}
       genres={genres}
-      rankMovies={rankMovies}
-      persons={persons}
-      genreMovies={results}
+      rank={rank}
+      person={persons}
+      discover={discover}
     />
   );
 };

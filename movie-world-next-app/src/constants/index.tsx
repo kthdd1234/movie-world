@@ -1,4 +1,4 @@
-import { EListsType, ENavItemType } from '@/types/enum';
+import { EContentsSplitType, EListsType, ENavItemType } from '@/types/enum';
 import { INavItem } from '@/types/interface';
 import {
   VideoCameraOutlined,
@@ -9,7 +9,6 @@ import {
   MailOutlined,
   GithubOutlined,
   BoldOutlined,
-  InstagramFilled,
   InstagramOutlined,
 } from '@ant-design/icons';
 import {
@@ -17,14 +16,21 @@ import {
   PopularImage,
   TopRatedImage,
   UpcomingImage,
-  NolanMoviesImage,
+  TodayTVImage,
+  WeekTVImage,
+  LawOrderImage,
+  BreakinkBad,
 } from '../../public/images';
 
 /** ENavItemType */
 const { MOVIE, TV, SEARCH, EVALUATE, STORAGE } = ENavItemType;
 
+/** EContentsSplitType */
+const { CONTENTS_INFO, RELATED_CONTENTS, SEASON_INFO } = EContentsSplitType;
+
 /**  EListsType */
-const { NOW_PLAYING, POPULAR, TOP_RATED, UPCOMING, NOLAN_MOVIES } = EListsType;
+const { NOW_PLAYING, POPULAR, TOP_RATED, UPCOMING, AIRING_TODAY, ON_THE_AIR } =
+  EListsType;
 
 /** kobisBaseUrl */
 const kobisBaseUrl = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice`;
@@ -119,7 +125,7 @@ const staffMadesMovieList = [
   },
   {
     id: POPULAR,
-    title: '인기있는 영화 리스트',
+    title: '인기 있는 영화 리스트',
     sub_title: '많은 사람들이 좋아하는 영화',
     movie_titles: '하스 오브 스톤, 메가로톤 2, 스파이맨 등',
     image: PopularImage,
@@ -237,6 +243,115 @@ const footerIcons = [
   },
 ];
 
+const mainTVList = [
+  {
+    id: 1396,
+    back_drop: '/9faGSFi5jam6pDWGNd0p8JcJgXQ.jpg',
+    logo_path: '/chw44B2VnLha8iiTdyZcIW0ZELC.png',
+    desc: '2008년 1월 AMC에서 방영을 시작한 범죄 스릴러 \n 총 62편으로 구성된 다섯 시즌으로 종영되다!',
+  },
+  {
+    id: 37854,
+    back_drop: '/a6ptrTUH1c5OdWanjyYtAkOuYD0.jpg',
+    logo_path: '/pPhy19oNm236AkOT96wAIzY0eD8.png',
+    desc: '해적왕을 꿈꾸는 소년 루피의 모험담을 그린 작품! \n 해적왕을 꿈꾸는 루피와 동료들의 파란만장한 모험담',
+  },
+  {
+    id: 85937,
+    back_drop: '/nTvM4mhqNlHIvUkI1gVnW6XP7GG.jpg',
+    logo_path: '/6vUQ6lB5UlZAxCDYK9Tlu2l8lfs.png',
+    desc: '2019년 4월 Tokyo MX에서 방영을 시작한 애니메이션 \n 지금 탄지로가 복수의 칼날을 높이 든다.',
+  },
+  {
+    id: 100088,
+    back_drop: '/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg',
+    logo_path: '/msYtgZbEo8tAOJ37T50kgqulpKf.png',
+    desc: '팬데믹으로 인류 대다수가 괴생명체가 되어버린 근미래 \n 미국을 횡단하는 두 사람의 이야기를 다룬 아포칼립스물',
+  },
+  {
+    id: 87108,
+    back_drop: '/20eIP9o5ebArmu2HxJutaBjhLf4.jpg',
+    logo_path: '/7kqnlYTsYvlOdKWCnl2QrsNAclk.png',
+    desc: '2019년 5월 HBO에서 방영을 시작한 미니시리즈 \n 인류 최악의 인재로 기록된 구 소련 체르노빌 원자력 발전소 사태를 재구성',
+  },
+  {
+    id: 64010,
+    back_drop: '/oDEPqQstDYUHUxzyHotV8yrnzGk.jpg',
+    logo_path: '/mfMn2bjWYEOUEMIORhKJFVEj4EA.png',
+    desc: '2015년 11월 tvN에서 방영을 시작한 드라마 \n 쌍팔년도 쌍문동, 한 골목 다섯 가족의 왁자지껄 코믹 가족극',
+  },
+];
+
+const staffMadesTVList = [
+  {
+    id: POPULAR,
+    title: '인기 있는 TV 리스트',
+    sub_title: '많은 사람들이 좋아하는 TV 프로그램',
+    movie_titles: '로 앤 오더, 4차원 가족 카다시안 따라잡기 등',
+    image: LawOrderImage,
+  },
+  {
+    id: TOP_RATED,
+    title: '평점이 높은 TV 리스트',
+    sub_title: 'TMDB 기준으로 평점이 높은 TV 프로그램',
+    movie_titles: '브레이킹 배드, 아케인, 원피스 등',
+    image: BreakinkBad,
+  },
+  {
+    id: AIRING_TODAY,
+    title: '오늘 방송 되는 TV 리스트',
+    sub_title: '다양한 채널에서 방송 되는 프로그램',
+    movie_titles: '러브 아일랜드: 네덜란드 & 벨기에, 하늘의 인연 등',
+    image: TodayTVImage,
+  },
+  {
+    id: ON_THE_AIR,
+    title: '7일 동안의 TV 리스트',
+    sub_title: '오늘부터 일주일간 방송 되는 프로그램',
+    movie_titles: '타게스샤우, 생명을 건 포획, 우아한 제국 등',
+    image: WeekTVImage,
+  },
+  {
+    id: POPULAR,
+    title: '인기 있는 TV 리스트',
+    sub_title: '많은 사람들이 좋아하는 TV 프로그램',
+    movie_titles: '로 앤 오더, 4차원 가족 카다시안 따라잡기 등',
+    image: LawOrderImage,
+  },
+  {
+    id: TOP_RATED,
+    title: '평점이 높은 TV 리스트',
+    sub_title: 'TMDB 기준으로 평점이 높은 TV 프로그램',
+    movie_titles: '브레이킹 배드, 아케인, 원피스 등',
+    image: BreakinkBad,
+  },
+  {
+    id: AIRING_TODAY,
+    title: '오늘 방송 되는 TV 리스트',
+    sub_title: '다양한 채널에서 방송 되는 프로그램',
+    movie_titles: '러브 아일랜드: 네덜란드 & 벨기에, 하늘의 인연 등',
+    image: TodayTVImage,
+  },
+  {
+    id: ON_THE_AIR,
+    title: '7일 동안의 TV 리스트',
+    sub_title: '오늘부터 일주일간 방송 되는 프로그램',
+    movie_titles: '타게스샤우, 생명을 건 포획, 우아한 제국 등',
+    image: WeekTVImage,
+  },
+];
+
+const movieSplitList = [
+  { id: CONTENTS_INFO, name: '콘텐츠 정보' },
+  { id: RELATED_CONTENTS, name: '관련 콘텐츠' },
+];
+
+const tvSplitList = [
+  { id: CONTENTS_INFO, name: '콘텐츠 정보' },
+  { id: SEASON_INFO, name: '시즌 정보' },
+  { id: RELATED_CONTENTS, name: '관련 콘텐츠' },
+];
+
 export {
   navContentsItems,
   navServiceItems,
@@ -251,4 +366,8 @@ export {
   profileInfo,
   webSiteInfo,
   footerIcons,
+  mainTVList,
+  staffMadesTVList,
+  movieSplitList,
+  tvSplitList,
 };

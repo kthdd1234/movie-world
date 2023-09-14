@@ -7,6 +7,10 @@ import TrendingImage from './the-flash.jpeg';
 import NolanMoviesImage from './nolan-movies.webp';
 import EmptyProfileImage from './empty-profile-img.jpeg';
 import WLogo from './w-logo.png';
+import TodayTVImage from './today_tv.jpeg';
+import WeekTVImage from './tv_week.webp';
+import LawOrderImage from './law_order-img.jpeg';
+import BreakinkBad from './breaking_bad.jpeg';
 
 export {
   WatchaLogo,
@@ -18,4 +22,8 @@ export {
   NolanMoviesImage,
   EmptyProfileImage,
   WLogo,
+  TodayTVImage,
+  WeekTVImage,
+  LawOrderImage,
+  BreakinkBad,
 };

@@ -1,27 +1,28 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { IMovieHomeBody, IOnSlider, ISliderState } from '@/types/interface';
+import { IHomeBody, IOnSlider, ISliderState } from '@/types/interface';
 import Section from '../Slider';
 import MainSlider from '../Slider/MainSlider';
 import StaffMadesSlider from '../Slider/StaffMadesSlider';
 import RankSlider from '../Slider/RankSlider';
-import { mainMovieList, staffMadesMovieList } from '@/constants';
 import PersonSlider from '../Slider/PersonSlider';
 import GenreSlider from '../Slider/GenreSlider';
-import { EContentsType, ESliderType } from '@/types/enum';
+import { ESliderType } from '@/types/enum';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { genresAtom, sectionSliderAtom } from '@/states';
 
-const { MOVIE } = EContentsType;
-const { MAIN_CONTENTS, STAFF_MADES, RANK, PERSON, SF } = ESliderType;
+const { MAIN_CONTENTS, STAFF_MADES, RANK, PERSON, DRAMA } = ESliderType;
 
-const MovieHomeBody = ({
+const HomeBody = ({
+  type,
+  main,
+  staffmades,
   genres,
-  rankMovies,
-  persons,
-  genreMovies,
-}: IMovieHomeBody) => {
+  rank,
+  person,
+  discover,
+}: IHomeBody) => {
   /** useRecoil */
   const setGenresAtom = useSetRecoilState(genresAtom);
   const [sectionSliderState, setSectionSliderState] =
@@ -32,15 +33,14 @@ const MovieHomeBody = ({
 
   /** useEffect */
   useEffect(() => {
-    console.log('상단', genres);
     setGenresAtom(genres);
     setSectionSliderState({
       ...sectionSliderState,
-      main: { type: MOVIE, list: mainMovieList },
-      staffmades: { type: MOVIE, list: staffMadesMovieList },
-      person: { type: MOVIE, list: persons },
-      rank: { type: MOVIE, list: rankMovies },
-      SF: { type: MOVIE, list: genreMovies },
+      main: { type: type, list: main },
+      staffmades: { type: type, list: staffmades },
+      person: { type: type, list: person },
+      rank: { type: type, list: rank },
+      DRAMA: { type: type, list: discover },
     });
   }, []);
 
@@ -69,8 +69,8 @@ const MovieHomeBody = ({
       children: <PersonSlider onSlider={onSlider} />,
     },
     {
-      id: SF,
-      children: <GenreSlider genre={SF} onSlider={onSlider} />,
+      id: DRAMA,
+      children: <GenreSlider genre={DRAMA} onSlider={onSlider} />,
     },
   ];
 
@@ -87,4 +87,4 @@ const MovieHomeBody = ({
   );
 };
 
-export default MovieHomeBody;
+export default HomeBody;

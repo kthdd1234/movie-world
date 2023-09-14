@@ -1,7 +1,7 @@
 'use client';
 
 import { sectionSliderAtom } from '@/states';
-import { EListsType, ESliderType } from '@/types/enum';
+import { EMovieListsType, ESliderType } from '@/types/enum';
 import { IPropsOnSlider } from '@/types/interface';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -20,7 +20,7 @@ const StaffMadesSlider = ({ onSlider }: IPropsOnSlider) => {
     onSlider({ sliderId: ESliderType.STAFF_MADES, slider: slider });
   };
 
-  const onClick = (id: EListsType) => {
+  const onClick = (id: EMovieListsType) => {
     router.push(`/staffmades/${type}/${id}`);
   };
 
