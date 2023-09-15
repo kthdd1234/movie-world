@@ -1,9 +1,9 @@
+import { getFetch } from '@/app/api/route';
 import { kobisBaseUrl } from '@/constants';
 import {
   IParamsKobisBoxOffice,
   IResposeKobisBoxOffice,
 } from '@/types/interface';
-import { getFetch } from '..';
 
 /** API KEYS */
 const { NEXT_PUBLIC_KOBIS_API_KEY_1 } = process.env;

@@ -7,6 +7,7 @@ import { ESliderType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { sectionSliderAtom } from '@/states';
+import { EmptyProfileImage } from '../../../public/images';
 
 const PersonSlider = ({ onSlider }: IPropsOnSlider) => {
   /** useRouter */
@@ -44,7 +45,11 @@ const PersonSlider = ({ onSlider }: IPropsOnSlider) => {
           >
             <div className='w-[11rem] h-[11rem] mb-1 rounded-full overflow-hidden'>
               <Image
-                src={tmdbImgUrl + info.profile_path}
+                src={
+                  info.profile_path
+                    ? tmdbImgUrl + info.profile_path
+                    : EmptyProfileImage
+                }
                 alt=''
                 width={176}
                 height={0}

@@ -7,12 +7,13 @@ import {
   EContentsType,
 } from '@/types/enum';
 import HomeBody from '@/components/Body/HomeBody';
-import {
-  fetchTmdbDiscover,
-  fetchTmdbGenres,
-  fetchTmdbTrending,
-} from '@/api/tmdb';
+
 import { mainMovieList, staffMadesMovieList } from '@/constants';
+import {
+  fetchTmdbTrending,
+  fetchTmdbGenres,
+  fetchTmdbDiscover,
+} from '@/app/api/tmdb/route';
 
 const { MOVIE, PERSON } = ETrendingType;
 const { WEEK } = ETrendingDateType;

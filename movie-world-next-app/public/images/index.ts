@@ -11,6 +11,7 @@ import TodayTVImage from './today_tv.jpeg';
 import WeekTVImage from './tv_week.webp';
 import LawOrderImage from './law_order-img.jpeg';
 import BreakinkBad from './breaking_bad.jpeg';
+import NoImage from './no-image.jpeg';
 
 export {
   WatchaLogo,
@@ -26,4 +27,5 @@ export {
   WeekTVImage,
   LawOrderImage,
   BreakinkBad,
+  NoImage,
 };

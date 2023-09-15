@@ -1,4 +1,4 @@
-import { fetchTmdbLists } from '@/api/tmdb';
+import { fetchTmdbLists } from '@/app/api/tmdb/route';
 import ContentsIntro from '@/components/Contents/ContentsIntro';
 import ContentsRelated from '@/components/Contents/ContentsRelated';
 import ContentsSetting from '@/components/Contents/ContentsSetting';

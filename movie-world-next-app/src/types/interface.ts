@@ -8,12 +8,10 @@ import {
   ESliderType,
   EWeekGb,
   ETrendingDateType,
-  EMovieListsType,
   EGenresType,
   EDiscoverType,
   EContentsType,
-  ETVListsType,
-  ETmdbPathType,
+  EListsType,
 } from './enum';
 import Slider from 'react-slick';
 import { StaticImageData } from 'next/image';
@@ -70,7 +68,7 @@ export interface IMainSlider {
 }
 
 export interface IStaffmadeSlider {
-  id: EMovieListsType | ETVListsType;
+  id: EListsType;
   title: string;
   sub_title: string;
   movie_titles: string;
@@ -499,16 +497,7 @@ export interface IResponceTmdbDetail {
       job: string;
     }[];
   };
-  seasons: {
-    air_date: string;
-    episode_count: number;
-    id: number;
-    name: string;
-    overview: string;
-    poster_path: string;
-    season_number: number;
-    vote_average: number;
-  }[];
+  seasons: ISeason[];
 }
 
 interface IVideosResult {
@@ -522,6 +511,17 @@ interface IVideosResult {
   official: boolean;
   published_at: string;
   id: string;
+}
+
+interface ISeason {
+  air_date: string;
+  episode_count: number;
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
+  vote_average: number;
 }
 
 interface ICreditsCast {
@@ -624,11 +624,20 @@ export interface IPropsContentsRelated {
   results: ITmdbContentsData[];
 }
 
-export interface IContentsBody {
+export interface IContentsBody extends IGetTmdbTVSeason {
   type: string;
   detail: IResponceTmdbDetail;
   reviews?: IResponceTmdbReviews;
   similar?: IResponceTmdbSimilar;
+}
+
+interface IGetTmdbTVSeason {
+  getTmdbTVSeason: ({
+    series_id,
+  }: {
+    series_id: number;
+    season_number: number;
+  }) => Promise<IResponseTmdbTVSeason>;
 }
 
 export interface IPropsParamsId {
@@ -740,4 +749,52 @@ export interface ISectionSliderState {
   WAR_POLITICS: { type: EContentsType; list: ITmdbContentsData[] };
   WESTERN: { type: EContentsType; list: ITmdbContentsData[] };
   [propsName: string]: any;
+}
+
+export interface IParamsTmdbTVSeason {
+  series_id: number;
+  season_number: number;
+  query: {
+    append_to_response: string;
+    language: TLanguage;
+  };
+}
+
+export interface IResponseTmdbTVSeason {
+  _id: string;
+  air_date: string;
+  name: string;
+  overview: string;
+  id: number;
+  poster_path: string;
+  season_number: number;
+  vote_average: number;
+  episodes: IEpisode[];
+}
+
+export interface IEpisode {
+  air_date: string;
+  episode_number: number;
+  episode_type: string;
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  runtime: number;
+  season_number: number;
+  show_id: number;
+  still_path: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+export interface IPropsContentsSeason extends IGetTmdbTVSeason {
+  series_id: number;
+  seasons: ISeason[];
+}
+
+export interface IStateSeason {
+  name: string;
+  number: number;
+  episodes: IEpisode[];
 }

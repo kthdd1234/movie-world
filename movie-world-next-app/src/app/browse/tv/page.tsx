@@ -2,14 +2,9 @@ import {
   fetchTmdbTrending,
   fetchTmdbGenres,
   fetchTmdbDiscover,
-} from '@/api/tmdb';
+} from '@/app/api/tmdb/route';
 import HomeBody from '@/components/Body/HomeBody';
-import {
-  mainMovieList,
-  mainTVList,
-  staffMadesMovieList,
-  staffMadesTVList,
-} from '@/constants';
+import { mainTVList, staffMadesTVList } from '@/constants';
 import {
   ETrendingType,
   ETrendingDateType,

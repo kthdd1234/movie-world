@@ -1,8 +1,8 @@
 import {
-  fetchTmdbDiscover,
   fetchTmdbPerson,
   fetchTmdbSearch,
-} from '@/api/tmdb';
+  fetchTmdbDiscover,
+} from '@/app/api/tmdb/route';
 import PersonBody from '@/components/Body/PersonBody';
 import { EDiscoverType, ESearchType } from '@/types/enum';
 import { IPropsParamsId } from '@/types/interface';

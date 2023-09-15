@@ -1,6 +1,6 @@
 import { kmdbBaseUrl } from '@/constants';
 import { IParamsKmdbDetail, IResposeKmdbMovieDetail } from '@/types/interface';
-import { getFetch } from '..';
+import { getFetch } from '../route';
 
 /** API KEYS */
 const { NEXT_PUBLIC_KMDB_API_KEY } = process.env;

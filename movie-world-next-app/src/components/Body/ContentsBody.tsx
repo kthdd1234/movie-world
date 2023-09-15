@@ -15,12 +15,19 @@ import ContentsSeason from '../Contents/ContentsSeason';
 const { MOVIE } = EContentsType;
 const { CONTENTS_INFO, SEASON_INFO, RELATED_CONTENTS } = EContentsSplitType;
 
-const ContentsBody = ({ type, detail, reviews, similar }: IContentsBody) => {
-  /** */
+const ContentsBody = ({
+  type,
+  detail,
+  reviews,
+  similar,
+  getTmdbTVSeason,
+}: IContentsBody) => {
+  /** useState */
   const [contentsSplitType, setContentsSplitType] = useState(CONTENTS_INFO);
 
-  /** */
+  /** detail */
   const {
+    id,
     name,
     title,
     overview,
@@ -39,7 +46,7 @@ const ContentsBody = ({ type, detail, reviews, similar }: IContentsBody) => {
   const isMovieType = type === MOVIE.toString();
 
   /** */
-  const onClickContentsSplitType = (type: EContentsSplitType) => {
+  const onClickContentsSplitType = async (type: EContentsSplitType) => {
     setContentsSplitType(type);
   };
 
@@ -93,7 +100,13 @@ const ContentsBody = ({ type, detail, reviews, similar }: IContentsBody) => {
           results={similar ? similar.results : []}
         />
       )}
-      {contentsSplitType === SEASON_INFO && <ContentsSeason />}
+      {contentsSplitType === SEASON_INFO && (
+        <ContentsSeason
+          series_id={id}
+          seasons={seasons}
+          getTmdbTVSeason={getTmdbTVSeason}
+        />
+      )}
     </div>
   );
 };

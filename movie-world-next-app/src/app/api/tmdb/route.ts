@@ -20,9 +20,11 @@ import {
   IResponceTmdbReviews,
   IParamsTmdbImages,
   IResponseTmdbImages,
+  IParamsTmdbTVSeason,
+  IResponseTmdbTVSeason,
 } from '@/types/interface';
-import { getFetch } from '..';
 import { ETmdbPathType } from '@/types/enum';
+import { getFetch } from '@/app/api/route';
 
 /** ETmdbPathType */
 const { TRENDING, DISCOVER, GENRE, SEARCH, PERSON } = ETmdbPathType;
@@ -157,6 +159,20 @@ const fetchTmdbImages = async ({
   return data;
 };
 
+const fetchTmdbTVSeason = async ({
+  series_id,
+  season_number,
+  query,
+}: IParamsTmdbTVSeason) => {
+  const data: IResponseTmdbTVSeason = await getFetch({
+    url: `${tmdbBaseUrl}/tv/${series_id}/season/${season_number}`,
+    token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
+    query: query,
+  });
+
+  return data;
+};
+
 export {
   fetchTmdbTrending,
   fetchTmdbDiscover,
@@ -168,4 +184,5 @@ export {
   fetchTmdbReviews,
   fetchTmdbSimilar,
   fetchTmdbImages,
+  fetchTmdbTVSeason,
 };

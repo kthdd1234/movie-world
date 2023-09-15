@@ -1,6 +1,7 @@
 const classNameTypes = {
-  danger: 'bg-tomato',
-  outline: 'border-[1.5px] border-divider',
+  danger: 'px-4 py-2 bg-tomato',
+  outline: 'px-4 py-2 border-[1.5px] border-divider',
+  text: 'text-whitePoint',
 };
 
 const IconButton = ({
@@ -11,12 +12,12 @@ const IconButton = ({
 }: {
   text: string;
   icon: JSX.Element;
-  type: 'danger' | 'outline';
+  type: 'danger' | 'outline' | 'text';
   onClick: (e: React.MouseEvent) => void;
 }) => {
   return (
     <button
-      className={`flex items-center px-4 py-2 text-base rounded ${classNameTypes[type]}`}
+      className={`flex items-center text-base rounded ${classNameTypes[type]}`}
       onClick={onClick}
     >
       {icon}

@@ -1,14 +1,36 @@
 import {
+  fetchTmdbTVSeason,
   fetchTmdbDetail,
   fetchTmdbReviews,
   fetchTmdbSimilar,
-} from '@/api/tmdb';
+} from '@/app/api/tmdb/route';
 import ContentsBody from '@/components/Body/ContentsBody';
 import { IPropsParamsList } from '@/types/interface';
 
 const ContentsPage = async ({ params }: IPropsParamsList) => {
   /** params */
   const [type, id] = params.list;
+
+  const getTmdbTVSeason = async ({
+    series_id,
+    season_number,
+  }: {
+    series_id: number;
+    season_number: number;
+  }) => {
+    'use server';
+    const data = await fetchTmdbTVSeason({
+      series_id: series_id,
+      season_number: season_number,
+      query: {
+        append_to_response: 'videos',
+        language: 'ko',
+      },
+    });
+    console.log(data);
+
+    return data;
+  };
 
   const detail = await fetchTmdbDetail({
     contents_type: type,
@@ -37,6 +59,7 @@ const ContentsPage = async ({ params }: IPropsParamsList) => {
       detail={detail}
       reviews={reviews}
       similar={similar}
+      getTmdbTVSeason={getTmdbTVSeason}
     />
   );
 };
