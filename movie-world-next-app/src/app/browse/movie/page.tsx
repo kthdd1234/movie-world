@@ -7,7 +7,6 @@ import {
   EContentsType,
 } from '@/types/enum';
 import HomeBody from '@/components/Body/HomeBody';
-
 import { mainMovieList, staffMadesMovieList } from '@/constants';
 import {
   fetchTmdbTrending,
@@ -36,17 +35,19 @@ const BrowseMovie = async () => {
     query: { language: 'ko' },
   });
 
-  const { results: discover } = await fetchTmdbDiscover({
-    discover_type: EDiscoverType.MOVIE,
-    query: {
-      include_adult: false,
-      language: 'ko',
-      page: 1,
-      with_genres: ESliderType.DRAMA,
-    },
+  const fetchGenreList = genres.map((info) => {
+    return fetchTmdbDiscover({
+      discover_type: EDiscoverType.MOVIE,
+      query: {
+        include_adult: false,
+        language: 'ko',
+        page: 1,
+        with_genres: info.id,
+      },
+    });
   });
 
-  //
+  const discovers = await Promise.all(fetchGenreList);
 
   return (
     <HomeBody
@@ -56,7 +57,7 @@ const BrowseMovie = async () => {
       genres={genres}
       rank={rank}
       person={persons}
-      discover={discover}
+      discovers={discovers}
     />
   );
 };

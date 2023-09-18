@@ -34,6 +34,12 @@ const GenreSlider = ({
     router.push(`/contents/${data.type}/${id}`);
   };
 
+  console.log(data.list);
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <div className='relative'>
       <SectionTitle text={genreInfo?.name ?? ''} />
@@ -46,7 +52,7 @@ const GenreSlider = ({
         arrows={false}
         infinite={true}
       >
-        {data?.list.map((info: any) => (
+        {data.list.map((info: any) => (
           <div
             key={info.id}
             className='mr-2 cursor-pointer'
@@ -54,7 +60,11 @@ const GenreSlider = ({
           >
             <Image
               className='rounded'
-              src={tmdbImgUrl + info.poster_path}
+              src={
+                info.poster_path
+                  ? tmdbImgUrl + info.poster_path
+                  : '/kdPMUMJzyYAc4roD52qavX0nLIC.jpg'
+              }
               alt=''
               width={173.5}
               height={255}

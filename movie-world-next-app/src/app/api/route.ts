@@ -10,8 +10,6 @@ const getFetch = async ({ url, query, token }: IGetFetch) => {
     },
   });
 
-  console.log(resp.status);
-
   if (resp.status !== 200) return null;
   return resp.json();
 };

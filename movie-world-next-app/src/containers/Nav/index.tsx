@@ -1,29 +1,26 @@
 'use client';
 
 import { navContentsItems, navServiceItems } from '@/constants';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ENavItemType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
-import NavColumnList from './NavColumnList';
 import { INavItem } from '@/types/interface';
 import { message } from 'antd';
+import { useSetRecoilState } from 'recoil';
+import { selectedNavAtom } from '@/states';
+import ColumnList from '@/components/Nav/ColumnList';
 
 const { SEARCH, EVALUATE, STORAGE } = ENavItemType;
 
 const Nav = () => {
-  /** useMessage */
-  const [messageApi, contextHolder] = message.useMessage();
-
   /** useRouter */
   const router = useRouter();
 
-  /** useSatte */
-  const [navItem, setNavItem] = useState(ENavItemType.NONE);
+  /** useMessage */
+  const [messageApi, contextHolder] = message.useMessage();
 
-  /** useEffect */
-  useEffect(() => {
-    setNavItem(ENavItemType.MOVIE);
-  }, []);
+  /**  useSetRecoilState */
+  const setSelectedNavState = useSetRecoilState(selectedNavAtom);
 
   const onSelectedItem = (item: INavItem) => {
     const notDevelopPage = [SEARCH, EVALUATE, STORAGE];
@@ -35,23 +32,27 @@ const Nav = () => {
       });
     } else {
       router.push(`/browse/${item.path}`);
-      setNavItem(item.type);
+      setSelectedNavState(item.type);
     }
   };
+
+  useEffect(() => {
+    const pathname = window.location.pathname;
+
+    if (pathname === '/browse/movie') {
+      setSelectedNavState(ENavItemType.MOVIE);
+    } else if (pathname === '/browse/tv') {
+      setSelectedNavState(ENavItemType.TV);
+    } else {
+      setSelectedNavState(ENavItemType.NONE);
+    }
+  }, []);
 
   return (
     <nav className={`fixed left-0 z-20 h-screen pt-16 w-52 bg-black2`}>
       {contextHolder}
-      <NavColumnList
-        seletedItem={navItem}
-        items={navContentsItems}
-        onSelectedItem={onSelectedItem}
-      />
-      <NavColumnList
-        seletedItem={navItem}
-        items={navServiceItems}
-        onSelectedItem={onSelectedItem}
-      />
+      <ColumnList items={navContentsItems} onSelectedItem={onSelectedItem} />
+      <ColumnList items={navServiceItems} onSelectedItem={onSelectedItem} />
     </nav>
   );
 };

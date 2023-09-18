@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { sectionSliderAtom } from '@/states';
 
+const { MOVIE, TV } = EContentsType;
+
 const MainSlider = ({ onSlider }: IPropsOnSlider) => {
   /** useRouter */
   const router = useRouter();
@@ -28,7 +30,8 @@ const MainSlider = ({ onSlider }: IPropsOnSlider) => {
   return (
     <>
       <div className='text-3xl font-bold text-white'>
-        {type === EContentsType.MOVIE ? '영화' : 'TV 프로그램'}
+        {type === MOVIE && '영화'}
+        {type === TV && 'TV 프로그램'}
       </div>
       <div className='h-8' />
       <Slider

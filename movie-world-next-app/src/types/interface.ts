@@ -235,8 +235,7 @@ export interface INavItem {
   path: string;
 }
 
-export interface INavColumnList {
-  seletedItem: ENavItemType;
+export interface IColumnList {
   items: INavItem[];
   onSelectedItem: (item: INavItem) => void;
 }
@@ -396,7 +395,7 @@ export interface IHomeBody extends IResponceTmdbGenres {
   type: EContentsType;
   rank: ITrendingData[];
   person: ITrendingData[];
-  discover: ITmdbContentsData[];
+  discovers: any[];
 }
 
 export interface IParamsTmdbDiscover {

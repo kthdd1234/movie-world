@@ -21,8 +21,15 @@ import { ESliderType } from '@/types/enum';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import { sectionSliderAtom } from '@/states';
+import { useInView } from 'react-intersection-observer';
 
 const RankSlider = ({ onSlider }: IPropsOnSlider) => {
+  /** useInView */
+  const { ref, inView, entry } = useInView({ threshold: 0, triggerOnce: true });
+
+  // console.log(inView);
+  // console.log(entry);
+
   /** useRouter */
   const router = useRouter();
 
@@ -54,7 +61,7 @@ const RankSlider = ({ onSlider }: IPropsOnSlider) => {
   };
 
   return (
-    <div className='relative'>
+    <div ref={ref} className='relative'>
       <SectionTitle text='주간 TOP 10' />
       <Slider
         ref={onRef}

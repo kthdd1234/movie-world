@@ -1,18 +1,27 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { IHomeBody, IOnSlider, ISliderState } from '@/types/interface';
+import {
+  IHomeBody,
+  IOnSlider,
+  ISliderState,
+  ITmdbContentsList,
+} from '@/types/interface';
 import Section from '../Slider';
 import MainSlider from '../Slider/MainSlider';
 import StaffMadesSlider from '../Slider/StaffMadesSlider';
 import RankSlider from '../Slider/RankSlider';
 import PersonSlider from '../Slider/PersonSlider';
 import GenreSlider from '../Slider/GenreSlider';
-import { ESliderType } from '@/types/enum';
+import { EContentsType, ESliderType } from '@/types/enum';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { genresAtom, sectionSliderAtom } from '@/states';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 
 const { MAIN_CONTENTS, STAFF_MADES, RANK, PERSON, DRAMA } = ESliderType;
+
+const antIcon = <LoadingOutlined style={{ fontSize: 35 }} spin />;
 
 const HomeBody = ({
   type,
@@ -21,7 +30,7 @@ const HomeBody = ({
   genres,
   rank,
   person,
-  discover,
+  discovers,
 }: IHomeBody) => {
   /** useRecoil */
   const setGenresAtom = useSetRecoilState(genresAtom);
@@ -29,10 +38,21 @@ const HomeBody = ({
     useRecoilState(sectionSliderAtom);
 
   /** useState */
+  const [isShowSpin, setIsShowSpin] = useState(true);
   const [sliderState, setSliderState] = useState<ISliderState>({});
 
   /** useEffect */
   useEffect(() => {
+    const discoverObj: {
+      [key: string]: { type: EContentsType; list: [] };
+    } = {};
+
+    discovers.forEach((list, i) => {
+      const obj = genres[i];
+      const key = ESliderType[obj.id];
+      discoverObj[key] = { type: type, list: list.results };
+    });
+
     setGenresAtom(genres);
     setSectionSliderState({
       ...sectionSliderState,
@@ -40,8 +60,16 @@ const HomeBody = ({
       staffmades: { type: type, list: staffmades },
       person: { type: type, list: person },
       rank: { type: type, list: rank },
-      DRAMA: { type: type, list: discover },
+      ...discoverObj,
     });
+  }, []);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setIsShowSpin(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const onSlider = ({ sliderId, slider }: IOnSlider) => {
@@ -68,21 +96,32 @@ const HomeBody = ({
       id: PERSON,
       children: <PersonSlider onSlider={onSlider} />,
     },
-    {
-      id: DRAMA,
-      children: <GenreSlider genre={DRAMA} onSlider={onSlider} />,
-    },
   ];
+
+  genres.forEach((info) => {
+    sectionList.push({
+      id: info.id,
+      children: <GenreSlider genre={info.id} onSlider={onSlider} />,
+    });
+  });
 
   return (
     <div className='h-full'>
-      {sectionList.map((item, key) => (
-        <Section
-          key={key}
-          children={item.children}
-          slider={sliderState[item.id]}
-        />
-      ))}
+      {isShowSpin ? (
+        <div className='w-full h-[67vh] flex items-center justify-center'>
+          <Spin indicator={antIcon} />
+        </div>
+      ) : (
+        <>
+          {sectionList.map((item, key) => (
+            <Section
+              key={key}
+              children={item.children}
+              slider={sliderState[item.id]}
+            />
+          ))}
+        </>
+      )}
     </div>
   );
 };

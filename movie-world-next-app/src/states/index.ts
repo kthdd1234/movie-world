@@ -1,4 +1,4 @@
-import { EContentsType } from '@/types/enum';
+import { EContentsType, ENavItemType } from '@/types/enum';
 import { IGenreData, ISectionSliderState } from '@/types/interface';
 import { atom } from 'recoil';
 
@@ -8,6 +8,11 @@ const initSectionSlider = {
   type: NONE,
   list: [],
 };
+
+const selectedNavAtom = atom<ENavItemType>({
+  key: 'selectedNavAtom',
+  default: ENavItemType.NONE,
+});
 
 const sectionSliderAtom = atom<ISectionSliderState>({
   key: 'sectionSliderAtom',
@@ -49,4 +54,4 @@ const genresAtom = atom<IGenreData[]>({
   default: [],
 });
 
-export { genresAtom, sectionSliderAtom };
+export { selectedNavAtom, genresAtom, sectionSliderAtom };

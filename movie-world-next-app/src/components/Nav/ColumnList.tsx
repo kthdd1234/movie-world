@@ -1,17 +1,18 @@
-import { INavColumnList } from '@/types/interface';
+import { selectedNavAtom } from '@/states';
+import { IColumnList } from '@/types/interface';
+import { useRecoilValue } from 'recoil';
 
-const NavColumnList = ({
-  seletedItem,
-  items,
-  onSelectedItem,
-}: INavColumnList) => {
+const ColumnList = ({ items, onSelectedItem }: IColumnList) => {
+  /** useRecoilValue */
+  const selectedNavState = useRecoilValue(selectedNavAtom);
+
   return (
     <ul className='flex flex-col p-3'>
       {items.map((item) => (
         <li
           key={item.type}
           className={`flex gap-3 px-4 py-2 text-base text-[#d4d7db] hover:text-white cursor-pointer rounded-md ${
-            seletedItem === item.type ? 'bg-[#303133]' : ''
+            selectedNavState === item.type ? 'bg-[#303133]' : ''
           }`}
           onClick={() => onSelectedItem(item)}
         >
@@ -23,4 +24,4 @@ const NavColumnList = ({
   );
 };
 
-export default NavColumnList;
+export default ColumnList;
