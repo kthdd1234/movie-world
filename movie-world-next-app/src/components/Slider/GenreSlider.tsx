@@ -34,8 +34,6 @@ const GenreSlider = ({
     router.push(`/contents/${data.type}/${id}`);
   };
 
-  console.log(data.list);
-
   if (!data) {
     return null;
   }

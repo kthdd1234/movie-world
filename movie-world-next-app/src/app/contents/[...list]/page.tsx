@@ -27,7 +27,6 @@ const ContentsPage = async ({ params }: IPropsParamsList) => {
         language: 'ko',
       },
     });
-    console.log(data);
 
     return data;
   };
