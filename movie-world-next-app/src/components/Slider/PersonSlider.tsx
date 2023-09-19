@@ -57,7 +57,9 @@ const PersonSlider = ({ onSlider }: IPropsOnSlider) => {
             </div>
             <div className='mr-3 text-center'>
               <div className='text-white'>{info.name}</div>
-              <div className='text-mist'>{`${info.known_for[0].title}`}</div>
+              <div className='text-mist'>{`${
+                info.known_for[0] ? info.known_for[0].title : ''
+              }`}</div>
             </div>
           </div>
         ))}
