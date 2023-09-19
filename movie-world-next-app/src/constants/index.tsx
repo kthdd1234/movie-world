@@ -52,13 +52,13 @@ const navContentsItems: INavItem[] = [
     icon: <VideoCameraOutlined />,
     name: '영화',
     type: MOVIE,
-    path: '/movie',
+    path: 'movie',
   },
   {
     icon: <DesktopOutlined />,
     name: 'TV',
     type: TV,
-    path: '/tv',
+    path: 'tv',
   },
 ];
 

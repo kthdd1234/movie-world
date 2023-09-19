@@ -1,25 +1,33 @@
-import {
-  ETrendingType,
-  ETrendingDateType,
-  EGenresType,
-  EDiscoverType,
-  ESliderType,
-  EContentsType,
-} from '@/types/enum';
 import HomeBody from '@/components/Body/HomeBody';
-import { mainMovieList, staffMadesMovieList } from '@/constants';
+import {
+  mainMovieList,
+  mainTVList,
+  staffMadesMovieList,
+  staffMadesTVList,
+} from '@/constants';
+import {
+  EContentsType,
+  EDiscoverType,
+  EGenresType,
+  ETrendingDateType,
+  ETrendingType,
+} from '@/types/enum';
 import {
   fetchTmdbTrending,
   fetchTmdbGenres,
   fetchTmdbDiscover,
-} from '@/app/api/tmdb';
+} from '../../api/tmdb';
 
-const { MOVIE, PERSON } = ETrendingType;
+const { MOVIE, TV, PERSON } = ETrendingType;
 const { WEEK } = ETrendingDateType;
 
-const BrowseMovie = async () => {
+const Page = async ({ params }: { params: { type: string[] } }) => {
+  /** params */
+  const [type] = params.type;
+  const isMovieType = type === 'movie';
+
   const { results: rank } = await fetchTmdbTrending({
-    trending_type: MOVIE,
+    trending_type: isMovieType ? MOVIE : TV,
     time_window: WEEK,
     query: { language: 'ko' },
   });
@@ -31,13 +39,13 @@ const BrowseMovie = async () => {
   });
 
   const { genres } = await fetchTmdbGenres({
-    genres_type: EGenresType.MOVIE,
+    genres_type: isMovieType ? EGenresType.MOVIE : EGenresType.TV,
     query: { language: 'ko' },
   });
 
   const fetchGenreList = genres.map((info) => {
     return fetchTmdbDiscover({
-      discover_type: EDiscoverType.MOVIE,
+      discover_type: isMovieType ? EDiscoverType.MOVIE : EDiscoverType.TV,
       query: {
         include_adult: false,
         language: 'ko',
@@ -51,15 +59,15 @@ const BrowseMovie = async () => {
 
   return (
     <HomeBody
-      type={EContentsType.MOVIE}
-      main={mainMovieList}
-      staffmades={staffMadesMovieList}
-      genres={genres}
+      type={isMovieType ? EContentsType.MOVIE : EContentsType.TV}
+      main={isMovieType ? mainMovieList : mainTVList}
+      staffmades={isMovieType ? staffMadesMovieList : staffMadesTVList}
       rank={rank}
       person={persons}
+      genres={genres}
       discovers={discovers}
     />
   );
 };
 
-export default BrowseMovie;
+export default Page;

@@ -3,12 +3,13 @@
 import { navContentsItems, navServiceItems } from '@/constants';
 import { useEffect } from 'react';
 import { ENavItemType } from '@/types/enum';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { INavItem } from '@/types/interface';
 import { message } from 'antd';
 import { useSetRecoilState } from 'recoil';
 import { selectedNavAtom } from '@/states';
 import ColumnList from '@/components/Nav/ColumnList';
+import { useRouter } from 'next/navigation';
 
 const { SEARCH, EVALUATE, STORAGE } = ENavItemType;
 
@@ -31,7 +32,6 @@ const Nav = () => {
         content: '개발 준비 중입니다.',
       });
     } else {
-      router.push(`/browse/${item.path}`);
       setSelectedNavState(item.type);
     }
   };
