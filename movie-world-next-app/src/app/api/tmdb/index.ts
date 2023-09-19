@@ -24,7 +24,9 @@ import {
   IResponseTmdbTVSeason,
 } from '@/types/interface';
 import { ETmdbPathType } from '@/types/enum';
-import { getFetch } from '@/app/api/route';
+import { GET } from '@/app/api';
+import { TNextResponce } from '@/types/type';
+import { NextResponse } from 'next/server';
 
 /** ETmdbPathType */
 const { TRENDING, DISCOVER, GENRE, SEARCH, PERSON } = ETmdbPathType;
@@ -37,56 +39,56 @@ const fetchTmdbTrending = async ({
   time_window,
   query,
 }: IParamsTmdbTrending) => {
-  const data: IResponceTmdbTrending = await getFetch({
+  const data: NextResponse<IResponceTmdbTrending> = await GET({
     url: `${tmdbBaseUrl}/${TRENDING}/${trending_type}/${time_window}`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponceTmdbTrending>;
 };
 
 const fetchTmdbGenres = async ({ genres_type, query }: IParamsTmdbGenres) => {
-  const data: IResponceTmdbGenres = await getFetch({
+  const data: NextResponse<IResponceTmdbGenres> = await GET({
     url: `${tmdbBaseUrl}/${GENRE}/${genres_type}/list`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponceTmdbGenres>;
 };
 
 const fetchTmdbDiscover = async ({
   discover_type,
   query,
 }: IParamsTmdbDiscover) => {
-  const data: ITmdbContentsList = await getFetch({
+  const data: NextResponse<ITmdbContentsList> = await GET({
     url: `${tmdbBaseUrl}/${DISCOVER}/${discover_type}`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<ITmdbContentsList>;
 };
 
 const fetchTmdbPerson = async ({ person_id, query }: IParamsTmdbPerson) => {
-  const data: IResponceTmdbPerson = await getFetch({
+  const data: NextResponse<IResponceTmdbPerson> = await GET({
     url: `${tmdbBaseUrl}/${PERSON}/${person_id}`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponceTmdbPerson>;
 };
 
 const fetchTmdbSearch = async ({ search_type, query }: IParamsTmdbSearch) => {
-  const data: IResponceTmdbSearch = await getFetch({
+  const data: NextResponse<IResponceTmdbSearch> = await GET({
     url: `${tmdbBaseUrl}/${SEARCH}/${search_type}`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponceTmdbSearch>;
 };
 
 const fetchTmdbDetail = async ({
@@ -94,13 +96,13 @@ const fetchTmdbDetail = async ({
   id,
   query,
 }: IParamsTmdbDetail) => {
-  const data: IResponceTmdbDetail = await getFetch({
+  const data: NextResponse<IResponceTmdbDetail> = await GET({
     url: `${tmdbBaseUrl}/${contents_type}/${id}`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponceTmdbDetail>;
 };
 
 const fetchTmdbLists = async ({
@@ -108,13 +110,13 @@ const fetchTmdbLists = async ({
   lists_type,
   query,
 }: IParamsTmdbLists) => {
-  const data: IResponseTmdbLists = await getFetch({
+  const data: NextResponse<IResponseTmdbLists> = await GET({
     url: `${tmdbBaseUrl}/${contents_type}/${lists_type}`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponseTmdbLists>;
 };
 
 const fetchTmdbReviews = async ({
@@ -122,13 +124,13 @@ const fetchTmdbReviews = async ({
   movie_id,
   query,
 }: IParamsTmdbReviews) => {
-  const data: IResponceTmdbReviews = await getFetch({
+  const data: NextResponse<IResponceTmdbReviews> = await GET({
     url: `${tmdbBaseUrl}/${contents_type}/${movie_id}/reviews`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponceTmdbReviews>;
 };
 
 const fetchTmdbSimilar = async ({
@@ -136,13 +138,13 @@ const fetchTmdbSimilar = async ({
   movie_id,
   query,
 }: IParamsTmdbSimilar) => {
-  const data: IResponceTmdbSimilar = await getFetch({
+  const data: NextResponse<IResponceTmdbSimilar> = await GET({
     url: `${tmdbBaseUrl}/${contents_type}/${movie_id}/similar`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponceTmdbSimilar>;
 };
 
 const fetchTmdbImages = async ({
@@ -150,13 +152,13 @@ const fetchTmdbImages = async ({
   movie_id,
   query,
 }: IParamsTmdbImages) => {
-  const data: IResponseTmdbImages = await getFetch({
+  const data: NextResponse<IResponseTmdbImages> = await GET({
     url: `${tmdbBaseUrl}/${contents_type}/${movie_id}/images`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponseTmdbImages>;
 };
 
 const fetchTmdbTVSeason = async ({
@@ -164,13 +166,13 @@ const fetchTmdbTVSeason = async ({
   season_number,
   query,
 }: IParamsTmdbTVSeason) => {
-  const data: IResponseTmdbTVSeason = await getFetch({
+  const data: NextResponse<IResponseTmdbTVSeason> = await GET({
     url: `${tmdbBaseUrl}/tv/${series_id}/season/${season_number}`,
     token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
     query: query,
   });
 
-  return data;
+  return data.json() as Promise<IResponseTmdbTVSeason>;
 };
 
 export {

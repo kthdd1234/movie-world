@@ -2,7 +2,7 @@ import {
   fetchTmdbTrending,
   fetchTmdbGenres,
   fetchTmdbDiscover,
-} from '@/app/api/tmdb/route';
+} from '@/app/api/tmdb';
 import HomeBody from '@/components/Body/HomeBody';
 import { mainTVList, staffMadesTVList } from '@/constants';
 import {

@@ -1,6 +1,7 @@
-import { IGetFetch, IPostFetch } from '@/types/interface';
+import { IGET, IPOST } from '@/types/interface';
+import { NextResponse } from 'next/server';
 
-const getFetch = async ({ url, query, token }: IGetFetch) => {
+const GET = async ({ url, token, query }: IGET) => {
   const resp = await fetch(`${url}?${new URLSearchParams(query)}`, {
     method: 'GET',
     cache: 'force-cache',
@@ -9,12 +10,12 @@ const getFetch = async ({ url, query, token }: IGetFetch) => {
       Authorization: `Bearer ${token}`,
     },
   });
+  const data = await resp.json();
 
-  if (resp.status !== 200) return null;
-  return resp.json();
+  return NextResponse.json(data);
 };
 
-const postFetch = async ({ url, query, body }: IPostFetch) => {
+const POST = async ({ url, query, body }: IPOST) => {
   const resp = await fetch(`${url}?${new URLSearchParams(query)}`, {
     method: 'POST',
     cache: 'no-store',
@@ -23,9 +24,9 @@ const postFetch = async ({ url, query, body }: IPostFetch) => {
       'Content-type': 'application/json',
     },
   });
+  const data = await resp.json();
 
-  if (resp.status !== 200) return null;
-  return resp.json();
+  return NextResponse.json(data);
 };
 
-export { getFetch, postFetch };
+export { GET, POST };

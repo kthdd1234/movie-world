@@ -17,13 +17,13 @@ import Slider from 'react-slick';
 import { StaticImageData } from 'next/image';
 import { TLanguage, TSlider } from './type';
 
-export interface IGetFetch {
+export interface IGET {
   url: string;
   query: Record<string, any>;
   token?: string;
 }
 
-export interface IPostFetch {
+export interface IPOST {
   url: string;
   query: Record<string, any>;
   body: any;

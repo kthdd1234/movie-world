@@ -3,7 +3,7 @@ import {
   fetchTmdbDetail,
   fetchTmdbReviews,
   fetchTmdbSimilar,
-} from '@/app/api/tmdb/route';
+} from '@/app/api/tmdb';
 import ContentsBody from '@/components/Body/ContentsBody';
 import { IPropsParamsList } from '@/types/interface';
 

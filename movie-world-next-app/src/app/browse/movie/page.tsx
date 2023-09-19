@@ -12,7 +12,7 @@ import {
   fetchTmdbTrending,
   fetchTmdbGenres,
   fetchTmdbDiscover,
-} from '@/app/api/tmdb/route';
+} from '@/app/api/tmdb';
 
 const { MOVIE, PERSON } = ETrendingType;
 const { WEEK } = ETrendingDateType;

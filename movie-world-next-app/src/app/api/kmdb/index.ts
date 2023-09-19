@@ -1,12 +1,14 @@
 import { kmdbBaseUrl } from '@/constants';
 import { IParamsKmdbDetail, IResposeKmdbMovieDetail } from '@/types/interface';
-import { getFetch } from '../route';
+import { GET } from '..';
+import { TNextResponce } from '@/types/type';
+import { NextResponse } from 'next/server';
 
 /** API KEYS */
 const { NEXT_PUBLIC_KMDB_API_KEY } = process.env;
 
 const fetchKmdbDetail = async (query: IParamsKmdbDetail) => {
-  const data: IResposeKmdbMovieDetail = await getFetch({
+  const data: NextResponse<IResposeKmdbMovieDetail> = await GET({
     url: kmdbBaseUrl,
     query: {
       collection: 'kmdb_new2',
@@ -15,7 +17,7 @@ const fetchKmdbDetail = async (query: IParamsKmdbDetail) => {
     },
   });
 
-  return data;
+  return data.json();
 };
 
 export { fetchKmdbDetail };
