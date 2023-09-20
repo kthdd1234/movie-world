@@ -11,7 +11,7 @@ import { selectedNavAtom } from '@/states';
 import ColumnList from '@/components/Nav/ColumnList';
 import { useRouter } from 'next/navigation';
 
-const { SEARCH, EVALUATE, STORAGE } = ENavItemType;
+const { EVALUATE, STORAGE } = ENavItemType;
 
 const Nav = () => {
   /** useRouter */
@@ -24,7 +24,7 @@ const Nav = () => {
   const setSelectedNavState = useSetRecoilState(selectedNavAtom);
 
   const onSelectedItem = (item: INavItem) => {
-    const notDevelopPage = [SEARCH, EVALUATE, STORAGE];
+    const notDevelopPage = [EVALUATE, STORAGE];
 
     if (notDevelopPage.includes(item.type)) {
       messageApi.open({
@@ -32,20 +32,20 @@ const Nav = () => {
         content: '개발 준비 중입니다.',
       });
     } else {
+      router.push(`${item.path}`);
       setSelectedNavState(item.type);
     }
   };
 
   useEffect(() => {
     const pathname = window.location.pathname;
+    const navItems = [...navContentsItems, ...navServiceItems];
 
-    if (pathname === '/browse/movie') {
-      setSelectedNavState(ENavItemType.MOVIE);
-    } else if (pathname === '/browse/tv') {
-      setSelectedNavState(ENavItemType.TV);
-    } else {
-      setSelectedNavState(ENavItemType.NONE);
-    }
+    navItems.forEach((item) => {
+      if (pathname === item.path) {
+        setSelectedNavState(item.type);
+      }
+    });
   }, []);
 
   return (

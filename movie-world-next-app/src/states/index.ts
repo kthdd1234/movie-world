@@ -54,4 +54,12 @@ const genresAtom = atom<IGenreData[]>({
   default: [],
 });
 
-export { selectedNavAtom, genresAtom, sectionSliderAtom };
+const searchInputAtom = atom({
+  key: 'searchInputAtom',
+  default: {
+    isShow: false,
+    keyword: '',
+  },
+});
+
+export { selectedNavAtom, genresAtom, sectionSliderAtom, searchInputAtom };

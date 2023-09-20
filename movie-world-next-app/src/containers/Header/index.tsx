@@ -1,17 +1,21 @@
 'use client';
 
-import { BellOutlined, NotificationOutlined } from '@ant-design/icons';
+import { BellOutlined, SearchOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ProfileDefaultImg, WatchWLogo } from '../../../public/images';
-import { selectedNavAtom } from '@/states';
-import { useSetRecoilState } from 'recoil';
+import { searchInputAtom, selectedNavAtom } from '@/states';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { ENavItemType } from '@/types/enum';
 
 const Header = () => {
   /** useMessage */
   const [messageApi, contextHolder] = message.useMessage();
+
+  /** useRecoilState */
+  const [searchInputState, setSearchInputState] =
+    useRecoilState(searchInputAtom);
 
   /** useRouter */
   const router = useRouter();
@@ -32,18 +36,37 @@ const Header = () => {
     });
   };
 
+  const onChange = (value: string) => {
+    setSearchInputState({ isShow: true, keyword: value });
+  };
+
+  const { isShow, keyword } = searchInputState;
+
   return (
     <header className={`fixed top-0 z-30 w-screen p-3 bg-black2`}>
       {contextHolder}
       <div className='flex items-center justify-between'>
-        <Image
-          className='pl-5 cursor-pointer'
-          src={WatchWLogo}
-          alt=''
-          width={65}
-          height={0}
-          onClick={onClickHome}
-        />
+        <div className='flex items-center'>
+          <Image
+            className='pl-5 cursor-pointer'
+            src={WatchWLogo}
+            alt=''
+            width={65}
+            height={0}
+            onClick={onClickHome}
+          />
+          {isShow && (
+            <div className='flex items-center ml-40 w-[337px] text-deepGray'>
+              <SearchOutlined className='mr-1 text-xl' />
+              <input
+                className='w-full text-base'
+                placeholder='영화, TV 프로그램, 인물 검색'
+                value={keyword}
+                onChange={(e) => onChange(e.target.value)}
+              />
+            </div>
+          )}
+        </div>
         <div className='flex gap-5 pr-5'>
           <div className='flex items-center'>
             <BellOutlined
