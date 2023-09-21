@@ -8,6 +8,7 @@ module.exports = {
   ],
   theme: {
     colors: {
+      transparent: 'transparent',
       white: '#ffffff',
       whitePoint: 'rgba(255, 255, 255, 0.7)',
       whitePoint2: 'rgba(255, 255, 255, 0.2)',
@@ -21,6 +22,7 @@ module.exports = {
       yellow500: '#eab308',
       deepGray2: 'rgb(132, 134, 141)',
       deepGray3: 'rgb(186, 186, 193)',
+      inputBG: 'rgb(34, 35, 38)',
     },
     extend: {
       backgroundImage: {

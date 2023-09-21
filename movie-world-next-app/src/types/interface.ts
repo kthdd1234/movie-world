@@ -12,6 +12,7 @@ import {
   EDiscoverType,
   EContentsType,
   EListsType,
+  ESearchType,
 } from './enum';
 import Slider from 'react-slick';
 import { StaticImageData } from 'next/image';
@@ -796,4 +797,41 @@ export interface IStateSeason {
   name: string;
   number: number;
   episodes: IEpisode[];
+}
+
+export interface IParamsPersonPopular {
+  query: {
+    language: TLanguage;
+    page: number;
+  };
+}
+
+export interface IResponcePersonPopular {
+  page: number;
+  results: {
+    adult: false;
+    gender: 1;
+    id: 1231;
+    known_for: ITmdbContentsData[];
+    known_for_department: string;
+    name: string;
+    popularity: number;
+    profile_path: string;
+  }[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface IParamsSearch {
+  search_type: ESearchType;
+  keyword: string;
+}
+
+export interface IPropsSearchBody {
+  movieGenres: IGenreData[];
+  tvGenres: IGenreData[];
+  getSearchResults: ({
+    search_type,
+    keyword,
+  }: IParamsSearch) => Promise<ISearchData[]>;
 }

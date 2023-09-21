@@ -56,10 +56,10 @@ const Header = () => {
             onClick={onClickHome}
           />
           {isShow && (
-            <div className='flex items-center ml-40 w-[337px] text-deepGray'>
-              <SearchOutlined className='mr-1 text-xl' />
+            <div className='flex items-center ml-40 w-[337px]  bg-inputBG px-2 py-1 rounded'>
+              <SearchOutlined className='mx-2 mb-1 text-xl text-deepGray' />
               <input
-                className='w-full text-base'
+                className='w-full text-base text-white bg-transparent outline-none caret-tomato'
                 placeholder='영화, TV 프로그램, 인물 검색'
                 value={keyword}
                 onChange={(e) => onChange(e.target.value)}

@@ -213,6 +213,15 @@ enum ETmdbPathType {
   PERSON = 'person',
 }
 
+enum ISearchType {
+  /** */
+  MOVIE = 'movie',
+  /** */
+  TV = 'tv',
+  /** */
+  PERSON = 'perosn',
+}
+
 export {
   EWeekGb,
   EMultiMovieYn,
@@ -229,4 +238,5 @@ export {
   ESearchType,
   EListsType,
   ETmdbPathType,
+  ISearchType,
 };

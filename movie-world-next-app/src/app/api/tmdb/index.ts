@@ -22,6 +22,8 @@ import {
   IResponseTmdbImages,
   IParamsTmdbTVSeason,
   IResponseTmdbTVSeason,
+  IParamsPersonPopular,
+  IResponcePersonPopular,
 } from '@/types/interface';
 import { ETmdbPathType } from '@/types/enum';
 import { GET } from '@/app/api';
@@ -175,6 +177,16 @@ const fetchTmdbTVSeason = async ({
   return data.json() as Promise<IResponseTmdbTVSeason>;
 };
 
+const fetchTmdbPersonPopular = async ({ query }: IParamsPersonPopular) => {
+  const data: NextResponse<IResponcePersonPopular> = await GET({
+    url: `${tmdbBaseUrl}/person/popular`,
+    token: NEXT_PUBLIC_TMDB_ACCESS_TOKEN,
+    query: query,
+  });
+
+  return data.json() as Promise<IResponcePersonPopular>;
+};
+
 export {
   fetchTmdbTrending,
   fetchTmdbDiscover,
@@ -187,4 +199,5 @@ export {
   fetchTmdbSimilar,
   fetchTmdbImages,
   fetchTmdbTVSeason,
+  fetchTmdbPersonPopular,
 };
