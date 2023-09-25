@@ -13,9 +13,9 @@ import StaffMadesSlider from '../Slider/StaffMadesSlider';
 import RankSlider from '../Slider/RankSlider';
 import PersonSlider from '../Slider/PersonSlider';
 import GenreSlider from '../Slider/GenreSlider';
-import { EContentsType, ESliderType } from '@/types/enum';
+import { EContentsType, ENavItemType, ESliderType } from '@/types/enum';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { genresAtom, sectionSliderAtom } from '@/states';
+import { genresAtom, sectionSliderAtom, selectedNavAtom } from '@/states';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 
@@ -33,7 +33,8 @@ const HomeBody = ({
   discovers,
 }: IHomeBody) => {
   /** useRecoil */
-  const setGenresAtom = useSetRecoilState(genresAtom);
+  const setGenresState = useSetRecoilState(genresAtom);
+  const setSelectedNavState = useSetRecoilState(selectedNavAtom);
   const [sectionSliderState, setSectionSliderState] =
     useRecoilState(sectionSliderAtom);
 
@@ -53,7 +54,7 @@ const HomeBody = ({
       discoverObj[key] = { type: type, list: list.results };
     });
 
-    setGenresAtom(genres);
+    setGenresState(genres);
     setSectionSliderState({
       ...sectionSliderState,
       main: { type: type, list: main },
@@ -68,6 +69,9 @@ const HomeBody = ({
     let timer = setTimeout(() => {
       setIsShowSpin(false);
     }, 1500);
+
+    type === EContentsType.MOVIE && setSelectedNavState(ENavItemType.MOVIE);
+    type === EContentsType.TV && setSelectedNavState(ENavItemType.TV);
 
     return () => clearTimeout(timer);
   }, []);

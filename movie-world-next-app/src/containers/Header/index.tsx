@@ -43,18 +43,20 @@ const Header = () => {
   const { isShow, keyword } = searchInputState;
 
   return (
-    <header className={`fixed top-0 z-30 w-screen p-3 bg-black2`}>
+    <header className={`fixed top-0 z-30 w-screen  bg-black2 px-5 py-3`}>
       {contextHolder}
       <div className='flex items-center justify-between'>
         <div className='flex items-center'>
-          <Image
-            className='pl-5 cursor-pointer'
-            src={WatchWLogo}
-            alt=''
-            width={65}
-            height={0}
-            onClick={onClickHome}
-          />
+          <div className='w-[45px] h-[45px] rounded-xl overflow-hidden'>
+            <Image
+              className='scursor-pointer'
+              src={WatchWLogo}
+              alt=''
+              width={45}
+              height={0}
+              onClick={onClickHome}
+            />
+          </div>
           {isShow && (
             <div className='flex items-center ml-40 w-[337px]  bg-inputBG px-2 py-1 rounded'>
               <SearchOutlined className='mx-2 mb-1 text-xl text-deepGray' />
