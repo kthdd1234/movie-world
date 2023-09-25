@@ -9,6 +9,8 @@ const Profile = () => {
     window.open(link);
   };
 
+  //
+
   return (
     <ul className='flex text-xs text-whitePoint'>
       {profileInfo.map(({ name, isPoint, isUnderline, link }, key) => (
