@@ -10,6 +10,9 @@ import { Divider } from 'antd';
 import { searchTypeList } from '@/constants';
 import ContentsSearchResult from '@/containers/Main/ContentsSearchResult';
 import NavBar from '../Nav/NavBar';
+import PersonSearchResults from '@/containers/Main/PersonSearchResults';
+
+const { MOVIE, TV, PERSON } = ESearchType;
 
 const SearchBody = ({
   movieGenres,
@@ -17,7 +20,7 @@ const SearchBody = ({
   getSearchResults,
 }: IPropsSearchBody) => {
   /** useState */
-  const [searchType, setSearchType] = useState(ESearchType.MOVIE.toString());
+  const [searchType, setSearchType] = useState(MOVIE.toString());
   const [contentsResults, setContentsResults] = useState<ISearchData[]>([]);
 
   /** useSetRecoilState */
@@ -73,7 +76,11 @@ const SearchBody = ({
             onClick={onClickSearchType}
           />
           <Divider style={{ marginTop: '1px' }} className='bg-divider' />
-          <ContentsSearchResult results={contentsResults} />
+          {searchType !== PERSON.toString() ? (
+            <ContentsSearchResult results={contentsResults} />
+          ) : (
+            <PersonSearchResults />
+          )}
         </>
       )}
     </div>

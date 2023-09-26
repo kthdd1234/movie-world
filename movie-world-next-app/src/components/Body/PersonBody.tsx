@@ -3,28 +3,28 @@
 import { tmdbImgUrl } from '@/constants';
 import ContentsIntro from '../Contents/ContentsIntro';
 import { IPropsPerson } from '@/types/interface';
-import ContentsSplit from '../Contents/ContentsSplit';
 import { useState } from 'react';
 import { EContentsSplitType, EContentsType } from '@/types/enum';
 import ContentsRelated from '../Contents/ContentsRelated';
+import NavBar from '../Nav/NavBar';
 
 const { MOVIE, TV } = EContentsSplitType;
 
 const PersonBody = ({ searchResult, name, biography, data }: IPropsPerson) => {
   /** */
-  const [splitType, setSplitType] = useState(MOVIE);
+  const [splitType, setSplitType] = useState(MOVIE.toString());
 
   /** */
   const { movie, tv } = data;
   const personInfo = searchResult[0];
   const { known_for_department, profile_path } = personInfo;
   const list = [
-    { id: MOVIE, name: '영화' },
-    { id: TV, name: 'TV 프로그램' },
+    { id: MOVIE.toString(), name: '영화' },
+    { id: TV.toString(), name: 'TV 프로그램' },
   ];
 
   /** */
-  const onClick = (type: EContentsSplitType) => {
+  const onClick = (type: string) => {
     setSplitType(type);
   };
 
@@ -40,11 +40,21 @@ const PersonBody = ({ searchResult, name, biography, data }: IPropsPerson) => {
         subTitle={known_for_department}
         overview={biography}
       />
-      <ContentsSplit list={list} curType={splitType} onClick={onClick} />
+      {/* <ContentsSplit list={list} curType={splitType} onClick={onClick} /> */}
+      <NavBar
+        className='flex justify-center mb-4'
+        list={list}
+        selectedId={splitType.toString()}
+        onClick={onClick}
+      />
       <ContentsRelated
         isTitle={false}
-        type={splitType === MOVIE ? EContentsType.MOVIE : EContentsType.TV}
-        results={splitType === MOVIE ? movie : tv}
+        type={
+          splitType === MOVIE.toString()
+            ? EContentsType.MOVIE
+            : EContentsType.TV
+        }
+        results={splitType === MOVIE.toString() ? movie : tv}
       />
     </div>
   );
