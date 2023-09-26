@@ -2,7 +2,6 @@
 
 import ContentsIntro from '../Contents/ContentsIntro';
 import ContentsRelated from '../Contents/ContentsRelated';
-import ContentsSplit from '../Contents/ContentsSplit';
 import ContentsSetting from '../Contents/ContentsSetting';
 import { IContentsBody } from '@/types/interface';
 import { EContentsSplitType, EContentsType } from '@/types/enum';
@@ -11,6 +10,7 @@ import ContentsDetail from '../Contents/ContentsDetail';
 import { secondsFormatter } from '@/services/date_and_time';
 import { movieSplitList, tmdbImgUrl, tvSplitList } from '@/constants';
 import ContentsSeason from '../Contents/ContentsSeason';
+import NavBar from '../Nav/NavBar';
 
 const { MOVIE } = EContentsType;
 const { CONTENTS_INFO, SEASON_INFO, RELATED_CONTENTS } = EContentsSplitType;
@@ -23,7 +23,9 @@ const ContentsBody = ({
   getTmdbTVSeason,
 }: IContentsBody) => {
   /** useState */
-  const [contentsSplitType, setContentsSplitType] = useState(CONTENTS_INFO);
+  const [seletedNavType, setSeletedNavType] = useState(
+    CONTENTS_INFO.toString()
+  );
 
   /** detail */
   const {
@@ -46,8 +48,8 @@ const ContentsBody = ({
   const isMovieType = type === MOVIE.toString();
 
   /** */
-  const onClickContentsSplitType = async (type: EContentsSplitType) => {
-    setContentsSplitType(type);
+  const onSeletedNavType = async (type: string) => {
+    setSeletedNavType(type);
   };
 
   /** */
@@ -77,12 +79,14 @@ const ContentsBody = ({
       <ContentsSetting
         watchKey={videos.results.length > 0 ? videos.results[0].key : ''}
       />
-      <ContentsSplit
+      <NavBar
+        className='flex justify-center mb-4'
         list={isMovieType ? movieSplitList : tvSplitList}
-        curType={contentsSplitType}
-        onClick={onClickContentsSplitType}
+        selectedId={seletedNavType.toString()}
+        onClick={onSeletedNavType}
       />
-      {contentsSplitType === CONTENTS_INFO && (
+
+      {seletedNavType === CONTENTS_INFO.toString() && (
         <ContentsDetail
           vote_count={vote_count}
           vote_average={vote_average}
@@ -93,14 +97,14 @@ const ContentsBody = ({
           reviews_result={reviews ? reviews.results : []}
         />
       )}
-      {contentsSplitType === RELATED_CONTENTS && (
+      {seletedNavType === RELATED_CONTENTS.toString() && (
         <ContentsRelated
           isTitle={true}
           type={MOVIE}
           results={similar ? similar.results : []}
         />
       )}
-      {contentsSplitType === SEASON_INFO && (
+      {seletedNavType === SEASON_INFO.toString() && (
         <ContentsSeason
           series_id={id}
           seasons={seasons}

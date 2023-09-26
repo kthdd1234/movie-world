@@ -1,4 +1,9 @@
-import { EContentsSplitType, EListsType, ENavItemType } from '@/types/enum';
+import {
+  EContentsSplitType,
+  EListsType,
+  ENavItemType,
+  ESearchType,
+} from '@/types/enum';
 import { INavItem } from '@/types/interface';
 import {
   VideoCameraOutlined,
@@ -342,14 +347,14 @@ const staffMadesTVList = [
 ];
 
 const movieSplitList = [
-  { id: CONTENTS_INFO, name: '콘텐츠 정보' },
-  { id: RELATED_CONTENTS, name: '관련 콘텐츠' },
+  { id: CONTENTS_INFO.toString(), name: '콘텐츠 정보' },
+  { id: RELATED_CONTENTS.toString(), name: '관련 콘텐츠' },
 ];
 
 const tvSplitList = [
-  { id: CONTENTS_INFO, name: '콘텐츠 정보' },
-  { id: SEASON_INFO, name: '시즌 정보' },
-  { id: RELATED_CONTENTS, name: '관련 콘텐츠' },
+  { id: CONTENTS_INFO.toString(), name: '콘텐츠 정보' },
+  { id: SEASON_INFO.toString(), name: '시즌 정보' },
+  { id: RELATED_CONTENTS.toString(), name: '관련 콘텐츠' },
 ];
 
 export {
@@ -371,3 +376,9 @@ export {
   movieSplitList,
   tvSplitList,
 };
+
+export const searchTypeList = [
+  { id: ESearchType.MOVIE, name: '영화' },
+  { id: ESearchType.TV, name: 'TV 프로그램' },
+  { id: ESearchType.PERSON, name: '인물' },
+];

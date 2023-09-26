@@ -675,7 +675,13 @@ export interface ISearchData {
   original_name: string;
   popularity: number;
   profile_path: string;
+  poster_path: string;
+  title: string;
   known_for: ITmdbContentsData[];
+  genre_ids: number[];
+  release_date: string;
+  vote_average: number;
+  first_air_date: string;
 }
 
 export interface IParamsTmdbPerson {
@@ -823,7 +829,7 @@ export interface IResponcePersonPopular {
 }
 
 export interface IParamsSearch {
-  search_type: ESearchType;
+  search_type: string;
   keyword: string;
 }
 
@@ -834,4 +840,11 @@ export interface IPropsSearchBody {
     search_type,
     keyword,
   }: IParamsSearch) => Promise<ISearchData[]>;
+}
+
+export interface INavBar {
+  className: string;
+  list: { id: string; name: string }[];
+  selectedId: string;
+  onClick: (id: string) => void;
 }

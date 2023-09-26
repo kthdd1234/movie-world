@@ -47,7 +47,7 @@ const Header = () => {
       {contextHolder}
       <div className='flex items-center justify-between'>
         <div className='flex items-center'>
-          <div className='w-[45px] h-[45px] rounded-xl overflow-hidden'>
+          <div className='w-[45px] h-[45px] rounded overflow-hidden'>
             <Image
               className='scursor-pointer'
               src={WatchWLogo}
